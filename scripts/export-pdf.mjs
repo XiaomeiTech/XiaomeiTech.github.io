@@ -8,7 +8,6 @@ const configs = [
   'pdf-configs/app-guide.mts',
   'pdf-configs/product-manual.mts',
   'pdf-configs/series-manual.mts',
-  'pdf-configs/legal.mts'
 ]
 
 for (const config of configs) {
