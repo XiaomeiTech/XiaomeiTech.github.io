@@ -1,0 +1,66 @@
+:root {
+  --vp-c-brand-1: #dc2626;
+  --vp-c-brand-2: #b91c1c;
+  --vp-c-brand-3: #991b1b;
+
+  --vp-custom-block-info-bg: #f1f5f9;
+  --vp-custom-block-info-border: #475569;
+
+  --vp-custom-block-tip-bg: #eef4ff;
+  --vp-custom-block-tip-border: #2563eb;
+
+  --vp-custom-block-warning-bg: #fff7ed;
+  --vp-custom-block-warning-border: #c2410c;
+
+  --vp-custom-block-danger-bg: #fef2f2;
+  --vp-custom-block-danger-border: #b91c1c;
+
+  --vp-custom-block-details-bg: #f8fafc;
+  --vp-custom-block-details-border: #94a3b8;
+}
+.dark {
+  --vp-c-brand-1: #f87171;
+  --vp-c-brand-2: #ef4444;
+  --vp-c-brand-3: #dc2626;
+
+  --vp-custom-block-info-bg: #1e293b;
+
+  --vp-custom-block-tip-bg: #0f1f47;
+
+  --vp-custom-block-warning-bg: #422006;
+
+  --vp-custom-block-danger-bg: #450a0a;
+
+  --vp-custom-block-details-bg: #1f2937;
+}
+
+.VPDoc .custom-block.warning .custom-block-title::before,
+.VPDoc .custom-block.danger .custom-block-title::before {
+  content: '⚠︎';
+  color: var(--block-icon-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.02em);
+}
+
+.dark .VPDoc .custom-block.warning {
+  --block-icon-color: #f59e0b;
+}
+
+.dark .VPDoc .custom-block.danger {
+  --block-icon-color: #ef4444;
+}
+
+
+/* Keep logo visible before the top-left site button/title. */
+.VPNavBarTitle .title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.VPNavBarTitle .title .logo {
+  width: 22px;
+  height: 22px;
+}
