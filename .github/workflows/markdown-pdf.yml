@@ -20,40 +20,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Install Pandoc and PDF dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-xetex fonts-noto-cjk
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
 
-      - name: Convert markdown files to PDF
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p artifacts/pdf
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
 
-          mapfile -d '' files < <(find markdown -type f -name '*.md' -print0)
+      - name: Install Puppeteer deps
+        run: sudo apt-get update && sudo apt-get install -y libnss3 libnspr4 libgbm1 libasound2
 
-          if [ ${#files[@]} -eq 0 ]; then
-            echo "No markdown files found in markdown directory."
-            exit 0
-          fi
+      - name: Build docs
+        run: npm run docs:build
 
-          for file in "${files[@]}"; do
-            rel_path="${file#markdown/}"
-            name="${rel_path%.md}"
-            name="${name//\//-}"
-            out="artifacts/pdf/${name}.pdf"
-
-            pandoc "$file" \
-              --from=gfm+yaml_metadata_block \
-              --pdf-engine=xelatex \
-              -V mainfont="Noto Sans CJK SC" \
-              -V geometry:margin=1in \
-              --standalone \
-              -o "$out"
-
-            echo "Generated $out"
-          done
+      - name: Export PDF
+        run: npm run docs:pdf
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
