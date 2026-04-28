@@ -1,5 +1,6 @@
 ﻿import { defineConfig } from 'vitepress'
 import { fileURLToPath } from 'node:url'
+import wavedromPlugin from './wavedrom.mts'
 
 const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
 const repoName = env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
@@ -7,12 +8,20 @@ const isUserOrOrgPagesRepo = repoName.endsWith('.github.io')
 const githubBase = repoName && !isUserOrOrgPagesRepo ? `/${repoName}/` : '/'
 const markdownSrcDir = fileURLToPath(new URL('../../markdown', import.meta.url))
 
+
+// https://vitepress.yiov.top/
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   lang: 'zh-CN',
   srcDir: markdownSrcDir,
   base: env.GITHUB_ACTIONS ? githubBase : '/',
   
+  markdown: {
+    config: (md) => {
+      md.use(wavedromPlugin)
+    }
+  },
+
   title: "小美技术",
   description: "工业数字化解决方案",
   head: [
@@ -39,10 +48,12 @@ export default defineConfig({
         }
       }
     },
+
     // footer: {
     //   message: 'Released under the MIT License.',
     //   copyright: 'Copyright © 2019-present Evan You'
     // },  
+
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: '小美技术',
     logo: {
@@ -57,7 +68,9 @@ export default defineConfig({
       { text: '关于与支持', items: [
         { text: 'Markdown 示例', link: '/web/markdown-examples' },
         { text: 'Runtime API 示例', link: '/web/api-examples' },
-        { text: '本地开发运行', link: '/web/localsetup' }
+        { text: '本地开发运行', link: '/web/localsetup' },
+        { text: '波形图示例', link: '/web/wavedrom' },
+
       ]},
       { text: '下载中心', link: 'https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases'},
     ],

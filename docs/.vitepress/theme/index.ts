@@ -1,6 +1,11 @@
 import DefaultTheme from 'vitepress/theme'
 import './custom.css'
+// @ts-ignore
+import WavedromVue from './components/Wavedrom.vue'
 
 export default {
-  extends: DefaultTheme
+  extends: DefaultTheme,
+  enhanceApp({ app }) {
+    app.component("WavedromVue", WavedromVue)
+  }
 }
