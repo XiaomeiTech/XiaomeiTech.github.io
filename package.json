@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "scripts": {
+    "clean:cache": "node scripts/clean-cache.mjs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "rebuild": "npm run clean:cache && npm ci && npm run docs:build",
+    "rebuild:fast": "npm run clean:cache && npm run docs:build"
+  },
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.17"
+  }
+}

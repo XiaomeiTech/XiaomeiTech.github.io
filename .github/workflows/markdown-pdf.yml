@@ -1,0 +1,71 @@
+name: Build Markdown PDF
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'markdown/**/*.md'
+      - '.github/workflows/markdown-pdf.yml'
+
+jobs:
+  markdown-to-pdf:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install Pandoc and PDF dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex fonts-noto-cjk
+
+      - name: Convert markdown files to PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/pdf
+
+          mapfile -d '' files < <(find markdown -type f -name '*.md' -print0)
+
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No markdown files found in markdown directory."
+            exit 0
+          fi
+
+          for file in "${files[@]}"; do
+            rel_path="${file#markdown/}"
+            name="${rel_path%.md}"
+            name="${name//\//-}"
+            out="artifacts/pdf/${name}.pdf"
+
+            pandoc "$file" \
+              --from=gfm+yaml_metadata_block \
+              --pdf-engine=xelatex \
+              -V mainfont="Noto Sans CJK SC" \
+              -V geometry:margin=1in \
+              --standalone \
+              -o "$out"
+
+            echo "Generated $out"
+          done
+
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-pdf
+          path: artifacts/pdf
+          if-no-files-found: warn
+
+      - name: Update GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-pdf
+          name: Latest PDF Exports
+          files: artifacts/pdf/*.pdf
+          make_latest: true
