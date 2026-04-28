@@ -15,6 +15,7 @@ export default defineConfig({
   lang: 'zh-CN',
   srcDir: markdownSrcDir,
   base: env.GITHUB_ACTIONS ? githubBase : '/',
+  lastUpdated: true,
   
   markdown: {
     config: (md) => {
@@ -28,6 +29,12 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/logo/xm-logo.png' }]
   ],
   themeConfig: {
+    lastUpdated:{text: '最后更新',
+      formatOptions: {
+          dateStyle: 'full',
+          timeStyle: 'medium'
+        }
+      },
     search: {
       provider: 'local',
       options: {
@@ -66,6 +73,7 @@ export default defineConfig({
       { text: '飞达控制器', link: '/feeder-controller/' },
       { text: '定制项目', link: '/custom/' },
       { text: '关于与支持', items: [
+        { text: 'PDF手册', link: '/pdf/' },
         { text: 'Markdown 示例', link: '/web/markdown-examples' },
         { text: 'Runtime API 示例', link: '/web/api-examples' },
         { text: '本地开发运行', link: '/web/localsetup' },
@@ -119,6 +127,20 @@ export default defineConfig({
           text: '定制项目',
           items: [
             { text: '项目概览', link: '/custom/' }
+          ]
+        }
+      ],
+
+      '/pdf/': [
+        {
+          text: 'PDF手册',
+          items: [
+            { text: '导出说明', link: '/pdf/' },
+            { text: '数据手册', link: '/pdf/datasheet' },
+            { text: '应用指南', link: '/pdf/app-guide' },
+            { text: '单品手册', link: '/pdf/product-manual' },
+            { text: '系列合并手册', link: '/pdf/series-manual' },
+            { text: '法律与合规', link: '/pdf/legal' }
           ]
         }
       ],

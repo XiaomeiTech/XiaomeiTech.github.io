@@ -127,6 +127,12 @@ Build static site:
 npm run docs:build
 ```
 
+Export PDFs (same pipeline as GitHub Actions):
+
+```powershell
+npm run docs:pdf
+```
+
 Preview build output:
 
 ```powershell
