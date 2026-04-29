@@ -151,6 +151,38 @@ Fast rebuild:
 npm run rebuild:fast
 ```
 
+## 6.2 PDF Export Pipeline
+
+This project uses `vitepress-export-pdf` (Puppeteer-based) to convert Markdown pages to PDF.
+
+### Export all PDFs
+
+```powershell
+npm run docs:build
+npm run docs:pdf
+```
+
+PDFs are written to `artifacts/pdf/`:
+
+| File | Config | Content |
+|------|--------|---------|
+| `datasheet.pdf` | `pdf-configs/datasheet.mts` | Product spec overview |
+| `app-guide.pdf` | `pdf-configs/app-guide.mts` | Dev setup & API examples |
+| `product-manual.pdf` | `pdf-configs/product-manual.mts` | Single product full manual |
+| `series-manual.pdf` | `pdf-configs/series-manual.mts` | All products combined |
+
+### Customize PDF export
+
+Edit the corresponding file in `pdf-configs/` to adjust:
+
+- `routePatterns` — which pages to include
+- `pdfOptions` — paper format, margins, header/footer
+- `outFile` — output filename
+
+### CI / GitHub Actions
+
+The workflow `.github/workflows/markdown-pdf.yml` runs on every push to `main`/`master` that touches `markdown/**/*.md`. It builds the site, exports PDFs, and publishes them to [GitHub Releases](https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases/tag/latest-pdf).
+
 ## 7. Optional: switch Node versions with nvm-windows
 
 If you need to switch between multiple Node versions, use nvm-windows.

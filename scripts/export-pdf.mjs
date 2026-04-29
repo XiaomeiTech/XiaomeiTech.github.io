@@ -1,8 +1,6 @@
 import { spawnSync } from 'node:child_process'
-import path from 'node:path'
 
-const root = process.cwd()
-const outDir = path.join(root, 'artifacts', 'pdf')
+const outDir = 'artifacts/pdf'
 const configs = [
   'pdf-configs/datasheet.mts',
   'pdf-configs/app-guide.mts',

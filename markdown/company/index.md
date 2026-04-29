@@ -1,36 +1,33 @@
----
-# https://vitepress.dev/reference/default-theme-home-page
-layout: home
+# 关于小美
 
-hero:
-  name: "小美技术"
-  text: "工业通信与数字化解决方案"
-  tagline: "聚焦制造业现场连接、数据采集与系统集成，为企业提供稳定、安全、可持续演进的技术底座。"
-  image:
-    src: /logo/xm-logo.png
-    alt: 小美技术 Logo
-  actions:
-    - theme: brand
-      text: 进入文档中心
-      link: /markdown-examples
-    - theme: alt
-      text: 查看 API 示例
-      link: /api-examples
+## 公司简介
 
-features:
-  - title: 稳定可靠
-    details: 采用工程化交付流程与标准化组件，保障项目从 PoC 到规模化落地的一致性。
-  - title: 行业实践
-    details: 覆盖 PLC、边缘网关、协议转换与云端集成，面向工业现场真实业务场景。
-  - title: 安全合规
-    details: 支持权限分层、访问审计与数据传输加密，满足企业级治理与运维要求。
----
+**小美技术（东莞）有限公司**是一家专注于工业通信与数字化解决方案的技术型企业，致力于为制造业客户提供稳定、安全、可持续演进的工业现场连接与数据采集方案。
+
+公司立足工业自动化核心领域，围绕工业总线协议（EtherCAT、PROFINET、PROFIBUS、Modbus 等）构建产品矩阵，覆盖远程 IO 系统、嵌入式控制单元、定制化控制器及行业专用模组，已在 3C 电子、新能源、汽车零部件等细分场景形成批量交付能力。
+
+小美技术坚持"工程化交付 + 标准化组件"的产品理念，从 PoC 验证到规模化落地，保障项目的一致性、稳定性与可维护性。
+
+## 产品体系
+
+### 远程 IO 系统
+基于主流工业现场总线协议的分布式 IO 解决方案，包含：
+
+- **耦合器系列**：EtherCAT 耦合器、PROFINET 耦合器、EtherNet/IP 耦合器、Modbus 耦合器
+- **拓展模块系列**：模拟量输入（AI）、模拟量输出（AO）、数字量输入（DI）、数字量输出（DO）
+
+### 飞达控制器
+- **CM-SC1524-N** — 5 轴脉冲控制卡，适配模切飞达、自裁自贴飞达及 SMT 供料飞达
+
+### 定制产品
+面向特定工艺场景的控制器定制开发，包括协议适配、I/O 扩展、专用算法集成等。
 
 ## 服务能力
 
-- 工业协议接入：Modbus、PROFINET、PROFIBUS、EtherCAT 等。
-- 数据平台建设：采集、清洗、建模与可视化闭环。
-- 系统集成实施：MES、ERP、SCADA 的接口联动与流程打通。
+- **工业协议接入**：EtherCAT、PROFINET、PROFIBUS、Modbus RTU/TCP、EtherNet/IP
+- **控制方案设计**：嵌入式运动控制、逻辑控制、过程控制
+- **数据平台建设**：采集、清洗、建模与可视化闭环
+- **系统集成实施**：MES、ERP、SCADA 接口联动与流程打通
 
 ## 交付流程
 
@@ -38,3 +35,19 @@ features:
 2. 方案设计与分阶段实施
 3. 联调验收与运维陪跑
 
+## 合作伙伴
+
+- **客户案例**：3C 电子、新能源零部件、汽车零部件等
+- **行业客户**：3C 电子、新能源、汽车零部件等
+- **合作项目**：与客户合作，定制化开发与实施，保障项目的一致性、稳定性与可维护性。
+
+- **新能源客户**：与新能源客户合作，为新能源领域提供稳定、安全、可持续演进的工业现场连接与数据采集方案。
+
+- **汽车零部件客户**：与汽车零部件客户合作，为汽车零部件领域提供稳定、安全、可持续演进的工业现场连接与数据采集方案。
+
+## 联系我们
+
+- **地址**：广东省东莞市
+- **官网**：[xmjs.asia](https://xmjs.asia)
+- **GitHub**：[github.com/XiaomeiTech](https://github.com/XiaomeiTech)
+- **下载中心**：[GitHub Releases](https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases)

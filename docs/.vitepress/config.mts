@@ -73,6 +73,7 @@ export default defineConfig({
       { text: '飞达控制器', link: '/feeder-controller/' },
       { text: '定制项目', link: '/custom/' },
       { text: '关于与支持', items: [
+        { text: '关于我们', link: '/company/' },
         { text: 'PDF手册', link: '/pdf/' },
         { text: 'Markdown 示例', link: '/web/markdown-examples' },
         { text: 'Runtime API 示例', link: '/web/api-examples' },
@@ -147,9 +148,18 @@ export default defineConfig({
       ],
 
 
+      '/company/': [
+        {
+          text: '关于小美',
+          items: [
+            { text: '公司介绍', link: '/company/' }
+          ]
+        }
+      ],
+
       '/web/': [
         {
-          text: '关于小美技术',
+          text: '开发指南',
           items: [
             { text: 'Markdown 示例', link: '/web/markdown-examples' },
             { text: 'Runtime API 示例', link: '/web/api-examples' },

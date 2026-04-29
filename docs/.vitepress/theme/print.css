@@ -1,0 +1,38 @@
+@media print {
+  .VPNav,
+  .VPLocalNav,
+  .VPDocFooter,
+  .VPDocAside,
+  .VPSidebar {
+    display: none !important;
+  }
+
+  .VPContent {
+    padding-top: 0 !important;
+  }
+
+  .VPDoc {
+    padding: 0 !important;
+  }
+
+  .content-container {
+    max-width: 100% !important;
+  }
+
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  pre, blockquote {
+    page-break-inside: avoid;
+  }
+}
