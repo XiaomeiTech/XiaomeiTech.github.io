@@ -1,13 +1,14 @@
-const COMPANY = '小美技术（东莞）有限公司'
-const COMPANY_EN = 'Xiaomei Technology (Dongguan) Co., Ltd.'
-const BRAND = '#dc2626'
-const YEAR = new Date().getFullYear()
+export const COMPANY = '小美技术（东莞）有限公司'
+export const COMPANY_EN = 'Xiaomei Technology (Dongguan) Co., Ltd.'
+export const BRAND = '#dc2626'
+export const HEADER_TEXT_COLOR = '#5f778e' // LatexReference: Morandi Deep Blue
+export const YEAR = new Date().getFullYear()
 
 const MARGIN = { top: 94, right: 57, bottom: 94, left: 57 }
 
 function h(html) { return html.replace(/\n\s*/g, '') }
 
-const FONT = "'Microsoft YaHei', 'SimHei', sans-serif"
+export const FONT = "'HarmonyOS Sans SC', 'SimHei', sans-serif"
 
 /**
  * @param {{ outFile: string, title: string, routePatterns: string[] }} opts
@@ -18,7 +19,7 @@ export function datasheetConfig(opts) {
     <table style="width:100%;padding:0 8px 6px 8px;font-family:${FONT};font-size:11px;color:#333;border-bottom:2px solid ${BRAND};border-collapse:collapse;">
       <tr>
         <td style="font-weight:bold;font-size:12px;color:${BRAND};text-align:left;vertical-align:bottom;">${COMPANY}</td>
-        <td style="font-weight:bold;font-size:12px;text-align:right;vertical-align:bottom;">${opts.title}</td>
+        <td style="font-weight:bold;font-size:12px;color:${HEADER_TEXT_COLOR};text-align:right;vertical-align:bottom;">${opts.title}</td>
       </tr>
     </table>
   `)

@@ -6,3 +6,4 @@ docs/.vitepress/dist
 .claude/settings.local.json
 markdown/.vitepress/.temp/pdf
 artifacts/pdf
+LatexReference

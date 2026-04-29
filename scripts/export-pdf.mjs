@@ -2,10 +2,13 @@ import { spawnSync } from 'node:child_process'
 import { readFileSync, mkdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
 import puppeteer from 'puppeteer'
+import { BRAND, COMPANY, COMPANY_EN, YEAR, FONT, HEADER_TEXT_COLOR } from '../pdf-configs/_shared.mjs'
 
 const root = process.cwd()
 const outDir = path.join(root, 'artifacts', 'pdf')
-const tempDir = path.join(root, 'artifacts', '.temp')
+// NOTE: Must be a relative path for vitepress-export-pdf to avoid invalid path issue
+const relTempDir = 'artifacts/.temp'
+const tempDir = path.join(root, relTempDir)
 const coverDir = path.join(root, 'pdf-configs', 'covers')
 
 const configs = [
@@ -19,7 +22,28 @@ mkdirSync(tempDir, { recursive: true })
 mkdirSync(outDir, { recursive: true })
 
 async function renderCover(browser, htmlFile) {
-  const html = readFileSync(path.join(coverDir, htmlFile), 'utf-8')
+  let html = readFileSync(path.join(coverDir, htmlFile), 'utf-8')
+  
+  // 注入公共 CSS 样式与当前变量
+  try {
+    const sharedCss = readFileSync(path.join(coverDir, 'shared-cover.css'), 'utf-8')
+    const styleVariables = `
+      :root {
+        --brand-color: ${BRAND};
+        --font-family: ${FONT};
+        --header-text-color: ${HEADER_TEXT_COLOR};
+      }
+    `
+    html = html.replace('</head>', `<style>${styleVariables}\n${sharedCss}</style></head>`)
+  } catch(e) {
+    // 忽略找不到样式的错误
+  }
+
+  // 模板字符文本替换
+  html = html.replace(/{{COMPANY}}/g, COMPANY)
+  html = html.replace(/{{COMPANY_EN}}/g, COMPANY_EN)
+  html = html.replace(/{{YEAR}}/g, YEAR)
+
   const page = await browser.newPage()
   await page.setContent(html, { waitUntil: 'networkidle0' })
   const outPath = path.join(tempDir, htmlFile.replace('.html', '.pdf'))
@@ -38,7 +62,7 @@ function runVitepressExport(config, outFile) {
     'vitepress-export-pdf', 'export', 'docs',
     '--config', config,
     '--outFile', outFile,
-    '--outDir', tempDir,
+    '--outDir', relTempDir, // 使用相对路径解决合并时的 Path contains invalid characters
   ]
   const result = spawnSync('npx', args, { stdio: 'inherit', shell: true })
   return result.status === 0
