@@ -43,6 +43,7 @@ async function renderCover(browser, htmlFile) {
   html = html.replace(/{{COMPANY}}/g, COMPANY)
   html = html.replace(/{{COMPANY_EN}}/g, COMPANY_EN)
   html = html.replace(/{{YEAR}}/g, YEAR)
+  html = html.replace(/{{MONTH}}/g, MONTH)
 
   const page = await browser.newPage()
   await page.setContent(html, { waitUntil: 'networkidle0' })

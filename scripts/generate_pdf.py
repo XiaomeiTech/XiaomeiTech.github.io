@@ -64,6 +64,10 @@ except OSError as exc:
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 log = logging.getLogger(__name__)
 
+# Suppress noisy DEBUG logs from WeasyPrint's dependencies
+for _noisy in ("weasyprint", "fontTools", "PIL", "cssselect2", "tinycss2"):
+    logging.getLogger(_noisy).setLevel(logging.WARNING)
+
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "pdf-templates"
 
@@ -94,7 +98,7 @@ def _set_defaults(cfg):
     cfg.setdefault("company_en", "")
     cfg.setdefault("brand", "#dc2626")
     cfg.setdefault("year", str(datetime.now().year))
-    cfg.setdefault("output", f"artifacts/pdf/{cfg.get('_config_name', 'output')}.pdf")
+    cfg.setdefault("output", f"pdf-out/{cfg.get('_config_name', 'output')}.pdf")
     cfg.setdefault("cover", {})
     cfg.setdefault("ending", {})
     cfg.setdefault("content", {})
@@ -286,11 +290,11 @@ def _resolve_image_paths(html_text, md_file_path, base_dir):
             return m.group(0)
         candidate = md_dir / src
         if candidate.exists():
-            return f'src="file://{candidate.as_posix()}"'
+            return f'src="{candidate.as_uri()}"'
         # Try relative to base_dir
         candidate2 = Path(base_dir) / src
         if candidate2.exists():
-            return f'src="file://{candidate2.as_posix()}"'
+            return f'src="{candidate2.as_uri()}"'
         return m.group(0)
 
     return re.sub(r'src="([^"]+)"', _fix_src, html_text)
@@ -358,13 +362,13 @@ def _strip_vue_blocks(text):
 _FONT_FACES_CSS = """
 @font-face {{
   font-family: 'HarmonyOS Sans SC';
-  src: url('file:///{font_dir}/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+  src: url('{font_dir}/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }}
 @font-face {{
   font-family: 'HarmonyOS Sans SC';
-  src: url('file:///{font_dir}/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+  src: url('{font_dir}/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }}
@@ -470,7 +474,6 @@ pre {{
   padding: 8pt 12pt;
   font-size: 8pt;
   line-height: 1.4;
-  overflow-x: auto;
   white-space: pre-wrap;
   word-break: break-all;
   page-break-inside: avoid;
@@ -568,8 +571,8 @@ def build_content_css(config):
 
 
 def build_font_faces(config):
-    font_dir = config["pdf"]["font_dir"].replace("\\", "/")
-    return _FONT_FACES_CSS.format(font_dir=font_dir)
+    font_uri = Path(config["pdf"]["font_dir"]).resolve().as_uri()
+    return _FONT_FACES_CSS.format(font_dir=font_uri)
 
 
 # ---------------------------------------------------------------------------
@@ -616,6 +619,14 @@ def _inject_font_css(html_str, font_css):
     return html_str.replace("</head>", f"<style>{font_css}</style></head>")
 
 
+def _suppress_noisy_loggers():
+    """Suppress DEBUG/INFO spam from WeasyPrint's dependencies."""
+    noise_prefixes = ("fontTools", "weasyprint", "PIL", "cssselect2", "tinycss2")
+    for name in logging.root.manager.loggerDict:
+        if name.startswith(noise_prefixes):
+            logging.getLogger(name).setLevel(logging.WARNING)
+
+
 def generate_pdf(config):
     env = make_env()
     temp_dir = Path(tempfile.mkdtemp(prefix="pdfgen_"))
@@ -623,6 +634,10 @@ def generate_pdf(config):
 
     # Build font CSS once for all parts
     font_css = build_font_faces(config)
+
+    # Suppress noisy logs (must be called after lazy loggers are created)
+    if logging.getLogger().level > logging.DEBUG:
+        _suppress_noisy_loggers()
 
     try:
         # 1. Cover page
@@ -688,6 +703,8 @@ def _build_variables(config, section):
         "COMPANY_EN": config["company_en"],
         "BRAND": config["brand"],
         "YEAR": config["year"],
+        "MONTH": datetime.now().strftime("%m"),
+        "DAY": datetime.now().strftime("%d"),
         "TITLE": config.get("title", ""),
         "SUBTITLE": config.get("subtitle", ""),
         "SERIES": config.get("series", ""),
@@ -717,12 +734,19 @@ def main():
         "-o", "--output", help="Override output PDF path"
     )
     parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Verbose logging"
+        "-v", "--verbose", action="store_true", help="Enable debug output (all libraries)"
+    )
+    parser.add_argument(
+        "-q", "--quiet", action="store_true", help="Only show errors and warnings"
     )
     args = parser.parse_args()
 
-    if args.verbose:
+    if args.quiet:
+        logging.getLogger().setLevel(logging.WARNING)
+    elif args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
+        for _name in ("weasyprint", "fontTools", "PIL", "cssselect2", "tinycss2"):
+            logging.getLogger(_name).setLevel(logging.DEBUG)
 
     config = load_config(args.config)
     if args.output:

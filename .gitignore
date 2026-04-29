@@ -3,7 +3,6 @@ docs/.vitepress/cache
 docs/.vitepress/dist
 .vitepress/cache
 .vitepress/dist
-.claude/settings.local.json
-markdown/.vitepress/.temp/pdf
-artifacts/pdf
+.claude
 LatexReference
+pdf-out/feeder-datasheet.pdf
