@@ -611,10 +611,18 @@ def merge_pdfs(pdf_paths, output_path):
 # ---------------------------------------------------------------------------
 
 
+def _inject_font_css(html_str, font_css):
+    """Inject @font-face CSS into an HTML document before </head>."""
+    return html_str.replace("</head>", f"<style>{font_css}</style></head>")
+
+
 def generate_pdf(config):
     env = make_env()
     temp_dir = Path(tempfile.mkdtemp(prefix="pdfgen_"))
     temp_pdfs = []
+
+    # Build font CSS once for all parts
+    font_css = build_font_faces(config)
 
     try:
         # 1. Cover page
@@ -625,6 +633,7 @@ def generate_pdf(config):
             log.info("[cover] %s", Path(cover_tpl).name)
             cover_vars = _build_variables(config, cover)
             cover_html = render_template(env, cover_tpl, cover_vars)
+            cover_html = _inject_font_css(cover_html, font_css)
             cover_path = str(temp_dir / "cover.pdf")
             html_to_pdf(cover_html, cover_path)
             temp_pdfs.append(cover_path)
@@ -632,7 +641,6 @@ def generate_pdf(config):
         # 2. Body content from markdown
         log.info("[body] converting markdown...")
         body_html = convert_content_to_html(config)
-        font_css = build_font_faces(config)
         content_css = build_content_css(config)
         # Wrap in full HTML document for WeasyPrint
         body_html = f"""<!DOCTYPE html>
@@ -655,6 +663,7 @@ def generate_pdf(config):
             log.info("[ending] %s", Path(ending_tpl).name)
             ending_vars = _build_variables(config, ending)
             ending_html = render_template(env, ending_tpl, ending_vars)
+            ending_html = _inject_font_css(ending_html, font_css)
             ending_path = str(temp_dir / "ending.pdf")
             html_to_pdf(ending_html, ending_path)
             temp_pdfs.append(ending_path)
