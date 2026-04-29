@@ -1,3 +1,3 @@
-# EtherNetIP 耦合器
+# Modbus 耦合器
 
 正在开发中

@@ -116,7 +116,8 @@ export default defineConfig({
         {
           text: '飞达控制器',
           items: [
-            { text: '控制器说明', link: '/feeder-controller/' }
+            { text: '控制器概述', link: '/feeder-controller/' }, 
+            { text: '控制器说明', link: '/feeder-controller/manual/' },
           ]
         }
       ],
