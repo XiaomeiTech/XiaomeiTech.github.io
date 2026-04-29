@@ -3,11 +3,6 @@ const COMPANY_EN = 'Xiaomei Technology (Dongguan) Co., Ltd.'
 const BRAND = '#dc2626'
 const YEAR = new Date().getFullYear()
 
-// Puppeteer header/footer sandbox restrictions:
-// - no external fonts (use inline system font stack)
-// - no flexbox (use table layout)
-// - no string margin units (use px numbers)
-// 2.5cm ≈ 94px, 1.5cm ≈ 57px at 96dpi
 const MARGIN = { top: 94, right: 57, bottom: 94, left: 57 }
 
 function h(html) { return html.replace(/\n\s*/g, '') }
@@ -15,15 +10,15 @@ function h(html) { return html.replace(/\n\s*/g, '') }
 const FONT = "'Microsoft YaHei', 'SimHei', sans-serif"
 
 /**
- * @param {{ outFile: string, title: string, routePatterns?: string[] }} overrides
+ * @param {{ outFile: string, title: string, routePatterns: string[] }} opts
  * @returns {import('vitepress-export-pdf').UserConfig}
  */
-export function datasheetConfig(overrides) {
+export function datasheetConfig(opts) {
   const header = h(`
     <table style="width:100%;padding:0 8px 6px 8px;font-family:${FONT};font-size:11px;color:#333;border-bottom:2px solid ${BRAND};border-collapse:collapse;">
       <tr>
         <td style="font-weight:bold;font-size:12px;color:${BRAND};text-align:left;vertical-align:bottom;">${COMPANY}</td>
-        <td style="font-weight:bold;font-size:12px;text-align:right;vertical-align:bottom;">${overrides.title}</td>
+        <td style="font-weight:bold;font-size:12px;text-align:right;vertical-align:bottom;">${opts.title}</td>
       </tr>
     </table>
   `)
@@ -38,8 +33,8 @@ export function datasheetConfig(overrides) {
   `)
 
   return {
-    outFile: overrides.outFile,
-    routePatterns: overrides.routePatterns,
+    outFile: opts.outFile,
+    routePatterns: opts.routePatterns,
     pdfOptions: {
       format: 'A4',
       margin: MARGIN,

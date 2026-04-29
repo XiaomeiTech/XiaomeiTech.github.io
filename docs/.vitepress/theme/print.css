@@ -1,4 +1,5 @@
 @media print {
+  /* ---- hide chrome ---- */
   .VPNav,
   .VPLocalNav,
   .VPDocFooter,
@@ -7,20 +8,52 @@
     display: none !important;
   }
 
-  .VPContent {
-    padding-top: 0 !important;
+  .VPContent { padding-top: 0 !important; }
+  .VPDoc { padding: 0 !important; }
+  .content-container { max-width: 100% !important; }
+
+  /* ---- Body Typography ---- */
+  body {
+    font-family: 'HarmonyOS Sans SC', 'Microsoft YaHei', sans-serif;
+    color: #333;
+    line-height: 1.8;
+    font-size: 12px;
   }
 
-  .VPDoc {
-    padding: 0 !important;
-  }
-
-  .content-container {
-    max-width: 100% !important;
-  }
-
-  h1,h2, h3, h4 {
+  h1 {
+    color: #dc2626 !important;
+    font-size: 22px;
+    font-weight: 700;
+    page-break-before: always;
     page-break-after: avoid;
+    margin-top: 0;
+  }
+  h1:first-of-type {
+    page-break-before: avoid;
+  }
+  h2 {
+    color: #b91c1c !important;
+    font-size: 17px;
+    font-weight: 700;
+    page-break-after: avoid;
+    margin-top: 28px;
+    margin-bottom: 12px;
+  }
+  h3 {
+    color: #1f2937 !important;
+    font-size: 14px;
+    font-weight: 700;
+    page-break-after: avoid;
+  }
+  h4 {
+    color: #374151 !important;
+    font-size: 13px;
+    font-weight: 700;
+    page-break-after: avoid;
+  }
+
+  p, li {
+    line-height: 1.9;
   }
 
   img {
@@ -30,9 +63,26 @@
 
   table {
     page-break-inside: avoid;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+  th {
+    background: #f5f5f5;
+    font-weight: 700;
   }
 
   pre, blockquote {
     page-break-inside: avoid;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 24px 0;
   }
 }

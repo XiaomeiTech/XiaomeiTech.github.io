@@ -11,5 +11,6 @@ export default defineUserConfig(datasheetConfig({
     '!/pdf/**',
     '!/custom/**',
     '!/company/**',
+    '!/cover/**',
   ],
 }))

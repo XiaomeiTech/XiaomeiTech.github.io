@@ -8,5 +8,6 @@ export default defineUserConfig(datasheetConfig({
     '!/',
     '!/web/**',
     '!/pdf/**',
+    '!/cover/**',
   ],
 }))
