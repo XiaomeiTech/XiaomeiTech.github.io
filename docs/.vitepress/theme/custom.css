@@ -20,44 +20,77 @@
 :root {
   --vp-font-family-base: 'HarmonyOS Sans SC', 'Microsoft YaHei', sans-serif;
 
-  --vp-c-brand-1: #dc2626;
-  --vp-c-brand-2: #b91c1c;
-  --vp-c-brand-3: #991b1b;
+  /* Morandi brand colors */
+  --vp-c-brand-1: #A86767;
+  --vp-c-brand-2: #8F5555;
+  --vp-c-brand-3: #764444;
 
-  --vp-custom-block-info-bg: #f1f5f9;
-  --vp-custom-block-info-border: #475569;
+  /* Morandi custom block colors */
+  --vp-custom-block-info-bg: #f0f3f5;
+  --vp-custom-block-info-border: #7A8B99;
+  --vp-custom-block-info-text: #4A5B69;
 
-  --vp-custom-block-tip-bg: #eef4ff;
-  --vp-custom-block-tip-border: #2563eb;
+  --vp-custom-block-tip-bg: #f0f3f0;
+  --vp-custom-block-tip-border: #8A9B88;
+  --vp-custom-block-tip-text: #5A6B58;
 
-  --vp-custom-block-warning-bg: #fff7ed;
-  --vp-custom-block-warning-border: #c2410c;
+  --vp-custom-block-warning-bg: #faf6f2;
+  --vp-custom-block-warning-border: #B98B67;
+  --vp-custom-block-warning-text: #895B37;
 
-  --vp-custom-block-danger-bg: #fef2f2;
-  --vp-custom-block-danger-border: #b91c1c;
+  --vp-custom-block-danger-bg: #faf4f4;
+  --vp-custom-block-danger-border: #A86767;
+  --vp-custom-block-danger-text: #783737;
 
-  --vp-custom-block-details-bg: #f8fafc;
-  --vp-custom-block-details-border: #94a3b8;
+
+  --vp-custom-block-details-bg: #f8f8f8;
+  --vp-custom-block-details-border: #B0B4B8;
+  --vp-custom-block-details-text: #4A5B69;
+
+  --vp-custom-block-caution-bg: #faf9f5;
+  --vp-custom-block-caution-border: #be9721;
+  --vp-custom-block-caution-text: #c29739;
+
+  --vp-custom-block-notice-bg: #f2f4f5;
+  --vp-custom-block-notice-border: #2c4255;
+  --vp-custom-block-notice-text: #526474;
 }
+
 .dark {
-  --vp-c-brand-1: #f87171;
-  --vp-c-brand-2: #ef4444;
-  --vp-c-brand-3: #dc2626;
+  --vp-c-brand-1: #D4A0A0;
+  --vp-c-brand-2: #C08A8A;
+  --vp-c-brand-3: #A86767;
 
-  --vp-custom-block-info-bg: #1e293b;
+  --vp-custom-block-info-bg: #191c1f;
+    --vp-custom-block-info-border: #325a7a;
+  --vp-custom-block-info-text: #178ebd;
 
-  --vp-custom-block-tip-bg: #0f1f47;
 
-  --vp-custom-block-warning-bg: #422006;
+  --vp-custom-block-tip-bg: #2a322c;
+  --vp-custom-block-tip-border: #35862c;
+  --vp-custom-block-tip-text: #84c77c;
+  
+  --vp-custom-block-warning-bg: #3a3028;
+  
+  --vp-custom-block-danger-bg: #3a2828;
+  
+  --vp-custom-block-details-bg: #191b1b;
+  
+  --vp-custom-block-caution-bg: #3a382c;
+  
+  --vp-custom-block-notice-bg: #1d1f22;
+  --vp-custom-block-notice-border: #4e86b8;
+  --vp-custom-block-notice-text: #2673b6;
 
-  --vp-custom-block-danger-bg: #450a0a;
-
-  --vp-custom-block-details-bg: #1f2937;
+  
 }
 
-.VPDoc .custom-block.warning .custom-block-title::before,
+/* --- Danger block --- */
+.VPDoc .custom-block.danger {
+  --block-icon-color: #A86767;
+}
 .VPDoc .custom-block.danger .custom-block-title::before {
-  content: '⚠︎';
+  content: '⚠ ';
   color: var(--block-icon-color);
   font-size: 1.2rem;
   font-weight: 700;
@@ -65,14 +98,63 @@
   transform: translateY(-0.02em);
 }
 
+/* --- Warning block --- */
+.VPDoc .custom-block.warning {
+  --block-icon-color: #B98B67;
+}
+.VPDoc .custom-block.warning .custom-block-title::before {
+  content: '⚠ ';
+  color: var(--block-icon-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.02em);
+}
+
+/* --- Caution block --- */
+.VPDoc .custom-block.caution {
+  --block-icon-color: #C2B280;
+  border-color: var(--vp-custom-block-caution-border);
+  background: var(--vp-custom-block-caution-bg);
+  color: var(--vp-custom-block-caution-text);
+}
+.VPDoc .custom-block.caution .custom-block-title {
+  color: var(--vp-custom-block-caution-border);
+}
+.VPDoc .custom-block.caution .custom-block-title::before {
+  content: '⚠ ';
+  color: var(--block-icon-color);
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.02em);
+}
+
+/* --- Notice block (VitePress doesn't have built-in, style as custom) --- */
+.VPDoc .custom-block.notice {
+  border-color: var(--vp-custom-block-notice-border);
+  background: var(--vp-custom-block-notice-bg);
+  color: var(--vp-custom-block-notice-text);
+}
+.VPDoc .custom-block.notice .custom-block-title {
+  color: var(--vp-custom-block-notice-border);
+}
+
+/* --- Detail block --- */
+.VPDoc .custom-block.details {
+  border-color: var(--vp-custom-block-details-border);
+}
+
+/* --- Dark mode icon colors --- */
 .dark .VPDoc .custom-block.warning {
-  --block-icon-color: #f59e0b;
+  --block-icon-color: #D9AB87;
 }
-
 .dark .VPDoc .custom-block.danger {
-  --block-icon-color: #ef4444;
+  --block-icon-color: #C08A8A;
 }
-
+.dark .VPDoc .custom-block.caution {
+  --block-icon-color: #E2D2A0;
+}
 
 /* Keep logo visible before the top-left site button/title. */
 .VPNavBarTitle .title {
@@ -85,4 +167,3 @@
   width: 22px;
   height: 22px;
 }
-

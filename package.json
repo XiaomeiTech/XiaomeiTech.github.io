@@ -10,6 +10,7 @@
     "rebuild:fast": "npm run clean:cache && npm run docs:build"
   },
   "devDependencies": {
+    "markdown-it-container": "^4.0.0",
     "pdf-lib": "^1.17.1",
     "vitepress": "^2.0.0-alpha.17"
   },

@@ -120,7 +120,6 @@ python scripts/generate_pdf.py -c pdf-configs/datasheet.yaml -v
 python scripts/generate_pdf.py -c pdf-configs/datasheet.yaml -o output/custom.pdf
 ```
 
-输出目录：`artifacts/pdf/`
 
 ## 新增文档类型
 

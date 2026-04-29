@@ -1,5 +1,6 @@
 ﻿import { defineConfig } from 'vitepress'
 import { fileURLToPath } from 'node:url'
+import container from 'markdown-it-container'
 import wavedromPlugin from './wavedrom.mts'
 
 const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
@@ -7,6 +8,17 @@ const repoName = env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
 const isUserOrOrgPagesRepo = repoName.endsWith('.github.io')
 const githubBase = repoName && !isUserOrOrgPagesRepo ? `/${repoName}/` : '/'
 const markdownSrcDir = fileURLToPath(new URL('../../markdown', import.meta.url))
+
+// Helper: create a VitePress-compatible container render function
+function makeContainer(title: string): (tokens: any[], idx: number) => string {
+  return (tokens, idx) => {
+    const token = tokens[idx]
+    if (token.nesting === 1) {
+      return `<div class="${token.info} custom-block">\n<p class="custom-block-title">${title}</p>\n`
+    }
+    return '</div>\n'
+  }
+}
 
 
 // https://vitepress.yiov.top/
@@ -20,6 +32,9 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(wavedromPlugin)
+      // Register caution & notice as custom containers
+      md.use(container, 'caution', { render: makeContainer('CAUTION') })
+      md.use(container, 'notice',  { render: makeContainer('NOTICE') })
     }
   },
 

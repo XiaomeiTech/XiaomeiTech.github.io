@@ -186,7 +186,58 @@ def render_template(env, template_rel, variables):
 
 
 # ---------------------------------------------------------------------------
-# Markdown → HTML
+# VitePress ::: container → Python-Markdown admonition
+# ---------------------------------------------------------------------------
+
+
+def _convert_vitepress_containers(text):
+    """Convert VitePress ::: blocks to Python-Markdown !!! admonition syntax.
+
+    ::: info          !!! info
+       content   →        content (indented 4 spaces)
+    :::             """
+    result = []
+    lines = text.split("\n")
+    in_block = False
+    block_type = ""
+    indent = "    "
+
+    _titles = {
+        "danger": "⚠ DANGER", "warning": "⚠ WARNING",
+        "caution": "⚠ CAUTION",
+        "info": "INFO", "note": "NOTICE", "tip": "TIP", "details": "",
+    }
+
+    for line in lines:
+        m = re.match(r"^:::\s*(\w+)(?:\s+(.*?))?\s*$", line)
+        if m:
+            if in_block:
+                in_block = False
+            block_type = m.group(1)
+            custom = (m.group(2) or "").strip()
+            if custom:
+                title = custom
+            else:
+                title = _titles.get(block_type, block_type.upper())
+            if title:
+                result.append(f'!!! {block_type} "{title}"')
+            else:
+                result.append(f"!!! {block_type}")
+            in_block = True
+            continue
+        if in_block and re.match(r"^:::\s*$", line):
+            # Closing :::
+            in_block = False
+            block_type = ""
+            continue
+        if in_block:
+            result.append(indent + line)
+        else:
+            result.append(line)
+
+    return "\n".join(result)
+
+
 # ---------------------------------------------------------------------------
 
 
@@ -315,9 +366,8 @@ def convert_content_to_html(config):
         rel = Path(md_path).relative_to(base_dir)
         log.info("  [md] %s", rel)
         text = Path(md_path).read_text(encoding="utf-8")
-        # Strip VitePress frontmatter (YAML between --- delimiters)
         text = _strip_frontmatter(text)
-        # Strip Vue <script setup> blocks
+        text = _convert_vitepress_containers(text)
         text = _strip_vue_blocks(text)
         html = md.convert(text)
         html = _resolve_image_paths(html, md_path, base_dir)
@@ -332,6 +382,7 @@ def convert_content_to_html(config):
             log.info("  [appendix] %s", p.name)
             text = p.read_text(encoding="utf-8")
             text = _strip_frontmatter(text)
+            text = _convert_vitepress_containers(text)
             html = md.convert(text)
             parts.append(html)
             md.reset()
@@ -526,18 +577,38 @@ li {{ margin: 2pt 0; }}
   height: auto;
 }}
 
-/* Admonition blocks (compatible with VitePress ::: syntax) */
+/* Admonition blocks — LaTeX morandi style */
 .admonition {{
-  border-left: 4px solid #999;
-  padding: 8pt 12pt;
   margin: 10pt 0;
-  background: #f8f8f8;
+  border: 1.5pt solid #ddd;
   page-break-inside: avoid;
 }}
-.admonition.info {{ border-color: #4493f8; background: #f0f6ff; }}
-.admonition.tip {{ border-color: #3fb950; background: #f0fff4; }}
-.admonition.warning {{ border-color: #d29922; background: #fffcf0; }}
-.admonition.danger {{ border-color: {brand}; background: #fff5f5; }}
+.admonition .admonition-title {{
+  margin: 0;
+  padding: 4pt 10pt;
+  font-size: 10pt;
+  font-weight: 700;
+  color: #fff;
+}}
+.admonition p {{ padding: 6pt 10pt; margin: 0; }}
+
+/* Morandi color scheme (matches LatexReference/style/warning_def.tex) */
+.admonition.danger  {{ border-color: #A86767; }}
+.admonition.danger .admonition-title {{ background: #A86767; }}
+.admonition.warning {{ border-color: #B98B67; }}
+.admonition.warning .admonition-title {{ background: #B98B67; }}
+.admonition.caution {{ border-color: #C2B280; }}
+.admonition.caution .admonition-title {{ background: #C2B280; }}
+.admonition.info    {{ border-color: #7A8B99; }}
+.admonition.info .admonition-title    {{ background: #7A8B99; }}
+.admonition.note    {{ border-color: #8294A4; }}
+.admonition.note .admonition-title    {{ background: #8294A4; }}
+.admonition.notice  {{ border-color: #8294A4; }}
+.admonition.notice .admonition-title  {{ background: #8294A4; }}
+.admonition.tip     {{ border-color: #8A9B88; }}
+.admonition.tip .admonition-title     {{ background: #8A9B88; }}
+.admonition.details {{ border-color: #B0B4B8; background: #fafafa; }}
+.admonition.details .admonition-title {{ background: none; color: #B0B4B8; font-size: 9pt; padding: 2pt 10pt; }}
 
 /* Appendix separator */
 .appendix-separator {{
