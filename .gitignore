@@ -5,4 +5,4 @@ docs/.vitepress/dist
 .vitepress/dist
 .claude
 LatexReference
-pdf-out/feeder-datasheet.pdf
+pdf-out/

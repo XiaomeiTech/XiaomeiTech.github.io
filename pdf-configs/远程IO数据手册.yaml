@@ -44,4 +44,4 @@ pdf:
   footer:
     left: "© 2026 Xiaomei Technology (Dongguan) Co., Ltd."
 
-output: pdf-out/remoteIO-datasheet.pdf
+output: pdf-out/远程IO数据手册.pdf

@@ -5,15 +5,13 @@
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
-    "pdf:generate": "python scripts/generate_pdf.py -c pdf-configs/datasheet.yaml",
-    "pdf:generate-all": "bash -c 'for f in pdf-configs/*.yaml; do python scripts/generate_pdf.py -c \"$f\"; done'",
+    "pdf": "python scripts/generate_pdf.py",
     "rebuild": "npm run clean:cache && npm ci && npm run docs:build",
     "rebuild:fast": "npm run clean:cache && npm run docs:build"
   },
   "devDependencies": {
     "pdf-lib": "^1.17.1",
     "vitepress": "^2.0.0-alpha.17",
-    "vitepress-export-pdf": "^1.0.0"
   },
   "dependencies": {
     "wavedrom": "^3.6.1"

@@ -42,18 +42,13 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Generate PDFs
-        run: |
-          mkdir -p artifacts/pdf
-          for cfg in pdf-configs/*.yaml; do
-            echo "=== $(basename "$cfg") ==="
-            python scripts/generate_pdf.py -c "$cfg" -v
-          done
+        run: python scripts/generate_pdf.py -q
 
       - name: Upload PDF artifacts
         uses: actions/upload-artifact@v4
         with:
           name: markdown-pdf
-          path: artifacts/pdf
+          path: pdf-out
           if-no-files-found: warn
 
       - name: Update GitHub Release
@@ -61,5 +56,5 @@ jobs:
         with:
           tag_name: latest-pdf
           name: Latest PDF Exports
-          files: artifacts/pdf/*.pdf
+          files: pdf-out/*.pdf
           make_latest: true

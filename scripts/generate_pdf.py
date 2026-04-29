@@ -98,7 +98,7 @@ def _set_defaults(cfg):
     cfg.setdefault("company_en", "")
     cfg.setdefault("brand", "#dc2626")
     cfg.setdefault("year", str(datetime.now().year))
-    cfg.setdefault("output", f"pdf-out/{cfg.get('_config_name', 'output')}.pdf")
+    cfg.setdefault("output", f"artifacts/pdf/{cfg.get('_config_name', 'output')}.pdf")
     cfg.setdefault("cover", {})
     cfg.setdefault("ending", {})
     cfg.setdefault("content", {})
@@ -728,10 +728,11 @@ def main():
         description="XiaomeiTech PDF generation tool — compile markdown + templates into PDF"
     )
     parser.add_argument(
-        "-c", "--config", required=True, help="Path to YAML config file"
+        "-c", "--config",
+        help="Path to a single YAML config file. If omitted, compiles all pdf-configs/*.yaml"
     )
     parser.add_argument(
-        "-o", "--output", help="Override output PDF path"
+        "-o", "--output", help="Override output PDF path (only with -c)"
     )
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable debug output (all libraries)"
@@ -748,12 +749,25 @@ def main():
         for _name in ("weasyprint", "fontTools", "PIL", "cssselect2", "tinycss2"):
             logging.getLogger(_name).setLevel(logging.DEBUG)
 
-    config = load_config(args.config)
-    if args.output:
-        config["output"] = args.output
-
-    log.info("Generating: %s", config.get("title", config.get("_config_name")))
-    generate_pdf(config)
+    if args.config:
+        # Single config mode
+        config = load_config(args.config)
+        if args.output:
+            config["output"] = args.output
+        log.info("Generating: %s", config.get("title", config.get("_config_name")))
+        generate_pdf(config)
+    else:
+        # Batch mode: compile all YAML configs in pdf-configs/
+        config_dir = ROOT / "pdf-configs"
+        configs = sorted(config_dir.glob("*.yaml"))
+        if not configs:
+            log.error("No .yaml configs found in %s", config_dir)
+            sys.exit(1)
+        log.info("Batch mode: %d config(s) found", len(configs))
+        for cfg_path in configs:
+            log.info("\n=== %s ===", cfg_path.name)
+            config = load_config(str(cfg_path))
+            generate_pdf(config)
 
 
 if __name__ == "__main__":
