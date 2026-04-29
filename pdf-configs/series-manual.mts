@@ -1,18 +1,12 @@
 import { defineUserConfig } from 'vitepress-export-pdf'
+import { datasheetConfig } from './_shared.mjs'
 
-export default defineUserConfig({
+export default defineUserConfig(datasheetConfig({
   outFile: 'series-manual.pdf',
+  title: '系列合并手册',
   routePatterns: [
     '!/',
     '!/web/**',
     '!/pdf/**',
   ],
-  pdfOptions: {
-    format: 'A4',
-    margin: { top: 25, right: 20, bottom: 25, left: 20 },
-    printBackground: true,
-    displayHeaderFooter: true,
-    headerTemplate: '<div></div>',
-    footerTemplate: `<div style="width:100%;text-align:center;font-size:9px;color:#888;"><span class="pageNumber"></span> / <span class="totalPages"></span></div>`,
-  },
-})
+}))

@@ -1,4 +1,25 @@
+@font-face {
+  font-family: 'HarmonyOS Sans SC';
+  src: url('/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans SC';
+  src: url('/fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'HarmonyOS Sans SC';
+  src: url('/fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 :root {
+  --vp-font-family-base: 'HarmonyOS Sans SC', 'Microsoft YaHei', sans-serif;
+
   --vp-c-brand-1: #dc2626;
   --vp-c-brand-2: #b91c1c;
   --vp-c-brand-3: #991b1b;
