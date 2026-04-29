@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"try{console.log\\(require.resolve\\('merge-pdfs'\\)\\)}catch\\(e\\){console.log\\('NOT FOUND'\\)}\")",
+      "Bash(npm install *)",
+      "Bash(node -e \"try{console.log\\(require.resolve\\('pdf-lib'\\)\\)}catch\\(e\\){console.log\\('NOT FOUND'\\)}\")",
+      "Bash(pip install *)",
+      "Bash(python scripts/generate-pdf.py -c pdf-configs/datasheet.yaml -v)"
+    ]
+  }
+}

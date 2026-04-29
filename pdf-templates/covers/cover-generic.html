@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: {{ FONT }};
+    color: #222;
+  }
+  @page { size: A4; margin: 0; }
+  .cover {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 80px 60px 60px 60px;
+    text-align: center;
+  }
+  .cover-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+  }
+  .cover-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: {{ BRAND }};
+    letter-spacing: 8px;
+    margin-bottom: 40px;
+  }
+  .cover-series {
+    font-size: 17px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 40px;
+    font-weight: 700;
+    color: {{ BRAND }};
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+  .cover-subtitle {
+    font-size: 15px;
+    color: #888;
+    letter-spacing: 3px;
+    margin-bottom: 44px;
+  }
+  .cover-divider {
+    width: 60px;
+    height: 3px;
+    background: {{ BRAND }};
+    margin: 0 auto 44px auto;
+  }
+  .cover-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 2.2;
+  }
+  .cover-bottom {
+    position: absolute;
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-section">
+    <div class="cover-logo">{{ COMPANY }}</div>
+    <div class="cover-series">{{ SERIES }}</div>
+    <div class="cover-title">{{ TITLE }}</div>
+    <div class="cover-subtitle">{{ SUBTITLE }}</div>
+    <div class="cover-divider"></div>
+    <div class="cover-desc">{{ DESCRIPTION }}</div>
+  </div>
+  <div class="cover-bottom">
+    {{ COMPANY }}<br>
+    {{ COMPANY_EN }}
+  </div>
+</div>
+</body>
+</html>

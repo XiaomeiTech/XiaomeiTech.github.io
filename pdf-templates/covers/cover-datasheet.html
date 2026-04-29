@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: {{ FONT }};
+    color: #222;
+  }
+  @page { size: A4; margin: 0; }
+  .cover {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    padding: 60px 80px;
+    overflow: hidden;
+  }
+  .cover-logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: {{ BRAND }};
+    letter-spacing: 2px;
+  }
+  .cover-image-container {
+    position: absolute;
+    bottom: 30%;
+    right: -50px;
+    width: 50%;
+    height: auto;
+    opacity: 0.9;
+    z-index: -1;
+  }
+  .cover-series {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 250px;
+  }
+  .cover-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: {{ BRAND }};
+    margin-top: 30px;
+    letter-spacing: 4px;
+  }
+  .cover-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 10px;
+  }
+  .cover-type {
+    font-size: 18px;
+    font-weight: 700;
+    color: #5f778e;
+    margin-top: 80px;
+  }
+  .bottom-info {
+    position: absolute;
+    bottom: 60px;
+    left: 80px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .bottom-info strong {
+    color: #222;
+  }
+</style>
+</head>
+<body>
+<div class="cover">
+  <div class="cover-logo">{{ COMPANY }} <br> {{ COMPANY_EN }}</div>
+
+  <div class="cover-image-container">
+    <!-- Product cover image (optional) -->
+  </div>
+
+  <div class="cover-series">{{ SERIES }}</div>
+  <div class="cover-title">{{ TITLE }}</div>
+  <div class="cover-subtitle">{{ SUBTITLE }}</div>
+  <div class="cover-type">{{ DESCRIPTION }}</div>
+
+  <div class="bottom-info">
+    <p>订货号：<strong>{{ order_number }}</strong></p>
+    <br>
+    <p><strong>{{ YEAR }}-04-29</strong></p>
+    <p>文档编号：{{ doc_number }}</p>
+    <p>版本：{{ version }}</p>
+  </div>
+</div>
+</body>
+</html>
