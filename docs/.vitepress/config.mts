@@ -82,6 +82,8 @@ export default defineConfig({
       src: '/logo/xm-logo.png',
       alt: '小美技术 Logo'
     },
+
+
     nav: [
       { text: '首页', link: '/' },
       { text: '远程IO系统', link: '/remoteIO/' },
@@ -143,7 +145,11 @@ export default defineConfig({
         {
           text: '定制项目',
           items: [
-            { text: '项目概览', link: '/custom/' }
+            { text: '项目概览', link: '/custom/' },
+            { text: '模块可分离式远程IO', link: '/custom/Modular Separable Remote IO /' },
+            { text: '治具无线负压检测（高速线）', link: '/custom/presssensorH/' },
+            { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' },
+            { text: '直驱伺服滚筒驱动器', link: '/custom/DC Servo Roller Driver/' },
           ]
         }
       ],
