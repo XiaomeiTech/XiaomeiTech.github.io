@@ -20,6 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    outputs:
+      changed: ${{ steps.check-changes.outputs.changed }}
 
     steps:
       - name: Checkout
@@ -27,34 +29,78 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Check if markdown has changed since latest-pdf tag
+        id: check-changes
+        run: |
+          if git rev-parse latest-pdf >/dev/null 2>&1; then
+            # latest-pdf tag exists, check for changes since that tag
+            if git diff latest-pdf HEAD --quiet -- markdown/ pdf-configs/ pdf-templates/ pdf-content/ scripts/generate_pdf.py requirements.txt; then
+              echo "changed=false" >> $GITHUB_OUTPUT
+              echo "✓ No changes in source files since latest-pdf tag"
+            else
+              echo "changed=true" >> $GITHUB_OUTPUT
+              echo "✓ Changes detected in source files, will regenerate PDF"
+            fi
+          else
+            # latest-pdf tag doesn't exist yet
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "✓ First run, will generate PDF"
+          fi
+
       - name: Setup Python
+        if: steps.check-changes.outputs.changed == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
 
       - name: Install system dependencies (WeasyPrint)
+        if: steps.check-changes.outputs.changed == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libcairo2 libgdk-pixbuf2.0-0 libffi8
 
       - name: Install Python dependencies
+        if: steps.check-changes.outputs.changed == 'true'
         run: pip install -r requirements.txt
 
       - name: Generate PDFs
+        if: steps.check-changes.outputs.changed == 'true'
         run: python scripts/generate_pdf.py -q
 
       - name: Upload PDF artifacts
+        if: steps.check-changes.outputs.changed == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: markdown-pdf
           path: pdf-out
           if-no-files-found: warn
 
-      - name: Update GitHub Release
+      - name: Update GitHub Release (latest-pdf)
+        if: steps.check-changes.outputs.changed == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-pdf
           name: Latest PDF Exports
           files: pdf-out/*.pdf
           make_latest: true
+
+      - name: Update GitHub Release (diff-latest)
+        if: steps.check-changes.outputs.changed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: diff-latest
+          name: 'Diff PDF Exports (Yellow Highlights)'
+          body: |
+            📝 **Difference Highlights Edition**
+
+            This release contains PDFs with yellow highlighting showing what changed since the last version:
+            - 🟨 **Light Yellow**: Newly added sections
+            - 🟧 **Orange Yellow**: Modified sections
+
+            **Key Changes:**
+            - Headers and titles are highlighted with gradient backgrounds
+            - Left border indicators mark changed content blocks
+            - Easy to spot updates at a glance
+          files: pdf-out/*.pdf
+          make_latest: false

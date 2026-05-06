@@ -14,6 +14,7 @@ import argparse
 import logging
 import os
 import re
+import subprocess
 import sys
 import tempfile
 from datetime import datetime
@@ -70,6 +71,64 @@ for _noisy in ("weasyprint", "fontTools", "PIL", "cssselect2", "tinycss2"):
 
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = ROOT / "pdf-templates"
+
+
+# ---------------------------------------------------------------------------
+# Git diff detection
+# ---------------------------------------------------------------------------
+
+
+def get_changed_files():
+    """Detect files changed since latest-pdf tag using git diff.
+
+    Returns dict: {file_path: 'modified'|'added'|'deleted'}
+    """
+    changed = {}
+    try:
+        # Check if latest-pdf tag exists
+        result = subprocess.run(
+            ["git", "rev-parse", "latest-pdf"],
+            capture_output=True,
+            text=True,
+            cwd=ROOT
+        )
+        if result.returncode != 0:
+            log.info("No 'latest-pdf' tag found, treating all files as new")
+            return {}
+
+        # Get diff between latest-pdf and HEAD
+        result = subprocess.run(
+            ["git", "diff", "--name-status", "latest-pdf", "HEAD"],
+            capture_output=True,
+            text=True,
+            cwd=ROOT
+        )
+
+        for line in result.stdout.strip().split("\n"):
+            if not line:
+                continue
+            parts = line.split("\t")
+            status = parts[0]
+            filepath = parts[1]
+
+            # Only track markdown files
+            if filepath.endswith(".md"):
+                if status == "A":
+                    changed[filepath] = "added"
+                elif status == "M":
+                    changed[filepath] = "modified"
+                elif status == "D":
+                    changed[filepath] = "deleted"
+
+        if changed:
+            log.info("Detected %d changed markdown files:", len(changed))
+            for f, s in changed.items():
+                log.info("  %s: %s", f, s)
+
+    except Exception as exc:
+        log.warning("Failed to detect git changes: %s", exc)
+
+    return changed
 
 
 # ---------------------------------------------------------------------------
@@ -351,8 +410,11 @@ def _resolve_image_paths(html_text, md_file_path, base_dir):
     return re.sub(r'src="([^"]+)"', _fix_src, html_text)
 
 
-def convert_content_to_html(config):
+def convert_content_to_html(config, changed_files=None):
     """Convert configured markdown files + appendices into a single HTML body."""
+    if changed_files is None:
+        changed_files = {}
+
     content = config.get("content", {})
     base_dir = content["base_dir"]
     file_list = content.get("files", [])
@@ -364,7 +426,21 @@ def convert_content_to_html(config):
     # Main content
     for md_path in collect_markdown_files(file_list, base_dir):
         rel = Path(md_path).relative_to(base_dir)
-        log.info("  [md] %s", rel)
+        rel_str = rel.as_posix()
+
+        # Check if this file was changed
+        is_changed = rel_str in changed_files or str(md_path) in changed_files
+        change_type = changed_files.get(rel_str, changed_files.get(str(md_path)))
+
+        # Log with change indicator
+        status_marker = ""
+        if is_changed:
+            if change_type == "added":
+                status_marker = " [NEW]"
+            elif change_type == "modified":
+                status_marker = " [MODIFIED]"
+
+        log.info("  [md] %s%s", rel, status_marker)
         text = Path(md_path).read_text(encoding="utf-8")
         text = _strip_frontmatter(text)
         text = _convert_vitepress_containers(text)
@@ -372,6 +448,13 @@ def convert_content_to_html(config):
         html = md.convert(text)
         html = _resolve_image_paths(html, md_path, base_dir)
         html = _process_wavedrom_blocks(html)
+
+        # Wrap changed content with marker div
+        if is_changed:
+            marker_class = f"changed-content changed-{change_type}"
+            marker_attr = f'data-change-type="{change_type}"'
+            html = f'<div class="{marker_class}" {marker_attr}>{html}</div>'
+
         parts.append(html)
         md.reset()
 
@@ -617,6 +700,44 @@ li {{ margin: 2pt 0; }}
   margin-top: 20pt;
   padding-top: 10pt;
 }}
+
+/* Changed content highlighting */
+.changed-content {{
+  position: relative;
+}}
+.changed-content::before {{
+  content: attr(data-change-type);
+  position: absolute;
+  left: -30pt;
+  font-size: 7pt;
+  font-weight: bold;
+  color: #f59e0b;
+  text-transform: uppercase;
+}}
+.changed-added {{
+  border-left: 3pt solid #fbbf24;
+  background: rgba(253, 224, 71, 0.15);
+  padding-left: 10pt;
+  margin-left: -10pt;
+}}
+.changed-added h1, .changed-added h2, .changed-added h3,
+.changed-added h4, .changed-added h5, .changed-added h6 {{
+  background: linear-gradient(90deg, rgba(253, 224, 71, 0.4) 0%, transparent 100%);
+  padding-left: 8pt;
+  margin-left: -8pt;
+}}
+.changed-modified {{
+  border-left: 3pt solid #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  padding-left: 10pt;
+  margin-left: -10pt;
+}}
+.changed-modified h1, .changed-modified h2, .changed-modified h3,
+.changed-modified h4, .changed-modified h5, .changed-modified h6 {{
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.3) 0%, transparent 100%);
+  padding-left: 8pt;
+  margin-left: -8pt;
+}}
 """
 
 
@@ -703,6 +824,9 @@ def generate_pdf(config):
     temp_dir = Path(tempfile.mkdtemp(prefix="pdfgen_"))
     temp_pdfs = []
 
+    # Detect git changes early
+    changed_files = get_changed_files()
+
     # Build font CSS once for all parts
     font_css = build_font_faces(config)
 
@@ -724,9 +848,9 @@ def generate_pdf(config):
             html_to_pdf(cover_html, cover_path)
             temp_pdfs.append(cover_path)
 
-        # 2. Body content from markdown
+        # 2. Body content from markdown (pass changed_files)
         log.info("[body] converting markdown...")
-        body_html = convert_content_to_html(config)
+        body_html = convert_content_to_html(config, changed_files)
         content_css = build_content_css(config)
         # Wrap in full HTML document for WeasyPrint
         body_html = f"""<!DOCTYPE html>
