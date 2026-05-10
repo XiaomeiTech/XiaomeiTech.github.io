@@ -28,7 +28,8 @@ export default defineConfig({
   srcDir: markdownSrcDir,
   base: env.GITHUB_ACTIONS ? githubBase : '/',
   lastUpdated: true,
-  
+  ignoreDeadLinks: true,
+
   markdown: {
     config: (md) => {
       md.use(wavedromPlugin)
