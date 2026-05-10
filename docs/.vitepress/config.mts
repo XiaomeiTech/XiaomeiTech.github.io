@@ -92,13 +92,16 @@ export default defineConfig({
       { text: '关于与支持', items: [
         { text: '关于我们', link: '/company/' },
         { text: 'PDF手册', link: '/pdf/' },
-        { text: 'Markdown 示例', link: '/web/markdown-examples' },
-        { text: 'Runtime API 示例', link: '/web/api-examples' },
-        { text: '本地开发运行', link: '/web/localsetup' },
-        { text: '波形图示例', link: '/web/wavedrom' },
+        { text: '网站测试', link: '/web-debug/' },
+
 
       ]},
-      { text: '下载中心', link: 'https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases'},
+      { text: '资料下载',  items:
+        [
+          {text: '百度网盘', link:'https://pan.baidu.com/s/5QsFtoVzwyIoA_9J2bah8Zw?'},
+          {text: 'Github', link:'https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases'},
+        ]
+      }
     ],
  
     sidebar: {
@@ -178,16 +181,16 @@ export default defineConfig({
         }
       ],
 
-      '/web/': [
-        {
-          text: '开发指南',
-          items: [
-            { text: 'Markdown 示例', link: '/web/markdown-examples' },
-            { text: 'Runtime API 示例', link: '/web/api-examples' },
-            { text: '本地开发运行', link: '/web/localsetup' }
-          ]
-        }
-      ]
+      // '/web/': [
+      //   {
+      //     text: '开发指南',
+      //     items: [
+      //       { text: 'Markdown 示例', link: '/web/markdown-examples' },
+      //       { text: 'Runtime API 示例', link: '/web/api-examples' },
+      //       { text: '本地开发运行', link: '/web/localsetup' }
+      //     ]
+      //   }
+      // ]
     }
   }
 })
