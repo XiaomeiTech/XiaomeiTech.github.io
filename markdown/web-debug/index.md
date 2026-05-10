@@ -1,27 +1,62 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
+// 原始数据
 const traceResult = ref('正在获取 Cloudflare trace 信息...')
+// 解析后数据
+const parsedData = ref({})
 
 onMounted(() => {
-  fetch('/cdn-cgi/trace')
-    .then(res => res.text())
+  // 强制获取当前网站 /cdn-cgi/trace
+  const url = new URL('/cdn-cgi/trace', window.location.origin).href
+
+  fetch(url)
+    .then(response => {
+      if (!response.ok) throw new Error('当前网站未接入 Cloudflare')
+      return response.text()
+    })
     .then(data => {
       traceResult.value = data
+
+      // 自动解析
+      let obj = {}
+      data.split('\n').forEach(line => {
+        if (line.includes('=')) {
+          let [k, v] = line.split('=')
+          obj[k.trim()] = v.trim()
+        }
+      })
+      parsedData.value = obj
     })
-    .catch(err => {
-      traceResult.value = '获取失败：' + err.message
+    .catch(error => {
+      traceResult.value = '获取失败: ' + error
     })
 })
 </script>
 
+## [Cloudflare Test](/cdn-cgi/trace) Result
 
-# Cloudflare Test
-<template>
-  <div class="cf-trace" style="white-space: pre-wrap; margin: 1em 0;">
-    {{ traceResult }}
+### 🔍 解析后信息
+<div style="margin:1em 0; border:1px solid #eee; border-radius:6px; overflow:hidden;">
+  <div v-for="(val, key) in parsedData" :key="key" style="display:flex; flex-wrap:wrap; padding:10px 14px; border-bottom:1px solid #eee; background:#fafafa;">
+    <span style="font-weight:600; min-width:100px; color:#2c3e50;">{{ key }}:</span>
+    <span style="color:#3498db; flex:1; word-break:break-all;">{{ val }}</span>
   </div>
-</template>
+</div>
+
+### 📄 原始数据
+<pre
+  style="
+    white-space: pre-wrap;
+    word-break: break-all;
+    padding: 1rem;
+    border-radius: 6px;
+    line-height: 1.6;
+    background: #f7f7f7;
+  "
+>
+{{ traceResult }}
+</pre>
 
 ## Syntax Highlighting
 
