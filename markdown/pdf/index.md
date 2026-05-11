@@ -16,6 +16,4 @@
 | 单品手册 | 单个产品的详细操作手册 | `product-manual.pdf` |
 | 系列合并手册 | 全系列产品文档汇总 | `series-manual.pdf` |
 
-## 本地生成
 
-如需本地预览或自定义导出，参见 [本地开发运行](/web/localsetup)。

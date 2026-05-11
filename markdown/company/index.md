@@ -49,6 +49,6 @@
 ## 联系我们
 
 - **地址**：广东省东莞市
-- **官网**：[xmjs.asia](https://xmjs.asia)
+- **官网**：[xmtdg.cn](https://xmtdg.cn)
 - **GitHub**：[github.com/XiaomeiTech](https://github.com/XiaomeiTech)
 - **下载中心**：[GitHub Releases](https://github.com/XiaomeiTech/XiaomeiTech.github.io/releases)
