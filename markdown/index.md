@@ -10,12 +10,12 @@ hero:
     src: /logo/xm-logo.png
     alt: 小美技术 Logo
   actions:
-    - theme: brand
-      text: 进入文档中心
-      link: /markdown-examples
-    - theme: alt
-      text: 查看 API 示例
-      link: /api-examples
+    # - theme: brand
+    #   text: 进入文档中心
+    #   link: /markdown-examples
+    # - theme: alt
+    #   text: 查看 API 示例
+    #   link: /api-examples
 
 features:
   - title: 稳定可靠
