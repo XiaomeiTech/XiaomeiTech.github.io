@@ -1,9 +1,15 @@
 # 远程IO系统
-欢迎来到远程IO系统文档。请从左侧边栏选择您需要查看的具体模块信息。
+<!-- 欢迎来到远程IO系统文档。请从左侧边栏选择您需要查看的具体模块信息。 -->
+
+小美技术远程I/O产品线丰富多样，为工业数据采集与控制提供灵活高效的分布式解决方案，适配不同空间布局与安装需求满足从简单到复杂的信号接入。凭借卓越的稳定性、灵活的配置性及强大的定制能力，小美技术远程I/O已成为汽车、电力、冶金、水处理、智能装备等众多行业提升自动化水平、实现智能感知的可靠基石。
+
+![alt text](../img/RemoteIO.jpg)
 
 <!-- Use it like any other HTML element -->
 <model-viewer
   src="/models/im2620c-ec.glb" 
+  ar ar-modes="webxr scene-viewer quick-look"
+  camera-orbit="30.85deg 42.39deg 0.2632m" field-of-view="30deg"
   alt="3D模型"
   auto-rotate
   camera-controls
@@ -14,7 +20,7 @@
   ambient-occlusion-intensity="1"
   min-camera-distance="0.5"
   max-camera-distance="10"
-  style="width: 100%; height: 500px;"
+  style="width: 100%; height: 400px;"
 ></model-viewer>
 
 # 技术规格
@@ -134,3 +140,8 @@
 # 3D图纸下载
 ## 耦合器
 ## IO模块
+
+
+## BP系列 （刀片式）
+
+![alt text](../img/RemoteIO-BP.jpg)
