@@ -1,9 +1,11 @@
 # 飞达控制器操作手册
 
-## 硬件连接
+<!-- ## 硬件连接
 //todo
 32142125513531513531531531513
-测试diff功能
+测试diff功能 -->
+
+
 
 ## 屏幕交互
 ### (一) 调试操作
@@ -128,50 +130,50 @@ A.系统初始化完成后，系统直接进入联机自动状态，可以直接
 
 ### (六) 页面介绍
 1. 主页面
-![alt text](img/image.png)
+![为保护客户隐私，图片已隐藏](img/image.png)
 2. 权限登录
-![alt text](img/image-1.png)
+![为保护客户隐私，图片已隐藏](img/image-1.png)
 3. 设置
 a. 参数0
-![alt text](img/image-2.png)
+![为保护客户隐私，图片已隐藏](img/image-2.png)
 b. 参数1
-![alt text](img/image-3.png)
+![为保护客户隐私，图片已隐藏](img/image-3.png)
 c. 参数2
-![alt text](img/image-4.png)
+![为保护客户隐私，图片已隐藏](img/image-4.png)
 4. 手动控制
 a. 送膜电机
-![alt text](img/image-5.png)
+![为保护客户隐私，图片已隐藏](img/image-5.png)
 b. 1#收膜电机
-![alt text](img/image-6.png)
+![为保护客户隐私，图片已隐藏](img/image-6.png)
 c. 2#收膜电机
-![alt text](img/image-7.png)
+![为保护客户隐私，图片已隐藏](img/image-7.png)
 d. 推进电机
-![alt text](img/image-8.png)
+![为保护客户隐私，图片已隐藏](img/image-8.png)
 e. 气缸
 Ⅰ.第一页
-![alt text](img/image-9.png)
+![为保护客户隐私，图片已隐藏](img/image-9.png)
 Ⅱ.第二页
-![alt text](img/image-10.png)
+![为保护客户隐私，图片已隐藏](img/image-10.png)
 5. IO监控
 a. 输入0
-![alt text](img/image-11.png)
+![为保护客户隐私，图片已隐藏](img/image-11.png)
 b. 输入1
-![alt text](img/image-12.png)
+![为保护客户隐私，图片已隐藏](img/image-12.png)
 c. 输入2
-![alt text](img/image-13.png)
+![为保护客户隐私，图片已隐藏](img/image-13.png)
 d. 输出0
-![alt text](img/image-14.png)
+![为保护客户隐私，图片已隐藏](img/image-14.png)
 e. 输出1
-![alt text](img/image-15.png)
+![为保护客户隐私，图片已隐藏](img/image-15.png)
 6. 警报页面
-![alt text](img/image-16.png)
+![为保护客户隐私，图片已隐藏](img/image-16.png)
 
 ---
 
 ## 常见问题（保持更新）
 ### 1. 卡在初始化状态
 a. 页面显示
-![alt text](img/image-17.png)
+![为保护客户隐私，图片已隐藏](img/image-17.png)
 b. 解决方法
 1. 首先确认是否有警报，有警报先分析警报并解决。（复位按键和清楚警报按键都能清除当前警报）
 2. 没有警报确认步进电机和限位是否正常
@@ -184,7 +186,7 @@ b. 解决方法
 
 ### 2. 推进电机相关
 a. 页面显示
-![alt text](img/image-18.png)
+![为保护客户隐私，图片已隐藏](img/image-18.png)
 - 参数设置可以查看 (三)参数设置/1.系统参数/b.参数设置推荐
 - 回零按键已被屏蔽，防止其他机构发生干涉，需要回零使用主页面初始化按键，保证机构安全
 
@@ -198,7 +200,7 @@ c. 自裁自切飞达
 
 ### 3. 气缸报警
 a. 页面显示
-![alt text](img/image-19.png)
+![为保护客户隐私，图片已隐藏](img/image-19.png)
 b. 解决方法
 1. 首先检查对应气缸的限位开关状态变化是否正确(切换到手动控制进行测试)
 2. 观察对应气缸的限位开关状态变化是否在1s-3s之内(气缸超时时间，在设置参数0页面中设置)
@@ -207,7 +209,7 @@ b. 解决方法
 
 ### 4. 电机报警
 a. 页面显示
-![alt text](img/image-20.png)
+![为保护客户隐私，图片已隐藏](img/image-20.png)
 b. 解决方法
 - 点击设置参数0页面的重启按键，等待5秒后再尝试初始化，同时观察是否有电机警报
 - 如若重启不行，再尝试直接整体断电再重新上电尝试
