@@ -42,7 +42,8 @@ export default defineConfig({
   title: "小美技术",
   description: "工业数字化解决方案",
   head: [
-    ['link', { rel: 'icon', href: '/logo/xm-logo.png' }]
+    ['link', { rel: 'icon', href: '/logo/xm-logo.png' }],
+    ['script', { type: 'module', src: '/js/model-viewer.min.js' }]
   ],
   themeConfig: {
     lastUpdated:{text: '最后更新',
