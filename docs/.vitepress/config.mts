@@ -2,6 +2,9 @@
 import { fileURLToPath } from 'node:url'
 import container from 'markdown-it-container'
 import wavedromPlugin from './wavedrom.mts'
+import fs from 'node:fs'
+import path from 'node:path'
+
 
 const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
 const repoName = env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
@@ -29,6 +32,54 @@ export default defineConfig({
   base: env.GITHUB_ACTIONS ? githubBase : '/',
   lastUpdated: true,
   ignoreDeadLinks: true,
+
+  vite: {
+    plugins: [
+      {
+        name: 'ignore-missing-images',
+        enforce: 'pre',
+        resolveId(source: string, importer: string | undefined) {
+          if (/\.(png|jpe?g|gif|svg|webp)$/i.test(source) && importer) {
+            const absolutePath = path.resolve(path.dirname(importer), source)
+            
+                        // 净化 importer 路径，去掉 Vite 附加的 ?vue 等参数
+            const cleanImporter = importer.split('?')[0]
+
+            if (!fs.existsSync(absolutePath)) {
+              const mdFile = path.relative(process.cwd(), cleanImporter)
+              let lineNumber = '未知行'
+              try {
+                const fileContent = fs.readFileSync(cleanImporter, 'utf-8')
+                const lines = fileContent.split(/\r?\n/)
+                
+                // 【终极修改】：只提取纯文件名（比如 image.png）去匹配！
+                const fileName = path.basename(source) 
+                
+                // 只要这一行包含这个文件名，就认为是我们要找的那一行
+                const lineIndex = lines.findIndex(line => line.includes(fileName))
+                if (lineIndex !== -1) {
+                  lineNumber = `${lineIndex + 1}`
+                }
+              } catch (e) {
+                // 如果再出未知行，把下面这行注释打开，看看是不是报了其他系统错
+                // console.log(`[调试] 文件读取失败: ${cleanImporter}`, e.message)
+              }
+              
+              console.warn(`\n🛡️ [隐私保护] 已隐藏图片: ${source}\n   📄 来源定位: ${mdFile}:${lineNumber} ]`)
+              return '\0missing-image-fallback'
+            }
+          }
+          return null
+        },
+        load(id: string) {
+          if (id === '\0missing-image-fallback') {
+            return `export default "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"`
+          }
+        }
+      }
+    ]
+  },
+
 
   markdown: {
     config: (md) => {
