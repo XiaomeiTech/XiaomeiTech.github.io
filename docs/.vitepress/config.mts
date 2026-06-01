@@ -93,7 +93,7 @@ export default defineConfig({
   title: "小美技术",
   description: "工业数字化解决方案",
   head: [
-    ['link', { rel: 'icon', href: '/logo/xm-logo.png' }],
+    ['link', { rel: 'icon', href: '/logo/xm-logo-renew.png' }],
     ['script', { type: 'module', src: '/js/model-viewer.min.js' }]
   ],
   themeConfig: {
@@ -132,7 +132,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: '小美技术',
     logo: {
-      src: '/logo/xm-logo.png',
+      src: '/logo/xm-logo-renew.png',
       alt: '小美技术 Logo'
     },
 
