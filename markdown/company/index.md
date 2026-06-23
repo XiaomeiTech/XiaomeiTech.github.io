@@ -46,6 +46,13 @@
 
 凭借卓越的产品质量与服务能力，我们已与东莞新能德、广东明诚智能装备、三协精密等多家行业企业建立长期稳定的合作关系，在锂电、智能装备、精密制造等领域树立了优质的行业口碑。
 
+### 🏅 EtherCAT 会员认证
+
+**Xiaomei Technology (Dongguan) Co., Ltd.** 已正式成为 EtherCAT 会员。
+
+- **Vendor ID:** `0x00891018` （已生效）
+- **会员主页:** [查看 EtherCAT 官方档案](https://www.ethercat.org/en/members/members_33B7A1F22BAA4388AF4640F65864B346.htm)
+- **供应商列表:** [EtherCAT Vendor ID List](https://www.ethercat.org/VendorID)
 ## 联系我们
 
 - **地址**：广东省东莞市
