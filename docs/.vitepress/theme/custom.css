@@ -167,3 +167,10 @@
   width: 22px;
   height: 22px;
 }
+
+/* Make the home hero headline larger */
+.VPHero.has-image .name {
+  max-width: 720px;
+  font-size: 72px;
+  line-height: 1.05;
+}

@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "小美技术"
-  text: "致广大而尽精微"
+  text: "尽小者大 慎微者美"
   tagline: "聚焦制造业现场连接、数据采集与系统集成，为企业提供稳定、安全、可持续演进的技术底座。"
   image:
     src: /logo/xm-logo-renew.png
