@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
+import feederControllerImage from '../../../../markdown/img/CM-SC15124-N.jpg'
+import remoteIoCustomImage from '../../../../markdown/img/EM7230L.jpg'
+import remoteIoSystemImage from '../../../../markdown/img/RemoteIO.jpg'
+
 const slides = [
   {
-    src: new URL('../../../../markdown/img/CM-SC15124-N.jpg', import.meta.url).href,
+    src: feederControllerImage,
     label: '飞达控制器',
     title: '飞达控制器',
     description: '面向高速供料与节拍控制场景，提供稳定的运动协同与现场联动能力。',
@@ -11,7 +15,7 @@ const slides = [
     href: '/feeder-controller/'
   },
   {
-    src: new URL('../../../../markdown/img/EM7230L.jpg', import.meta.url).href,
+    src: remoteIoCustomImage,
     label: '定制远程IO系统',
     title: '定制远程IO系统',
     description: '支持协议转换、远程采集与模块化扩展，适配复杂产线和分布式设备。',
@@ -19,7 +23,7 @@ const slides = [
     href: '/remoteIO/'
   },
   {
-    src: new URL('../../../../markdown/img/RemoteIO.jpg', import.meta.url).href,
+    src: remoteIoSystemImage,
     label: '远程IO系统',
     title: '远程IO系统',
     description: '帮助现场设备快速联网、统一采集与数据上送，便于系统集成与可视化。',
@@ -30,13 +34,13 @@ const slides = [
 
 const relatedLinks = [
   {
-    src: new URL('../../../../markdown/img/CM-SC15124-N.jpg', import.meta.url).href,
+    src: feederControllerImage,
     label: '飞达控制器',
     title: '飞达控制器',
     href: '/feeder-controller/'
   },
   {
-    src: new URL('../../../../markdown/img/EM7230L.jpg', import.meta.url).href,
+    src: remoteIoCustomImage,
     label: '远程IO系统',
     title: '远程IO系统',
     href: '/remoteIO/'
