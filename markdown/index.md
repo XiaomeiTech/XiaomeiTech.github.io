@@ -3,19 +3,13 @@
 layout: home
 
 hero:
-  name: "小美技术（东莞）"
+  name: "小美技术"
   text: "致广大而尽精微"
   tagline: "聚焦制造业现场连接、数据采集与系统集成，为企业提供稳定、安全、可持续演进的技术底座。"
   image:
     src: /logo/xm-logo-renew.png
     alt: 小美技术 Logo
-  actions:
-    # - theme: brand
-    #   text: 进入文档中心
-    #   link: /markdown-examples
-    # - theme: alt
-    #   text: 查看 API 示例
-    #   link: /api-examples
+  # actions:
 
 features:
   - title: 稳定可靠
@@ -26,6 +20,7 @@ features:
     details: 支持权限分层、访问审计与数据传输加密，满足企业级治理与运维要求。
 ---
 
+<XmCarousel />
 ## 服务能力
 
 - 工业协议接入：Modbus、PROFINET、PROFIBUS、EtherCAT 等。
