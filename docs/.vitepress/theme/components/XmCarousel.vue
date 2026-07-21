@@ -13,14 +13,6 @@ const slides = [
   {
     src: new URL('../../../../markdown/img/RemoteIO.jpg', import.meta.url).href,
     label: 'VEHICLE AUTONOMY'
-  },
-  {
-    src: new URL('../../../../markdown/img/RemoteIO.jpg', import.meta.url).href,
-    label: 'VEHICLE AUTONOMY'
-  },
-  {
-    src: new URL('../../../../markdown/img/RemoteIO.jpg', import.meta.url).href,
-    label: 'VEHICLE AUTONOMY'
   }
 ]
 
