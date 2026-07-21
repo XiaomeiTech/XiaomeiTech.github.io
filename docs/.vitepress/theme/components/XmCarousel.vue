@@ -28,6 +28,21 @@ const slides = [
   }
 ]
 
+const relatedLinks = [
+  {
+    src: new URL('../../../../markdown/img/CM-SC15124-N.jpg', import.meta.url).href,
+    label: '飞达控制器',
+    title: '飞达控制器',
+    href: '/feeder-controller/'
+  },
+  {
+    src: new URL('../../../../markdown/img/EM7230L.jpg', import.meta.url).href,
+    label: '远程IO系统',
+    title: '远程IO系统',
+    href: '/remoteIO/'
+  }
+]
+
 const current = ref(0)
 const progress = ref(0)
 const duration = 4000
@@ -37,6 +52,9 @@ let progressTimer: number | undefined
 let advanceTimer: number | undefined
 let lastStartedAt = 0
 let elapsedBeforePause = 0
+let touchStartX = 0
+let touchStartY = 0
+let touchTracking = false
 
 function clearTimers() {
   if (progressTimer !== undefined) window.clearInterval(progressTimer)
@@ -96,7 +114,49 @@ function resume() {
   startProgress()
 }
 
+function onTouchStart(event: TouchEvent) {
+  const touch = event.touches[0]
+  if (!touch) return
+  touchTracking = true
+  touchStartX = touch.clientX
+  touchStartY = touch.clientY
+}
+
+function onTouchEnd(event: TouchEvent) {
+  if (!touchTracking) return
+  touchTracking = false
+
+  const touch = event.changedTouches[0]
+  if (!touch) return
+
+  const deltaX = touch.clientX - touchStartX
+  const deltaY = touch.clientY - touchStartY
+  const swipeThreshold = 40
+
+  if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) < Math.abs(deltaY)) return
+
+  if (deltaX < 0) {
+    next()
+  } else {
+    prev()
+  }
+}
+
+function onTouchCancel() {
+  touchTracking = false
+}
+
 onMounted(() => {
+  slides.forEach((slide) => {
+    const image = new Image()
+    image.src = slide.src
+  })
+
+  relatedLinks.forEach((item) => {
+    const image = new Image()
+    image.src = item.src
+  })
+
   startProgress()
 })
 
@@ -106,7 +166,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="xm-carousel" @mouseenter="pause" @mouseleave="resume">
+  <div
+    class="xm-carousel"
+    @mouseenter="pause"
+    @mouseleave="resume"
+    @touchstart.passive="onTouchStart"
+    @touchend="onTouchEnd"
+    @touchcancel="onTouchCancel"
+  >
     <div class="xm-slides">
       <div
         v-for="(slide, index) in slides"
@@ -114,7 +181,7 @@ onBeforeUnmount(() => {
         class="xm-slide"
         :class="{ 'is-active': index === current }"
       >
-        <img :src="slide.src" :alt="slide.label" />
+        <img :src="slide.src" :alt="slide.label" loading="eager" decoding="async" fetchpriority="high" />
         <div class="xm-content">
           <h2 class="xm-title">{{ slide.title }}</h2>
           <p class="xm-desc">{{ slide.description }}</p>
@@ -145,6 +212,21 @@ onBeforeUnmount(() => {
       </button>
     </div>
   </div>
+
+  <div class="xm-related" aria-label="Related product links">
+    <a
+      v-for="item in relatedLinks"
+      :key="item.label"
+      class="xm-related-card"
+      :href="item.href"
+    >
+      <img class="xm-related-image" :src="item.src" :alt="item.label" loading="eager" decoding="async" />
+      <div class="xm-related-overlay">
+        <span class="xm-related-title">{{ item.title }}</span>
+        <span class="xm-related-cta">点击查看</span>
+      </div>
+    </a>
+  </div>
 </template>
 
 <style scoped>
@@ -154,11 +236,13 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border-radius: 6px;
   margin: 12px 0;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 
 .xm-slides {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 15 / 9;
   min-height: 240px;
   max-height: 720px;
 }
@@ -291,6 +375,7 @@ onBeforeUnmount(() => {
   padding: 0;
   cursor: pointer;
   user-select: none;
+  touch-action: manipulation;
 }
 
 .xm-label {
@@ -320,6 +405,67 @@ onBeforeUnmount(() => {
 
 .xm-item.active .xm-label {
   color: #fff;
+}
+
+.xm-related {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.xm-related-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  text-decoration: none;
+  min-height: 180px;
+  background: #111;
+}
+
+.xm-related-image {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.xm-related-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.38) 100%);
+}
+
+.xm-related-card:hover .xm-related-image {
+  transform: scale(1.03);
+}
+
+.xm-related-overlay {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.xm-related-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.xm-related-cta {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  opacity: 0.9;
 }
 
 @media (max-width: 720px) {
@@ -361,6 +507,20 @@ onBeforeUnmount(() => {
 
   .xm-label {
     display: none;
+  }
+
+  .xm-related {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .xm-related-card,
+  .xm-related-image {
+    min-height: 140px;
+  }
+
+  .xm-related-title {
+    font-size: 16px;
   }
 }
 </style>
