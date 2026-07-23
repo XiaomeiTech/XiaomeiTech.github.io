@@ -4,6 +4,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import feederControllerImage from '../../../../markdown/img/CM-SC15124-N.jpg'
 import remoteIoCustomImage from '../../../../markdown/img/EM7230L.jpg'
 import remoteIoSystemImage from '../../../../markdown/img/RemoteIO.jpg'
+import customProjectsImage from '../../../../markdown/img/PE1637.jpg'
 
 const slides = [
   {
@@ -37,15 +38,27 @@ const relatedLinks = [
     src: feederControllerImage,
     label: '飞达控制器',
     title: '飞达控制器',
+    description: '面向高速供料与节拍控制场景，提供稳定的运动协同与现场联动能力。',
+    ctaText: '查看飞达控制器',
     href: '/feeder-controller/'
   },
   {
     src: remoteIoCustomImage,
     label: '远程IO系统',
     title: '远程IO系统',
+    description: '帮助现场设备快速联网、统一采集与数据上送，便于系统集成与可视化。',
+    ctaText: '查看远程IO',
     href: '/remoteIO/'
   }
 ]
+
+const customProjectLink = {
+  src: customProjectsImage,
+  title: '定制项目',
+  description: '从电路设计、嵌入式固件到结构开发，提供一站式硬件定制化解决方案，快速响应客户的个性化需求。',
+  ctaText: '查看定制项目',
+  href: '/custom/'
+}
 
 const current = ref(0)
 const progress = ref(0)
@@ -161,6 +174,10 @@ onMounted(() => {
     image.src = item.src
   })
 
+  // preload custom project banner image
+  const customImage = new Image()
+  customImage.src = customProjectLink.src
+
   startProgress()
 })
 
@@ -227,7 +244,19 @@ onBeforeUnmount(() => {
       <img class="xm-related-image" :src="item.src" :alt="item.label" loading="eager" decoding="async" />
       <div class="xm-related-overlay">
         <span class="xm-related-title">{{ item.title }}</span>
-        <span class="xm-related-cta">点击查看</span>
+        <span class="xm-related-desc">{{ item.description }}</span>
+        <span class="xm-related-cta">{{ item.ctaText }}</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="xm-custom-banner" aria-label="Custom project introduction">
+    <a class="xm-custom-card" :href="customProjectLink.href">
+      <img class="xm-custom-image" :src="customProjectLink.src" :alt="customProjectLink.title" loading="lazy" decoding="async" />
+      <div class="xm-custom-overlay">
+        <span class="xm-custom-title">{{ customProjectLink.title }}</span>
+        <span class="xm-custom-desc">{{ customProjectLink.description }}</span>
+        <span class="xm-custom-cta">{{ customProjectLink.ctaText }}</span>
       </div>
     </a>
   </div>
@@ -466,10 +495,102 @@ onBeforeUnmount(() => {
   line-height: 1.2;
 }
 
+.xm-related-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 40ch;
+}
+
 .xm-related-cta {
   font-size: 12px;
   letter-spacing: 0.08em;
   opacity: 0.9;
+}
+
+/* ---- Custom project banner (21:9) ---- */
+
+.xm-custom-banner {
+  margin-top: 16px;
+}
+
+.xm-custom-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  text-decoration: none;
+  aspect-ratio: 21 / 9;
+  min-height: 180px;
+  background: #111;
+}
+
+.xm-custom-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.xm-custom-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.18) 46%, rgba(0, 0, 0, 0.02) 100%);
+  pointer-events: none;
+}
+
+.xm-custom-card:hover .xm-custom-image {
+  transform: scale(1.03);
+}
+
+.xm-custom-overlay {
+  position: absolute;
+  left: 64px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #fff;
+  max-width: 560px;
+}
+
+.xm-custom-title {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 42px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.xm-custom-desc {
+  display: block;
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 52ch;
+}
+
+.xm-custom-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.xm-custom-cta:hover {
+  background: rgba(0, 0, 0, 0.32);
+  transform: translateY(-1px);
 }
 
 @media (max-width: 720px) {
@@ -525,6 +646,31 @@ onBeforeUnmount(() => {
 
   .xm-related-title {
     font-size: 16px;
+  }
+
+  .xm-related-desc {
+    font-size: 12px;
+  }
+
+  .xm-custom-overlay {
+    left: 18px;
+    right: 18px;
+  }
+
+  .xm-custom-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  .xm-custom-desc {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .xm-custom-cta {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 13px;
   }
 }
 </style>

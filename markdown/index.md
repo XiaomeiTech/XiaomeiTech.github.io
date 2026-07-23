@@ -27,7 +27,9 @@ features:
 ---
 
 <XmCarousel />
-## 服务能力
+
+<XmSolutionCards />
+<!-- ## 服务能力
 
 - 工业协议接入：Modbus、PROFINET、PROFIBUS、EtherCAT 等。
 - 数据平台建设：采集、清洗、建模与可视化闭环。
@@ -37,4 +39,4 @@ features:
 
 1. 需求澄清与现场评估
 2. 方案设计与分阶段实施
-3. 联调验收与运维陪跑
+3. 联调验收与运维陪跑 -->
