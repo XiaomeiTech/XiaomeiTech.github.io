@@ -156,7 +156,44 @@ EtherCAT 通信接口模块支持站点地址别名功能，站点地址是在�
 
 本节提供典型的 EtherCAT 网络配置示例，包括线型、星型和环型拓扑结构，线型支持近距离直连通信和通过光纤模块远距离通信。
 
-- **线型（近距离通信）**：各从站依次串联连接。
-- **线型（远距离通信）**：通过光纤模块实现远距离节点间通信。
-- **星型**：通过 EtherCAT 分支模块实现星型拓扑。
-- **环型**：首尾相连形成环型拓扑，提供冗余路径。
+#### 线型（近距离通信）
+
+```mermaid
+graph LR
+    A[EtherCAT 主站] --> B[EtherCAT 从站<br/>+ 扩展模块]
+    B --> C[EtherCAT 从站<br/>+ 扩展模块]
+    C --> D[EtherCAT 从站<br/>+ 扩展模块]
+```
+
+#### 线型（远距离通信）
+
+```mermaid
+graph LR
+    A[EtherCAT 主站] --> B[EtherCAT 从站<br/>+ 扩展模块]
+    B --> C[光电模块]
+    C -.->|光纤| D[光电模块]
+    D --> E[EtherCAT 从站<br/>+ 扩展模块]
+    E --> F[EtherCAT 从站<br/>+ 扩展模块]
+```
+
+#### 星型
+
+```mermaid
+graph TB
+    A[EtherCAT 主站] --> B[EtherCAT 分支模块]
+    B --> C[EtherCAT 从站<br/>+ 扩展模块]
+    B --> D[EtherCAT 从站<br/>+ 扩展模块]
+    B --> E[EtherCAT 从站<br/>+ 扩展模块]
+    B --> F[EtherCAT 从站<br/>+ 扩展模块]
+```
+
+#### 环型
+
+```mermaid
+graph LR
+    A[EtherCAT 主站] --> B[EtherCAT 从站<br/>+ 扩展模块]
+    B --> C[EtherCAT 从站<br/>+ 扩展模块]
+    C --> D[EtherCAT 从站<br/>+ 扩展模块]
+    D --> E[EtherCAT 从站<br/>+ 扩展模块]
+    E --> A
+```

@@ -84,12 +84,36 @@ PROFINET 的一个重要特征为可以同时传递实时数据和标准的 TCP/
 
 ### 线型
 
-S7-300/400/1200/1500 等控制器作为主站，各 PROFINET 从站依次串联。
+```mermaid
+graph LR
+    A[PLC 控制器] --> B[PROFINET 从站<br/>+ 扩展模块]
+    B --> C[PROFINET 从站<br/>+ 扩展模块]
+    C --> D[PROFINET 从站<br/>+ 扩展模块]
+```
 
 ### 星型
 
-通过交换机连接各 PROFINET 从站，S7-300/400/1200/1500 等控制器作为主站统一管理。
+```mermaid
+graph TB
+    A[PLC 控制器] --> SW[交换机]
+    SW --> B[PROFINET 从站<br/>+ 扩展模块]
+    SW --> C[PROFINET 从站<br/>+ 扩展模块]
+    SW --> D[PROFINET 从站<br/>+ 扩展模块]
+    SW --> E[PROFINET 从站<br/>+ 扩展模块]
+    SW --> F[PROFINET 从站<br/>+ 扩展模块]
+    SW --> G[PROFINET 从站<br/>+ 扩展模块]
+```
 
 ### 树型
 
-树型拓扑通过交换机级联实现分层组网，适用于大规模分布式产线。
+```mermaid
+graph TB
+    A[PLC 控制器] --> SW1[交换机 1]
+    SW1 --> B[PROFINET 从站<br/>+ 扩展模块]
+    SW1 --> C[PROFINET 从站<br/>+ 扩展模块]
+    SW1 --> D[PROFINET 从站<br/>+ 扩展模块]
+    SW1 --> SW2[交换机 2]
+    SW2 --> E[PROFINET 从站<br/>+ 扩展模块]
+    SW2 --> F[PROFINET 从站<br/>+ 扩展模块]
+    SW2 --> G[PROFINET 从站<br/>+ 扩展模块]
+```

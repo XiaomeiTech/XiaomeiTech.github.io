@@ -54,7 +54,7 @@ EtherNet/IP 的通信基于两种模式：**显式消息（Explicit Messaging）
 
 ## 典型网络拓扑
 
-本节提供 EtherNet/IP 典型网络拓扑示例，包括线型、星型、树型和环型拓扑结构：
+本节提供 EtherNet/IP 典型网络拓扑示例，包括线型、星型、环型和树型拓扑结构：
 
 ### 线型
 
@@ -70,18 +70,35 @@ graph LR
 ```mermaid
 graph TB
     A[EtherNet/IP 主站<br/>上位机配置软件<br/>EDS 文件] --> SW[交换机]
-    SW --> B[从站 + 扩展模块]
-    SW --> C[从站 + 扩展模块]
-    SW --> D[从站 + 扩展模块]
-    SW --> E[从站 + 扩展模块]
-    SW --> F[从站 + 扩展模块]
-    SW --> G[从站 + 扩展模块]
+    SW --> B[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW --> C[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW --> D[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW --> E[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW --> F[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW --> G[EtherNet/IP 从站<br/>+ 扩展模块]
 ```
 
 ### 环型
 
-环型拓扑中各节点首尾相连形成环路，提供链路冗余能力。
+```mermaid
+graph LR
+    A[EtherNet/IP 主站] --> B[EtherNet/IP 从站<br/>+ 扩展模块]
+    B --> C[EtherNet/IP 从站<br/>+ 扩展模块]
+    C --> D[EtherNet/IP 从站<br/>+ 扩展模块]
+    D --> E[EtherNet/IP 从站<br/>+ 扩展模块]
+    E --> F[EtherNet/IP 从站<br/>+ 扩展模块]
+    F --> A
+```
 
 ### 树型
 
-树型拓扑通过交换机级联，形成分层网络结构，适用于大型复杂产线组网。
+```mermaid
+graph TB
+    A[EtherNet/IP 主站<br/>上位机配置软件<br/>EDS 文件] --> SW1[交换机 1]
+    SW1 --> B[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW1 --> C[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW1 --> SW2[交换机 2]
+    SW2 --> D[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW2 --> E[EtherNet/IP 从站<br/>+ 扩展模块]
+    SW2 --> F[EtherNet/IP 从站<br/>+ 扩展模块]
+```
