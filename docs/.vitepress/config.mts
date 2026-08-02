@@ -202,6 +202,8 @@ defineConfig({
             { text: 'EtherCAT 总线介绍', link: '/remoteIO/Bus-intro/ECbus-intro' },
             { text: 'EtherNet/IP 总线介绍', link: '/remoteIO/Bus-intro/EIPbus-intro' },
             { text: 'PROFINET 总线介绍', link: '/remoteIO/Bus-intro/PNbus-intro' },
+            { text: '接线参考指南', link: '/remoteIO/Bus-intro/wiring-reference' },
+            { text: '安全参考说明', link: '/remoteIO/Bus-intro/safety-reference' },
           ]
         }
       ],
