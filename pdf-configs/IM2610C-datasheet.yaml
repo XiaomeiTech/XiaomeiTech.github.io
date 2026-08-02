@@ -1,0 +1,47 @@
+# IM2610C 数据手册 PDF 配置
+# Usage: python scripts/generate_pdf.py -c pdf-configs/IM2610C-datasheet.yaml
+
+company: 小美技术（东莞）有限公司
+company_en: Xiaomei Technology (Dongguan) Co., Ltd.
+brand: "#dc2626"
+
+title: 数据手册
+subtitle: DATASHEET
+series: EtherCAT 远程耦合器
+description: IM2610C 技术规格与参数说明
+
+cover:
+  template: pdf-templates/covers/cover-datasheet.html
+  variables:
+    doc_number: DOC-IM2610C-001
+    version: V1.0
+    order_number: IM2610C
+
+ending:
+  template: pdf-templates/endings/ending-default.html
+
+content:
+  base_dir: markdown
+  files:
+    - remoteIO/EtherCAT/IM2610C-datasheet.md
+
+appendices:
+  - pdf-content/legal-info.md
+  - pdf-content/warning-meanings.md
+
+pdf:
+  format: A4
+  margin:
+    top: 94
+    right: 57
+    bottom: 94
+    left: 57
+  font_family: "HarmonyOS Sans SC, SimHei, sans-serif"
+  font_dir: docs/public/fonts
+  header:
+    left: 小美技术（东莞）有限公司
+    right: IM2610C 数据手册
+  footer:
+    left: "© 2026 Xiaomei Technology (Dongguan) Co., Ltd."
+
+output: pdf-out/IM2610C-datasheet.pdf

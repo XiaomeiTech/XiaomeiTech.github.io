@@ -242,7 +242,8 @@ defineConfig({
             { text: '应用指南', link: '/pdf/app-guide' },
             { text: '单品手册', link: '/pdf/product-manual' },
             { text: '系列合并手册', link: '/pdf/series-manual' },
-            { text: '法律与合规', link: '/pdf/legal' }
+            { text: '法律与合规', link: '/pdf/legal' },
+            { text: 'PDF 编译指南', link: '/pdf/pdf-guide' }
           ]
         }
       ],
