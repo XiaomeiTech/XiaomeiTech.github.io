@@ -6,3 +6,4 @@ docs/.vitepress/dist
 .claude
 LatexReference
 pdf-out/
+.history/

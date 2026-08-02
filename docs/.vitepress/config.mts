@@ -1,4 +1,5 @@
 ﻿import { defineConfig } from 'vitepress'
+import { withMermaid } from 'vitepress-plugin-mermaid'
 import { fileURLToPath } from 'node:url'
 import container from 'markdown-it-container'
 import wavedromPlugin from './wavedrom.mts'
@@ -26,7 +27,8 @@ function makeContainer(title: string): (tokens: any[], idx: number) => string {
 
 // https://vitepress.yiov.top/
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+export default withMermaid(
+defineConfig({
   lang: 'zh-CN',
   srcDir: markdownSrcDir,
   base: env.GITHUB_ACTIONS ? githubBase : '/',
@@ -94,7 +96,18 @@ export default defineConfig({
   description: "工业数字化解决方案",
   head: [
     ['link', { rel: 'icon', href: '/logo/xm-logo-renew.png' }],
-    ['script', { type: 'module', src: '/js/model-viewer.min.js' }]
+    ['script', { type: 'module', src: '/js/model-viewer.min.js' }],
+    ['script', { src: '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', async: true }],
+    ['script', {}, `
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'zh-CN',
+          includedLanguages: 'en,zh-CN',
+          autoDisplay: false,
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+        }, 'google_translate_element');
+      }
+    `]
   ],
   themeConfig: {
     lastUpdated:{text: '最后更新',
@@ -182,6 +195,14 @@ export default defineConfig({
             { text: '数字量输入DI', link: '/remoteIO/DI/' },
             { text: '数字量输出DO', link: '/remoteIO/DO/' },
           ]
+        },
+        {
+          text: '总线介绍',
+          items: [
+            { text: 'EtherCAT 总线介绍', link: '/remoteIO/Bus-intro/ECbus-intro' },
+            { text: 'EtherNet/IP 总线介绍', link: '/remoteIO/Bus-intro/EIPbus-intro' },
+            { text: 'PROFINET 总线介绍', link: '/remoteIO/Bus-intro/PNbus-intro' },
+          ]
         }
       ],
 
@@ -246,4 +267,4 @@ export default defineConfig({
       // ]
     }
   }
-})
+}))
