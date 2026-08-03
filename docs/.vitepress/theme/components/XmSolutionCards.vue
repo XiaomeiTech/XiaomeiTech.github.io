@@ -324,8 +324,7 @@ onBeforeUnmount(() => {
 
 /* ---- image area ---- */
 .xm-solution-card-image {
-  flex: 1;
-  min-height: 0;
+  flex: 0 0 390px;
   overflow: hidden;
 }
 
@@ -334,6 +333,7 @@ onBeforeUnmount(() => {
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.5s ease;
 }
 
 /* ---- arrows ---- */

@@ -182,6 +182,7 @@ defineConfig({
           text: '耦合器',
           items: [
             { text: 'EtherCAT耦合器', link: '/remoteIO/EtherCAT/' },
+            { text: 'IM2610C 数据手册', link: '/remoteIO/EtherCAT/IM2610C-datasheet' },
             { text: 'PROFINET耦合器', link: '/remoteIO/PROFINET/' },
             { text: 'EtherNet/IP耦合器', link: '/remoteIO/EtherNetIP/' },
             { text: 'Modbus耦合器', link: '/remoteIO/Modbus/' }
@@ -202,6 +203,7 @@ defineConfig({
             { text: 'EtherCAT 总线介绍', link: '/remoteIO/Bus-intro/ECbus-intro' },
             { text: 'EtherNet/IP 总线介绍', link: '/remoteIO/Bus-intro/EIPbus-intro' },
             { text: 'PROFINET 总线介绍', link: '/remoteIO/Bus-intro/PNbus-intro' },
+            { text: '产品命名规则', link: '/remoteIO/Bus-intro/naming-reference' },
             { text: '接线参考指南', link: '/remoteIO/Bus-intro/wiring-reference' },
             { text: '安全参考说明', link: '/remoteIO/Bus-intro/safety-reference' },
           ]

@@ -24,6 +24,7 @@ content:
   base_dir: markdown
   files:
     - remoteIO/EtherCAT/IM2610C-datasheet.md
+    - remoteIO/Bus-intro/naming-reference.md
 
 appendices:
   - pdf-content/legal-info.md

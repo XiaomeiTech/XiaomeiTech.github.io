@@ -590,6 +590,12 @@ table {{
   border-collapse: collapse;
   margin: 10pt 0;
   font-size: 9pt;
+  page-break-inside: auto;
+}}
+thead {{
+  display: table-header-group;
+}}
+tr {{
   page-break-inside: avoid;
 }}
 th, td {{
