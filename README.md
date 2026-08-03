@@ -121,6 +121,40 @@ python scripts/generate_pdf.py -c pdf-configs/datasheet.yaml -o output/custom.pd
 ```
 
 
+## npm install vs npm ci
+
+| | `npm install` | `npm ci` |
+|------|------|------|
+| 依赖来源 | 读 `package.json`，按`^`/`~`范围解析 | 严格按 `package-lock.json` 精确版本安装 |
+| 版本确定性 | 不同机器可能装到不同版本 | 所有人装到完全相同的版本 |
+| 速度 | 慢，需重新解析依赖树 | 快，逐条照搬 |
+| lock 文件 | 自动更新 | 不一致则直接报错 |
+| 适用场景 | **本地开发**、新增依赖时 | **CI/CD**、部署、团队协作 |
+
+### 为什么 CI 必须用 `npm ci`
+
+`package.json` 写 `"three": "^0.182.0"`，`^` 允许任意 `0.182.x`。无 lock 时每次构建可能装到不同小版本，导致产物不一致。`package-lock.json` 把整棵依赖树锁死，`npm ci` 逐条还原，保证 CI 与本地完全一致。
+
+### 踩坑记录：lock 文件不同步
+
+手动改了 `package.json` 版本号但没更新 lock 文件，GitHub Actions 报错：
+
+```
+npm ci can only install packages when your package.json and
+package-lock.json are in sync.
+
+Invalid: lock file's three@0.184.0 does not satisfy three@0.182.0
+```
+
+**解决：**
+
+```powershell
+Remove-Item package-lock.json
+npm install --legacy-peer-deps
+```
+
+之后提交新的 `package-lock.json` 即可。**结论：全用 `npm ci`，改完 `package.json` 必须同步 lock 文件。**
+
 ## 新增文档类型
 
 新建一个 YAML 配置即可，以 "应用指南" 为例：
