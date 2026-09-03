@@ -8,55 +8,55 @@ import customProjectsImage from '../../../../markdown/img/PE1637.jpg'
 
 const slides = [
   {
-    src: feederControllerImage,
-    label: '飞达控制器',
-    title: '飞达控制器',
-    description: '面向高速供料与节拍控制场景，提供稳定的运动协同与现场联动能力。',
-    ctaText: '查看飞达控制器',
-    href: '/feeder-controller/'
+    src: remoteIoSystemImage,
+    label: 'Pexus',
+    title: 'Pexus 标准自动化控制平台',
+    description: 'Pexus PAC 控制器 + Pexus Edge 远程IO，配套 Pack Studio 与 Pack Runtime，一站式构建整线控制系统。',
+    ctaText: '了解 Pexus 平台',
+    href: '/pexus/'
   },
   {
     src: remoteIoCustomImage,
-    label: '定制远程IO系统',
-    title: '定制远程IO系统',
-    description: '支持协议转换、远程采集与模块化扩展，适配复杂产线和分布式设备。',
-    ctaText: '查看远程IO',
-    href: '/remoteIO/'
+    label: 'Pexus Edge',
+    title: 'Pexus Edge 远程IO',
+    description: '耦合器 + 扩展模块的分布式远程IO系列，支持 EtherCAT、PROFINET、EtherNet/IP、Modbus 等主流总线。',
+    ctaText: '查看 Pexus Edge',
+    href: '/pexus/edge'
   },
   {
-    src: remoteIoSystemImage,
-    label: '远程IO系统',
-    title: '远程IO系统',
-    description: '帮助现场设备快速联网、统一采集与数据上送，便于系统集成与可视化。',
-    ctaText: '查看定制项目',
+    src: feederControllerImage,
+    label: '工业控制器',
+    title: '工业控制器',
+    description: '飞达控制器与行业定制控制器：覆盖高速供料、节拍控制与专用工艺场景的控制器/驱动器。',
+    ctaText: '查看工业控制器',
     href: '/custom/'
   }
 ]
 
 const relatedLinks = [
   {
-    src: feederControllerImage,
-    label: '飞达控制器',
-    title: '飞达控制器',
-    description: '面向高速供料与节拍控制场景，提供稳定的运动协同与现场联动能力。',
-    ctaText: '查看飞达控制器',
-    href: '/feeder-controller/'
+    src: remoteIoSystemImage,
+    label: 'Pexus',
+    title: 'Pexus 标准自动化控制平台',
+    description: 'PAC + Edge + Studio + Runtime，标准化、平台化的整线控制底座。',
+    ctaText: '了解 Pexus 平台',
+    href: '/pexus/'
   },
   {
     src: remoteIoCustomImage,
-    label: '远程IO系统',
-    title: '远程IO系统',
+    label: 'Pexus Edge',
+    title: 'Pexus Edge 远程IO',
     description: '帮助现场设备快速联网、统一采集与数据上送，便于系统集成与可视化。',
-    ctaText: '查看远程IO',
-    href: '/remoteIO/'
+    ctaText: '查看 Pexus Edge',
+    href: '/pexus/edge'
   }
 ]
 
 const customProjectLink = {
   src: customProjectsImage,
-  title: '定制项目',
-  description: '从电路设计、嵌入式固件到结构开发，提供一站式硬件定制化解决方案，快速响应客户的个性化需求。',
-  ctaText: '查看定制项目',
+  title: '工业控制器',
+  description: '飞达控制器与行业定制控制器，从电路设计、嵌入式固件到结构开发，一站式硬件定制解决方案。',
+  ctaText: '查看工业控制器',
   href: '/custom/'
 }
 

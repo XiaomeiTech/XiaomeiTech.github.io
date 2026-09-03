@@ -25,6 +25,83 @@ function makeContainer(title: string): (tokens: any[], idx: number) => string {
 }
 
 
+// 侧边栏定义：Pexus 与工业控制器分别被多个路径前缀共用，
+// 使 /pexus/ 与 /pexus/edge/、/custom/ 与 /feeder-controller/ 展示同一套导航。
+const pexusSidebar = [
+  {
+    text: 'Pexus 标准自动化控制平台',
+    items: [
+      { text: '平台总览', link: '/pexus/' },
+      { text: 'Pexus PAC 控制器', link: '/pexus/pac' },
+      { text: 'Pexus Edge 远程IO', link: '/pexus/edge' },
+      { text: 'Pack Studio IDE', link: '/pexus/studio' },
+      { text: 'Pack Runtime 运行时', link: '/pexus/runtime' }
+    ]
+  },
+  {
+    text: 'Pexus Edge 远程IO',
+    items: [
+      { text: '系统概述', link: '/pexus/edge/' }
+    ]
+  },
+  {
+    text: '耦合器',
+    items: [
+      { text: 'EtherCAT耦合器', link: '/pexus/edge/EtherCAT/' },
+      { text: 'IM2610C 数据手册', link: '/pexus/edge/EtherCAT/IM2610C-datasheet' },
+      { text: 'PROFINET耦合器', link: '/pexus/edge/PROFINET/' },
+      { text: 'EtherNet/IP耦合器', link: '/pexus/edge/EtherNetIP/' },
+      { text: 'Modbus耦合器', link: '/pexus/edge/Modbus/' }
+    ]
+  },
+  {
+    text: '拓展模块',
+    items: [
+      { text: '模拟量输入AI', link: '/pexus/edge/AI/' },
+      { text: '模拟量输出AO', link: '/pexus/edge/AO/' },
+      { text: '数字量输入DI', link: '/pexus/edge/DI/' },
+      { text: '数字量输出DO', link: '/pexus/edge/DO/' }
+    ]
+  },
+  {
+    text: '总线介绍',
+    items: [
+      { text: 'EtherCAT 总线介绍', link: '/pexus/edge/Bus-intro/ECbus-intro' },
+      { text: 'EtherNet/IP 总线介绍', link: '/pexus/edge/Bus-intro/EIPbus-intro' },
+      { text: 'PROFINET 总线介绍', link: '/pexus/edge/Bus-intro/PNbus-intro' },
+      { text: '产品命名规则', link: '/pexus/edge/Bus-intro/naming-reference' },
+      { text: '接线参考指南', link: '/pexus/edge/Bus-intro/wiring-reference' },
+      { text: '安全参考说明', link: '/pexus/edge/Bus-intro/safety-reference' }
+    ]
+  }
+]
+
+const industrialSidebar = [
+  {
+    text: '工业控制器',
+    items: [
+      { text: '控制器总览', link: '/custom/' }
+    ]
+  },
+  {
+    text: '飞达控制器',
+    items: [
+      { text: '控制器概述', link: '/feeder-controller/' },
+      { text: '操作手册', link: '/feeder-controller/manual' }
+    ]
+  },
+  {
+    text: '定制控制器',
+    items: [
+      { text: '模块可分离式远程IO', link: '/custom/modular-separable-remote-io' },
+      { text: '治具无线负压检测（高速线）', link: '/custom/presssensorH/' },
+      { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' },
+      { text: '直驱伺服滚筒驱动器', link: '/custom/DC Servo Roller Driver/' }
+    ]
+  }
+]
+
+
 // https://vitepress.yiov.top/
 // https://vitepress.dev/reference/site-config
 export default withMermaid(
@@ -93,7 +170,7 @@ defineConfig({
   },
 
   title: "小美技术",
-  description: "工业数字化解决方案",
+  description: "Pexus 标准自动化控制平台与工业数字化解决方案",
   head: [
     ['link', { rel: 'icon', href: '/logo/xm-logo-renew.png' }],
     ['script', { type: 'module', src: '/js/model-viewer.min.js' }],
@@ -152,9 +229,8 @@ defineConfig({
 
     nav: [
       { text: '首页', link: '/' },
-      { text: '远程IO系统', link: '/remoteIO/' },
-      { text: '飞达控制器', link: '/feeder-controller/' },
-      { text: '定制项目', link: '/custom/' },
+      { text: 'Pexus', link: '/pexus/' },
+      { text: '工业控制器', link: '/custom/' },
       { text: '关于与支持', items: [
         { text: '关于我们', link: '/company/' },
         { text: 'PDF手册', link: '/pdf/' },
@@ -171,69 +247,11 @@ defineConfig({
     ],
  
     sidebar: {
-      '/remoteIO/': [
-        {
-          text: '远程IO系统',
-          items: [
-            { text: '系统概述', link: '/remoteIO/' },
-          ]
-        },
-        {
-          text: '耦合器',
-          items: [
-            { text: 'EtherCAT耦合器', link: '/remoteIO/EtherCAT/' },
-            { text: 'IM2610C 数据手册', link: '/remoteIO/EtherCAT/IM2610C-datasheet' },
-            { text: 'PROFINET耦合器', link: '/remoteIO/PROFINET/' },
-            { text: 'EtherNet/IP耦合器', link: '/remoteIO/EtherNetIP/' },
-            { text: 'Modbus耦合器', link: '/remoteIO/Modbus/' }
-          ]
-        },
-        {
-          text: '拓展模块',
-          items: [
-            { text: '模拟量输入AI', link: '/remoteIO/AI/' },
-            { text: '模拟量输出AO', link: '/remoteIO/AO/' },
-            { text: '数字量输入DI', link: '/remoteIO/DI/' },
-            { text: '数字量输出DO', link: '/remoteIO/DO/' },
-          ]
-        },
-        {
-          text: '总线介绍',
-          items: [
-            { text: 'EtherCAT 总线介绍', link: '/remoteIO/Bus-intro/ECbus-intro' },
-            { text: 'EtherNet/IP 总线介绍', link: '/remoteIO/Bus-intro/EIPbus-intro' },
-            { text: 'PROFINET 总线介绍', link: '/remoteIO/Bus-intro/PNbus-intro' },
-            { text: '产品命名规则', link: '/remoteIO/Bus-intro/naming-reference' },
-            { text: '接线参考指南', link: '/remoteIO/Bus-intro/wiring-reference' },
-            { text: '安全参考说明', link: '/remoteIO/Bus-intro/safety-reference' },
-          ]
-        }
-      ],
+      '/pexus/': pexusSidebar,
+      '/pexus/edge/': pexusSidebar,
 
-
-      '/feeder-controller/': [
-        {
-          text: '飞达控制器',
-          items: [
-            { text: '控制器概述', link: '/feeder-controller/' }, 
-            { text: '控制器说明', link: '/feeder-controller/manual/' },
-          ]
-        }
-      ],
-
-
-      '/custom/': [
-        {
-          text: '定制项目',
-          items: [
-            { text: '项目概览', link: '/custom/' },
-            { text: '模块可分离式远程IO', link: '/custom/Modular Separable Remote IO /' },
-            { text: '治具无线负压检测（高速线）', link: '/custom/presssensorH/' },
-            { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' },
-            { text: '直驱伺服滚筒驱动器', link: '/custom/DC Servo Roller Driver/' },
-          ]
-        }
-      ],
+      '/custom/': industrialSidebar,
+      '/feeder-controller/': industrialSidebar,
 
       '/pdf/': [
         {

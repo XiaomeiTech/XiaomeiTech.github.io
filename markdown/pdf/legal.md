@@ -8,7 +8,7 @@
 
 ## 商标声明
 
-<small>小美技术</small> 是小美技术（东莞）有限公司及其关联公司的注册商标。本文档提及的其他所有商标或注册商标，由各自的所有人拥有。若第三方未经书面授权出于自身目的使用这些商标，将侵害其所有者的权利。
+<small>小美技术</small>、<small>Pexus</small>、<small>Pexus PAC</small>、<small>Pexus Edge</small>、<small>Pack Studio</small> 与 <small>Pack Runtime</small> 是小美技术（东莞）有限公司及其关联公司的注册商标或产品名称。本文档提及的其他所有商标或注册商标，由各自的所有人拥有。若第三方未经书面授权出于自身目的使用这些商标，将侵害其所有者的权利。
 
 ## 免责声明
 

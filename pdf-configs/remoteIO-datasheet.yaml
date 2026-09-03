@@ -7,7 +7,7 @@ brand: "#dc2626"
 
 title: 数据手册
 subtitle: DATASHEET
-series: 远程IO系统
+series: Pexus Edge 远程IO
 description: 技术规格与参数说明
 
 cover:
@@ -23,7 +23,7 @@ ending:
 content:
   base_dir: markdown
   files:
-    - remoteIO/
+    - pexus/edge/
 
 appendices:
   - pdf-content/legal-info.md

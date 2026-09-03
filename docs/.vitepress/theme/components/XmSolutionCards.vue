@@ -6,56 +6,55 @@ import profinetImage from '../../../../markdown/img/RemoteIO.jpg'
 import ethernetipImage from '../../../../markdown/img/RemoteIO-BP.jpg'
 import modbusImage from '../../../../markdown/img/PE1637.jpg'
 import feederImage from '../../../../markdown/img/CM-SC15124-N.jpg'
-import customImage from '../../../../markdown/img/WH-DB15.jpg'
 
 const solutions = [
   {
+    icon: 'pexus',
+    title: 'Pexus 标准系列',
+    subtitle: 'PAC + Edge + Studio + Runtime',
+    description: '标准化自动化控制平台：Pexus PAC 控制器与 Pexus Edge 远程IO，配套 Pack Studio 集成开发环境与 Pack Runtime 运行时，一站式构建整线控制系统。',
+    href: '/pexus/',
+    src: profinetImage
+  },
+  {
     icon: 'ecat',
-    title: 'EtherCAT 远程IO',
+    title: 'Pexus Edge · EtherCAT',
     subtitle: '高性能实时工业以太网',
     description: '支持EtherCAT总线协议，微秒级实时响应，适配倍福、欧姆龙、ACS等主流PLC与运动控制器，为高速高精设备提供确定性通讯。',
-    href: '/remoteIO/EtherCAT/',
+    href: '/pexus/edge/EtherCAT/',
     src: ethercatImage
   },
   {
     icon: 'pn',
-    title: 'PROFINET 远程IO',
+    title: 'Pexus Edge · PROFINET',
     subtitle: '西门子生态无缝集成',
     description: '兼容PROFINET RT/IRT协议，支持TIA Portal快速组态与诊断，适配S7-1200/1500等西门子全系列PLC，即插即用。',
-    href: '/remoteIO/PROFINET/',
+    href: '/pexus/edge/PROFINET/',
     src: profinetImage
   },
   {
     icon: 'eip',
-    title: 'EtherNet/IP 远程IO',
+    title: 'Pexus Edge · EtherNet/IP',
     subtitle: '罗克韦尔生态兼容',
     description: '适配ControlLogix、CompactLogix等罗克韦尔PLC，CIP协议无缝对接，支持显式报文与隐式IO数据交换。',
-    href: '/remoteIO/EtherNetIP/',
+    href: '/pexus/edge/EtherNetIP/',
     src: ethernetipImage
   },
   {
     icon: 'mb',
-    title: 'Modbus 远程IO',
+    title: 'Pexus Edge · Modbus',
     subtitle: '经典工业协议广泛适配',
     description: '支持Modbus TCP与Modbus RTU双模式，兼容主流HMI、SCADA与各类PLC，部署简单、运维便捷。',
-    href: '/remoteIO/Modbus/',
+    href: '/pexus/edge/Modbus/',
     src: modbusImage
   },
   {
     icon: 'fc',
-    title: '飞达控制器',
-    subtitle: '高速供料与节拍控制',
-    description: '采用FOC矢量控制算法，提供速度闭环与位置闭环控制，适配有感无刷滚筒电机，面向SMT供料与物流分拣场景。',
-    href: '/feeder-controller/',
-    src: feederImage
-  },
-  {
-    icon: 'custom',
-    title: '定制项目',
-    subtitle: '一站式硬件定制解决方案',
-    description: '从电路设计、嵌入式固件到结构开发，快速响应个性化需求，覆盖工业自动化、精密制造及复杂控制系统的全链路定制。',
+    title: '工业控制器',
+    subtitle: '飞达控制器与行业定制控制器',
+    description: '覆盖高速供料飞达控制器与模块可分离式远程IO、直驱伺服滚筒驱动器等行业定制控制器，一站式硬件定制解决方案。',
     href: '/custom/',
-    src: customImage
+    src: feederImage
   }
 ]
 
@@ -123,7 +122,14 @@ onBeforeUnmount(() => {
               <div class="xm-solution-info">
                 <!-- icon -->
                 <svg class="xm-solution-icon" viewBox="0 0 32 32" fill="none">
-                  <template v-if="item.icon === 'ecat'">
+                  <template v-if="item.icon === 'pexus'">
+                    <path d="M16 3l10 5v10l-10 5-10-5V8l10-5z" stroke="currentColor" stroke-width="2" fill="none"/>
+                    <circle cx="16" cy="13" r="3" fill="currentColor" opacity="0.8"/>
+                    <line x1="16" y1="16" x2="16" y2="23" stroke="currentColor" stroke-width="1.5"/>
+                    <line x1="16" y1="23" x2="9" y2="27" stroke="currentColor" stroke-width="1.5"/>
+                    <line x1="16" y1="23" x2="23" y2="27" stroke="currentColor" stroke-width="1.5"/>
+                  </template>
+                  <template v-else-if="item.icon === 'ecat'">
                     <rect x="2" y="7" width="28" height="18" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
                     <path d="M10 13h4v6h-4zM17 13h5v6h-5z" fill="currentColor" opacity="0.7"/>
                     <line x1="2" y1="21" x2="30" y2="21" stroke="currentColor" stroke-width="1.5"/>

@@ -7,7 +7,7 @@ brand: "#dc2626"
 
 title: 数据手册
 subtitle: DATASHEET
-series: EtherCAT 远程耦合器
+series: Pexus Edge EtherCAT 远程耦合器
 description: IM2610C 技术规格与参数说明
 
 cover:
@@ -23,8 +23,8 @@ ending:
 content:
   base_dir: markdown
   files:
-    - remoteIO/EtherCAT/IM2610C-datasheet.md
-    - remoteIO/Bus-intro/naming-reference.md
+    - pexus/edge/EtherCAT/IM2610C-datasheet.md
+    - pexus/edge/Bus-intro/naming-reference.md
 
 appendices:
   - pdf-content/legal-info.md

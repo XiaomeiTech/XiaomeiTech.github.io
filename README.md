@@ -37,8 +37,9 @@ YAML 配置 → 封面 HTML (Jinja2) → WeasyPrint → 封面 PDF ─┐
 
 ```
 ├── markdown/                 # 源文档 (.md)，VitePress 和 PDF 系统共用
-│   ├── feeder-controller/    # 飞达控制器文档
-│   ├── remoteIO/             # 远程IO系统文档
+│   ├── pexus/                # Pexus 标准自动化控制平台（PAC / Studio / Runtime）
+│   │   └── edge/             # Pexus Edge 远程IO文档（耦合器 + 拓展模块 + 总线介绍）
+│   ├── feeder-controller/    # 飞达控制器文档（定制系列）
 │   ├── web/                  # 开发者指南 (仅网页)
 │   ├── company/              # 公司信息
 │   └── ...
