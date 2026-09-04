@@ -85,6 +85,12 @@
   
 }
 
+/* 暗色模式下：黑色线稿类 SVG 图片（工程图/尺寸图）反色，保证可见 */
+html.dark img[src$=".svg"],
+html.dark img[src^="data:image/svg"] {
+  filter: invert(1) hue-rotate(180deg);
+}
+
 /* --- Danger block --- */
 .VPDoc .custom-block.danger {
   --block-icon-color: #A86767;

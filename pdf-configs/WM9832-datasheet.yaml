@@ -1,0 +1,49 @@
+# WM9832 数据手册 PDF 配置
+# Usage: python scripts/generate_pdf.py -c pdf-configs/WM9832-datasheet.yaml
+
+company: 小美技术（东莞）有限公司
+company_en: Xiaomei Technology (Dongguan) Co., Ltd.
+brand: "#dc2626"
+
+title: 数据手册
+subtitle: DATASHEET
+series: Pexus Edge 无线数字量输入输出模块
+description: WM9832 技术规格与参数说明
+
+cover:
+  template: pdf-templates/covers/cover-datasheet.html
+  variables:
+    doc_number: DOC-WM9832-001
+    version: V1.0
+    order_number: WM9832
+    cover_image: markdown/img/WM9832/WM9832_SLDDRW.svg
+    feather: auto
+
+ending:
+  template: pdf-templates/endings/ending-default.html
+
+content:
+  base_dir: markdown
+  files:
+    - pexus/edge/Wireless/WM9832-datasheet.md
+
+appendices:
+  - pdf-content/legal-info.md
+  - pdf-content/warning-meanings.md
+
+pdf:
+  format: A4
+  margin:
+    top: 94
+    right: 57
+    bottom: 94
+    left: 57
+  font_family: "HarmonyOS Sans SC, SimHei, sans-serif"
+  font_dir: docs/public/fonts
+  header:
+    left: 小美技术（东莞）有限公司
+    right: WM9832 数据手册
+  footer:
+    left: "© 2026 Xiaomei Technology (Dongguan) Co., Ltd."
+
+output: pdf-out/WM9832-datasheet.pdf

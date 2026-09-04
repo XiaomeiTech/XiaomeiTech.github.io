@@ -23,12 +23,39 @@
   }
   .cover-image-container {
     position: absolute;
-    bottom: 30%;
-    right: -50px;
-    width: 50%;
+    right: 30px;
+    bottom: 110px;
+    width: 11cm;
     height: auto;
-    opacity: 0.9;
-    z-index: -1;
+    z-index: 0;
+  }
+  .cover-image-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .cover-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .feather {
+    position: absolute;
+  }
+  .feather-top {
+    top: 0; left: 0; right: 0; height: 14mm;
+    background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0));
+  }
+  .feather-bottom {
+    bottom: 0; left: 0; right: 0; height: 14mm;
+    background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0));
+  }
+  .feather-left {
+    top: 0; bottom: 0; left: 0; width: 14mm;
+    background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+  }
+  .feather-right {
+    top: 0; bottom: 0; right: 0; width: 14mm;
+    background: linear-gradient(to left, #fff, rgba(255, 255, 255, 0));
   }
   .cover-series {
     font-size: 20px;
@@ -72,8 +99,18 @@
 <div class="cover">
   <div class="cover-logo">{{ COMPANY }} <br> {{ COMPANY_EN }}</div>
 
-  <div class="cover-image-container">
-    <!-- Product cover image (optional) -->
+  <div class="cover-image-container {{ FEATHER_CLASS }}">
+    {% if COVER_IMAGE %}
+    <div class="cover-image-wrap">
+      <img class="cover-image" src="{{ COVER_IMAGE }}">
+      {% if FEATHER_ENABLED %}
+      <div class="feather feather-top"></div>
+      <div class="feather feather-bottom"></div>
+      <div class="feather feather-left"></div>
+      <div class="feather feather-right"></div>
+      {% endif %}
+    </div>
+    {% endif %}
   </div>
 
   <div class="cover-series">{{ SERIES }}</div>

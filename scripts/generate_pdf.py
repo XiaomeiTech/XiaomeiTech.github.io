@@ -916,6 +916,34 @@ def _build_variables(config, section):
     extra = section.get("variables", {})
     if extra:
         vars_dict.update(extra)
+
+    # --- Cover image & edge feathering ---
+    # cover_image: 封面产品图路径（相对项目根或绝对路径）
+    # feather: true=羽化 / false=不羽化 / auto=按格式自动判断
+    #   auto 规则：SVG（工程图）→ 不羽化；其他格式（实物/渲染图）→ 羽化
+    cover_image = vars_dict.get("cover_image", "")
+    feather = str(vars_dict.get("feather", "auto")).strip().lower()
+
+    cover_image_uri = ""
+    if cover_image:
+        img_path = Path(cover_image)
+        if not img_path.is_absolute():
+            img_path = ROOT / img_path
+        if img_path.exists():
+            cover_image_uri = img_path.as_uri()
+        else:
+            log.warning("[cover] cover_image not found: %s", cover_image)
+
+    if feather == "auto":
+        is_svg = cover_image.lower().endswith(".svg")
+        feather_enabled = (not is_svg) if cover_image else False
+    else:
+        feather_enabled = feather in ("true", "1", "yes", "on")
+
+    vars_dict["COVER_IMAGE"] = cover_image_uri
+    vars_dict["FEATHER_ENABLED"] = feather_enabled
+    vars_dict["FEATHER_CLASS"] = "feathered" if feather_enabled else "plain"
+
     return vars_dict
 
 
