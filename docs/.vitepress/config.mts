@@ -67,7 +67,8 @@ const pexusSidebar = [
     text: '无线模组',
     items: [
       { text: '无线模组', link: '/pexus/edge/Wireless/' },
-      { text: 'WM9832 数据手册', link: '/pexus/edge/Wireless/WM9832-datasheet' }
+      { text: 'WM9832 数据手册', link: '/pexus/edge/Wireless/WM9832-datasheet' },
+      { text: 'WM9232 数据手册', link: '/pexus/edge/Wireless/WM9232-datasheet' }
     ]
   },
   {

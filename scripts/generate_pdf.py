@@ -51,6 +51,9 @@ if sys.platform == "win32":
 
 import markdown
 import yaml
+from bs4 import BeautifulSoup
+from urllib.parse import unquote, urlparse
+from urllib.request import url2pathname
 from jinja2 import Environment, FileSystemLoader
 from pikepdf import Pdf
 
@@ -857,6 +860,7 @@ def generate_pdf(config):
         # 2. Body content from markdown (pass changed_files)
         log.info("[body] converting markdown...")
         body_html = convert_content_to_html(config, changed_files)
+        _generate_docx(config, body_html)
         content_css = build_content_css(config)
         # Wrap in full HTML document for WeasyPrint
         body_html = f"""<!DOCTYPE html>
@@ -945,6 +949,218 @@ def _build_variables(config, section):
     vars_dict["FEATHER_CLASS"] = "feathered" if feather_enabled else "plain"
 
     return vars_dict
+
+
+def _generate_docx(config, body_html):
+    """Generate a DOCX next to the PDF output, reusing the PDF CSS styles."""
+    try:
+        from docx import Document
+        from docx.enum.table import WD_TABLE_ALIGNMENT
+        from docx.enum.text import WD_ALIGN_PARAGRAPH
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+        from docx.shared import Cm, Pt, RGBColor
+    except ImportError:
+        log.warning("[docx] python-docx not installed, skipping DOCX generation")
+        return None
+
+    output = config.get("output", "pdf-out/output.pdf")
+    docx_path = Path(output).with_suffix(".docx")
+    docx_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # ---- 复用 PDF 的 CSS 样式作为唯一来源 ----
+    css = build_content_css(config)
+
+    def _css_prop(selector, prop):
+        m = re.search(selector + r"\s*\{([^}]*)\}", css, re.DOTALL)
+        if not m:
+            return None
+        pm = re.search(prop + r"\s*:\s*([^;]+);", m.group(1))
+        return pm.group(1).strip() if pm else None
+
+    def _pt_float(value):
+        if not value:
+            return None
+        m = re.search(r"([\d.]+)\s*pt", value)
+        return float(m.group(1)) if m else None
+
+    def _hex_rgb(value):
+        if not value:
+            return None
+        h = value.lstrip("#").strip()
+        if len(h) != 6:
+            return None
+        try:
+            return RGBColor(int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16))
+        except ValueError:
+            return None
+
+    font = config["pdf"]["font_family"].split(",")[0].strip() or "HarmonyOS Sans SC"
+    body_color = _hex_rgb(_css_prop("body", "color")) or RGBColor(0x22, 0x22, 0x22)
+    body_size = _pt_float(_css_prop("body", "font-size")) or 11.0
+    line_spacing = 1.7
+    _ls = _css_prop("body", "line-height")
+    if _ls:
+        try:
+            line_spacing = float(_ls)
+        except ValueError:
+            pass
+
+    heading_spec = {}
+    for level, default_size in {1: 22.0, 2: 16.0, 3: 13.0, 4: 11.0, 5: 11.0, 6: 11.0}.items():
+        size = _pt_float(_css_prop(f"h{level}", "font-size")) or default_size
+        color = _hex_rgb(_css_prop(f"h{level}", "color")) or body_color
+        heading_spec[level] = (size, color)
+
+    th_bg = (_css_prop("th", "background-color") or "#f5f5f5").lstrip("#")
+
+    soup = BeautifulSoup(body_html, "html.parser")
+    doc = Document()
+
+    # ---- 页面设置（跟随 PDF @page 边距，pt → cm） ----
+    pdf = config["pdf"]
+    m = pdf["margin"]
+    pt2cm = 0.0352778
+    section = doc.sections[0]
+    section.page_width = Cm(21.0)
+    section.page_height = Cm(29.7)
+    section.top_margin = Cm(round(m["top"] * pt2cm, 2))
+    section.bottom_margin = Cm(round(m["bottom"] * pt2cm, 2))
+    section.left_margin = Cm(round(m["left"] * pt2cm, 2))
+    section.right_margin = Cm(round(m["right"] * pt2cm, 2))
+
+    def _set_style_font(style_obj, size, bold=False, color=body_color):
+        style_obj.font.name = font
+        style_obj.font.size = Pt(size)
+        style_obj.font.bold = bold
+        style_obj.font.color.rgb = color
+        rpr = style_obj._element.get_or_add_rPr()
+        rfonts = rpr.get_or_add_rFonts()
+        rfonts.set(qn("w:eastAsia"), font)
+
+    normal = doc.styles["Normal"]
+    _set_style_font(normal, body_size, color=body_color)
+    normal.paragraph_format.line_spacing = line_spacing
+    normal.paragraph_format.space_after = Pt(6)
+
+    for level, (size, color) in heading_spec.items():
+        st = doc.styles[f"Heading {level}"]
+        _set_style_font(st, size, bold=True, color=color)
+        st.paragraph_format.space_before = Pt(10)
+        st.paragraph_format.space_after = Pt(6)
+
+    def _set_cell_bg(cell, hex_color):
+        tc_pr = cell._tc.get_or_add_tcPr()
+        shd = OxmlElement("w:shd")
+        shd.set(qn("w:val"), "clear")
+        shd.set(qn("w:fill"), hex_color)
+        tc_pr.append(shd)
+
+    def _make_run(par, text, bold=False, italic=False, code=False):
+        run = par.add_run(text)
+        run.font.name = "Consolas" if code else font
+        rpr = run._element.get_or_add_rPr()
+        rfonts = rpr.get_or_add_rFonts()
+        rfonts.set(qn("w:ascii"), run.font.name)
+        rfonts.set(qn("w:hAnsi"), run.font.name)
+        rfonts.set(qn("w:eastAsia"), font)
+        if bold:
+            run.bold = True
+        if italic:
+            run.italic = True
+        return run
+
+    def _add_inline(par, node):
+        for child in node.children:
+            tag = getattr(child, "name", None)
+            if tag in ("strong", "b"):
+                _make_run(par, child.get_text(), bold=True)
+            elif tag in ("em", "i"):
+                _make_run(par, child.get_text(), italic=True)
+            elif tag == "code":
+                _make_run(par, child.get_text(), code=True)
+            elif tag == "br":
+                par.add_run().add_break()
+            elif tag is None:
+                if child.strip():
+                    _make_run(par, child)
+            else:
+                _add_inline(par, child)
+
+    def _add_image(node):
+        src = node.get("src", "")
+        if not src.startswith("file://"):
+            return
+        img_path = Path(url2pathname(urlparse(src).path))
+        if not img_path.exists():
+            log.warning("[docx] image not found: %s", img_path)
+            return
+        try:
+            doc.add_picture(str(img_path), width=Cm(14))
+            doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+        except Exception as exc:  # noqa: BLE001
+            log.warning("[docx] skip image %s: %s", img_path, exc)
+
+    def _add_block(node):
+        tag = getattr(node, "name", None)
+        if tag in ("h1", "h2", "h3", "h4", "h5", "h6"):
+            doc.add_heading("", level=int(tag[1]))
+            _add_inline(doc.paragraphs[-1], node)
+        elif tag == "p":
+            imgs = node.find_all("img", recursive=False)
+            if imgs and not node.get_text(strip=True):
+                for img in imgs:
+                    _add_image(img)
+            else:
+                _add_inline(doc.add_paragraph(), node)
+        elif tag in ("ul", "ol"):
+            style = "List Bullet" if tag == "ul" else "List Number"
+            for li in node.find_all("li", recursive=False):
+                _add_inline(doc.add_paragraph(style=style), li)
+        elif tag == "table":
+            rows = node.find_all("tr")
+            if not rows:
+                return
+            ncols = max(
+                (len(tr.find_all(["td", "th"], recursive=False)) for tr in rows),
+                default=0,
+            )
+            if ncols == 0:
+                return
+            table = doc.add_table(rows=0, cols=ncols)
+            table.style = "Table Grid"
+            table.alignment = WD_TABLE_ALIGNMENT.CENTER
+            for tr in rows:
+                cells = tr.find_all(["td", "th"], recursive=False)
+                row = table.add_row().cells
+                for i, cell in enumerate(cells):
+                    if i >= ncols:
+                        break
+                    par = row[i].paragraphs[0]
+                    _add_inline(par, cell)
+                    if cell.name == "th":
+                        for run in par.runs:
+                            run.bold = True
+                        _set_cell_bg(row[i], th_bg)
+        elif tag == "img":
+            _add_image(node)
+        elif tag in ("blockquote", "div", "section", "article"):
+            for child in node.children:
+                if getattr(child, "name", None):
+                    _add_block(child)
+
+    body = soup.body or soup
+    for child in body.children:
+        if getattr(child, "name", None):
+            _add_block(child)
+
+    try:
+        doc.save(str(docx_path))
+    except (PermissionError, OSError) as exc:
+        log.warning("[docx] failed to save (文件可能已被打开): %s", exc)
+        return None
+    log.info("[docx] %s", docx_path)
+    return str(docx_path)
 
 
 # ---------------------------------------------------------------------------
