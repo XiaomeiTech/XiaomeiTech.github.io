@@ -92,4 +92,4 @@ jobs:
           REMOTE_PORT: ${{ secrets.TENCENT_CLOUD_SSH_PORT || '22' }}
           TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
           SOURCE: "site-dist/"
-          ARGS: "-avz --delete"
+          ARGS: "-az --info=progress2 --delete"
