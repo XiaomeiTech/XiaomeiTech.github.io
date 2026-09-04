@@ -56,6 +56,12 @@ jobs:
         with:
           path: docs/.vitepress/dist
 
+      - name: Upload site for server deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: docs/.vitepress/dist
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -63,3 +69,25 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy-tencent:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ secrets.TENCENT_HOST != '' }}
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: site-dist
+
+      - name: Deploy site to Tencent Cloud
+        uses: easingthemes/ssh-deploy@v4
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
+          REMOTE_USER: ${{ secrets.TENCENT_USER || 'root' }}
+          REMOTE_PORT: ${{ secrets.TENCENT_PORT || '22' }}
+          TARGET: ${{ secrets.TENCENT_TARGET }}
+          SOURCE: "site-dist/"
+          ARGS: "-avz --delete"
