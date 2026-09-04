@@ -1,43 +1,60 @@
 name: Deploy VitePress site to Pages
-
 'on':
   push:
     branches:
       - master
       - main
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: pages
   cancel-in-progress: false
-
 jobs:
   pre-check-network:
     runs-on: ubuntu-latest
-    if: ${{ secrets.TENCENT_CLOUD_IP != '' }}
     env:
       TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+      TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
       TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
+      TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
+      SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
     steps:
-      - name: Pre‑check Tencent Cloud SSH TCP connectivity
+      - name: Check all required tencent secrets, skip if any missing
+        run: |
+          REQUIRED=(
+            "${{ env.TENCENT_HOST }}"
+            "${{ env.TENCENT_USER }}"
+            "${{ env.TENCENT_TARGET }}"
+            "${{ env.SSH_PRIVKEY }}"
+          )
+          MISSING=0
+          if [[ -z "${{ env.TENCENT_HOST }}" ]]; then echo "⚠️ Missing: TENCENT_CLOUD_IP"; MISSING=1; fi
+          if [[ -z "${{ env.TENCENT_USER }}" ]]; then echo "⚠️ Missing: TENCENT_CLOUD_USER"; MISSING=1; fi
+          if [[ -z "${{ env.TENCENT_TARGET }}" ]]; then echo "⚠️ Missing: TENCENT_CLOUD_TARGET"; MISSING=1; fi
+          if [[ -z "${{ env.SSH_PRIVKEY }}" ]]; then echo "⚠️ Missing: TENCENT_CLOUD_SSH_PRIVATE_KEY"; MISSING=1; fi
+
+          if [[ $MISSING -eq 1 ]]; then
+            echo "ℹ️ One or more required tencent secrets missing, skip pre‑check and tencent deploy"
+            exit 0
+          fi
+        shell: bash
+
+      - name: Pre‑check Tencent Cloud SSH TCP connectivity (support domain name)
         run: |
           if [[ -z "${{ env.TENCENT_PORT_RAW }}" ]]; then
             TENCENT_PORT=22
           else
             TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
           fi
-          echo "Target Host: ${{ env.TENCENT_HOST }}"
+          echo "Target Host(Domain): ${{ env.TENCENT_HOST }}"
           echo "Target Port: $TENCENT_PORT"
-
           if timeout 10 bash -c "</dev/tcp/${{ env.TENCENT_HOST }}/$TENCENT_PORT"; then
             echo "✅ TCP connection SUCCESS, continue workflow"
           else
-            echo "❌ TCP connection FAILED: Network unreachable / timeout"
+            echo "❌ TCP connection FAILED: DNS resolve / Network unreachable / timeout"
             exit 1
           fi
         shell: bash
@@ -50,21 +67,17 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: npm
-
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
           enablement: true
-
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
-
       - name: Debug workspace before build
         run: |
           echo "GITHUB_SHA=$GITHUB_SHA"
@@ -73,15 +86,12 @@ jobs:
           ls -la docs
           ls -la markdown
           sed -n '1,40p' docs/.vitepress/config.mts
-
       - name: Build with VitePress
         run: npm run docs:build
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
-
       - name: Upload site for server deploy
         uses: actions/upload-artifact@v4
         with:
@@ -99,7 +109,6 @@ jobs:
   deploy-tencent:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ secrets.TENCENT_CLOUD_IP != '' }}
     env:
       TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
       TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
@@ -107,6 +116,20 @@ jobs:
       TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
       SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
     steps:
+      - name: Re‑check required secrets, skip deploy if missing
+        run: |
+          MISSING=0
+          if [[ -z "${{ env.TENCENT_HOST }}" ]]; then MISSING=1; fi
+          if [[ -z "${{ env.TENCENT_USER }}" ]]; then MISSING=1; fi
+          if [[ -z "${{ env.TENCENT_TARGET }}" ]]; then MISSING=1; fi
+          if [[ -z "${{ env.SSH_PRIVKEY }}" ]]; then MISSING=1; fi
+
+          if [[ $MISSING -eq 1 ]]; then
+            echo "ℹ️ Required tencent secrets incomplete, skip tencent cloud deploy"
+            exit 0
+          fi
+        shell: bash
+
       - name: Download site artifact
         uses: actions/download-artifact@v4
         with:
@@ -120,12 +143,10 @@ jobs:
           else
             TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
           fi
-
           mkdir -p ~/.ssh
           echo "${{ env.SSH_PRIVKEY }}" > ~/.ssh/deploy.key
           chmod 600 ~/.ssh/deploy.key
           ssh-keyscan -p "$TENCENT_PORT" "${{ env.TENCENT_HOST }}" >> ~/.ssh/known_hosts
-
           rsync -avz --compress --compress-level=6 --delete \
             -e "ssh -i ~/.ssh/deploy.key -p $TENCENT_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=20" \
             ./site-dist/ \
