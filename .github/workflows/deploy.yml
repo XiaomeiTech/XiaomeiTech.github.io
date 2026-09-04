@@ -74,7 +74,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     env:
-      TENCENT_HOST: ${{ secrets.TENCENT_HOST }}
+      TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v4
@@ -86,10 +86,10 @@ jobs:
         if: ${{ env.TENCENT_HOST != '' }}
         uses: easingthemes/ssh-deploy@v4
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.TENCENT_HOST }}
-          REMOTE_USER: ${{ secrets.TENCENT_USER || 'root' }}
-          REMOTE_PORT: ${{ secrets.TENCENT_PORT || '22' }}
-          TARGET: ${{ secrets.TENCENT_TARGET }}
+          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+          REMOTE_USER: ${{ secrets.TENCENT_CLOUD_USER }}
+          REMOTE_PORT: ${{ secrets.TENCENT_CLOUD_SSH_PORT || '22' }}
+          TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
           SOURCE: "site-dist/"
           ARGS: "-avz --delete"
