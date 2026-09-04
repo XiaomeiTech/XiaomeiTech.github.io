@@ -16,17 +16,13 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
-env:
-  TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
-  TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
-  TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
-  TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
-  SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
-
 jobs:
   pre-check-network:
     runs-on: ubuntu-latest
-    if: ${{ env.TENCENT_HOST != '' }}
+    if: ${{ secrets.TENCENT_CLOUD_IP != '' }}
+    env:
+      TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+      TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
     steps:
       - name: Pre‑check Tencent Cloud SSH TCP connectivity
         run: |
@@ -103,7 +99,13 @@ jobs:
   deploy-tencent:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ env.TENCENT_HOST != '' }}
+    if: ${{ secrets.TENCENT_CLOUD_IP != '' }}
+    env:
+      TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+      TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
+      TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
+      TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
+      SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v4
