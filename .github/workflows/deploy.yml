@@ -16,8 +16,38 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+  TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
+  TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
+  TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
+  SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
+
 jobs:
+  pre-check-network:
+    runs-on: ubuntu-latest
+    if: ${{ env.TENCENT_HOST != '' }}
+    steps:
+      - name: Pre‑check Tencent Cloud SSH TCP connectivity
+        run: |
+          if [[ -z "${{ env.TENCENT_PORT_RAW }}" ]]; then
+            TENCENT_PORT=22
+          else
+            TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
+          fi
+          echo "Target Host: ${{ env.TENCENT_HOST }}"
+          echo "Target Port: $TENCENT_PORT"
+
+          if timeout 10 bash -c "</dev/tcp/${{ env.TENCENT_HOST }}/$TENCENT_PORT"; then
+            echo "✅ TCP connection SUCCESS, continue workflow"
+          else
+            echo "❌ TCP connection FAILED: Network unreachable / timeout"
+            exit 1
+          fi
+        shell: bash
+
   build:
+    needs: pre-check-network
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -73,8 +103,7 @@ jobs:
   deploy-tencent:
     needs: build
     runs-on: ubuntu-latest
-    env:
-      TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+    if: ${{ env.TENCENT_HOST != '' }}
     steps:
       - name: Download site artifact
         uses: actions/download-artifact@v4
@@ -82,14 +111,21 @@ jobs:
           name: site-dist
           path: site-dist
 
-      - name: Deploy site to Tencent Cloud
-        if: ${{ env.TENCENT_HOST != '' }}
-        uses: easingthemes/ssh-deploy@v4
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
-          REMOTE_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
-          REMOTE_USER: ${{ secrets.TENCENT_CLOUD_USER }}
-          REMOTE_PORT: ${{ secrets.TENCENT_CLOUD_SSH_PORT || '22' }}
-          TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
-          SOURCE: "site-dist/"
-          ARGS: "-az --info=progress2 --delete"
+      - name: Rsync deploy to Tencent Cloud (native shell)
+        run: |
+          if [[ -z "${{ env.TENCENT_PORT_RAW }}" ]]; then
+            TENCENT_PORT=22
+          else
+            TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
+          fi
+
+          mkdir -p ~/.ssh
+          echo "${{ env.SSH_PRIVKEY }}" > ~/.ssh/deploy.key
+          chmod 600 ~/.ssh/deploy.key
+          ssh-keyscan -p "$TENCENT_PORT" "${{ env.TENCENT_HOST }}" >> ~/.ssh/known_hosts
+
+          rsync -avz --compress --compress-level=6 --delete \
+            -e "ssh -i ~/.ssh/deploy.key -p $TENCENT_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=20" \
+            ./site-dist/ \
+            ${{ env.TENCENT_USER }}@${{ env.TENCENT_HOST }}:${{ env.TENCENT_TARGET }}
+        shell: bash
