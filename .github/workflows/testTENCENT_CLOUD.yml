@@ -1,0 +1,71 @@
+name: Test Tencent Cloud SSH with Private Key
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-ssh:
+    runs-on: ubuntu-latest
+    env:
+      TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
+      TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
+      TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
+      SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
+
+    steps:
+      - name: Check required secrets
+        run: |
+          if [[ -z "${{ env.TENCENT_HOST }}" ]]; then echo "Missing TENCENT_HOST"; exit 1; fi
+          if [[ -z "${{ env.TENCENT_USER }}" ]]; then echo "Missing TENCENT_USER"; exit 1; fi
+          if [[ -z "${{ env.SSH_PRIVKEY }}" ]]; then echo "Missing SSH_PRIVKEY"; exit 1; fi
+
+      - name: Network and SSH diagnostics
+        run: |
+          # 设置端口
+          if [[ -z "${{ env.TENCENT_PORT_RAW }}" ]]; then
+            TENCENT_PORT=22
+          else
+            TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
+          fi
+          HOST="${{ env.TENCENT_HOST }}"
+          USER="${{ env.TENCENT_USER }}"
+
+          echo "═══════════════════════════════════════════════════════"
+          echo "🔍 Diagnostics with private key authentication"
+          echo "   Target: $USER@$HOST:$TENCENT_PORT"
+          echo "═══════════════════════════════════════════════════════"
+
+          # 1. 写入私钥（保留换行）
+          mkdir -p ~/.ssh
+          cat << 'EOF' > ~/.ssh/deploy.key
+          ${{ env.SSH_PRIVKEY }}
+          EOF
+          chmod 600 ~/.ssh/deploy.key
+
+          # 2. TCP 连通性测试（快速确认）
+          echo "🔌 TCP port check:"
+          if timeout 5 bash -c "echo >/dev/tcp/$HOST/$TENCENT_PORT" 2>/dev/null; then
+            echo "  ✅ TCP reachable"
+          else
+            echo "  ❌ TCP unreachable"
+            exit 1
+          fi
+
+          # 3. 使用私钥进行 SSH 认证测试（-v 输出详细）
+          echo "🔑 SSH authentication test with provided private key:"
+          ssh -v \
+              -o StrictHostKeyChecking=no \
+              -o ConnectTimeout=10 \
+              -i ~/.ssh/deploy.key \
+              -p "$TENCENT_PORT" \
+              "$USER@$HOST" \
+              "echo '✅ Authentication successful'" 2>&1 || {
+            EXIT=$?
+            echo "❌ SSH authentication failed (exit code $EXIT)"
+            echo "Possible reasons:"
+            echo "  - Private key does not match public key on server"
+            echo "  - Wrong username"
+            echo "  - Permissions on ~/.ssh/authorized_keys on server"
+            echo "  - Private key format corrupted (check line endings)"
+            exit $EXIT
+          }
