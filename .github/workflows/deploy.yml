@@ -113,19 +113,18 @@ jobs:
       TENCENT_HOST: ${{ secrets.TENCENT_CLOUD_IP }}
       TENCENT_USER: ${{ secrets.TENCENT_CLOUD_USER }}
       TENCENT_PORT_RAW: ${{ secrets.TENCENT_CLOUD_SSH_PORT }}
-      TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}
+      TENCENT_TARGET: ${{ secrets.TENCENT_CLOUD_TARGET }}   # 从 Secret 读取，不在代码中明文
       SSH_PRIVKEY: ${{ secrets.TENCENT_CLOUD_SSH_PRIVATE_KEY }}
     steps:
-      - name: Re‑check required secrets, skip deploy if missing
+      - name: Re‑check required secrets, skip if missing
         run: |
           MISSING=0
           if [[ -z "${{ env.TENCENT_HOST }}" ]]; then MISSING=1; fi
           if [[ -z "${{ env.TENCENT_USER }}" ]]; then MISSING=1; fi
           if [[ -z "${{ env.TENCENT_TARGET }}" ]]; then MISSING=1; fi
           if [[ -z "${{ env.SSH_PRIVKEY }}" ]]; then MISSING=1; fi
-
           if [[ $MISSING -eq 1 ]]; then
-            echo "ℹ️ Required tencent secrets incomplete, skip tencent cloud deploy"
+            echo "ℹ️ Required secrets incomplete, skip tencent cloud deploy"
             exit 0
           fi
         shell: bash
@@ -136,19 +135,30 @@ jobs:
           name: site-dist
           path: site-dist
 
-      - name: Rsync deploy to Tencent Cloud (native shell)
+      - name: Rsync deploy to Tencent Cloud
         run: |
+          # 设置端口
           if [[ -z "${{ env.TENCENT_PORT_RAW }}" ]]; then
             TENCENT_PORT=22
           else
             TENCENT_PORT=${{ env.TENCENT_PORT_RAW }}
           fi
+
+          # 写入私钥（保留换行符）
           mkdir -p ~/.ssh
-          echo "${{ env.SSH_PRIVKEY }}" > ~/.ssh/deploy.key
+          cat << 'EOF' > ~/.ssh/deploy.key
+          ${{ env.SSH_PRIVKEY }}
+          EOF
           chmod 600 ~/.ssh/deploy.key
-          ssh-keyscan -p "$TENCENT_PORT" "${{ env.TENCENT_HOST }}" >> ~/.ssh/known_hosts
+
+          # 添加 known_hosts
+          ssh-keyscan -p "$TENCENT_PORT" "${{ env.TENCENT_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+          # 目标路径从 Secret 获取（安全）
+          TARGET_DIR="${{ env.TENCENT_TARGET }}"
+
+          # 同步文件（不处理权限，您已在服务器预设好）
           rsync -avz --compress --compress-level=6 --delete \
             -e "ssh -i ~/.ssh/deploy.key -p $TENCENT_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=20" \
             ./site-dist/ \
-            ${{ env.TENCENT_USER }}@${{ env.TENCENT_HOST }}:${{ env.TENCENT_TARGET }}
-        shell: bash
+            ${{ env.TENCENT_USER }}@${{ env.TENCENT_HOST }}:"$TARGET_DIR"
