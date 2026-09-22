@@ -222,10 +222,9 @@ defineConfig({
       }
     },
 
-    // footer: {
-    //   message: 'Released under the MIT License.',
-    //   copyright: 'Copyright © 2019-present Evan You'
-    // },  
+    footer: {
+      message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">粤ICP备2026139328号</a>'
+    },
 
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: '小美技术',

@@ -270,7 +270,6 @@ onBeforeUnmount(() => {
   border-radius: 6px;
   margin: 12px 0;
   touch-action: pan-y;
-  overscroll-behavior: contain;
 }
 
 .xm-slides {

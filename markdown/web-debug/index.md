@@ -34,6 +34,10 @@ onMounted(() => {
 })
 </script>
 
+## 3D 模型调试
+
+[打开 Pexus Edge 材质与光照工作台](./model-lab) · 比较四种连接器组合与日夜材质；支持 SVG 实体贴纸、四点校准、放大镜取图、当前 GLB 导出及原始 STEP / x_t 下载。
+
 ## [Cloudflare Test](/cdn-cgi/trace) Result
 
 ### 🔍 解析后信息

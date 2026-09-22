@@ -4,14 +4,15 @@ EtherCAT 耦合器是 **Pexus Edge** 远程 I/O 系列中面向 EtherCAT 总线�
 
 <!-- Use it like any other HTML element -->
 <model-viewer
-  src="/models/im2620c-ec.glb" 
-  alt="3D模型"
+  src="/models/im2620c-ec-panel.glb"
+  alt="IM2620 EtherCAT 耦合器三维模型"
   auto-rotate
   camera-controls
-  exposure="0.5"
+  camera-orbit="25deg 70deg 105%"
+  exposure="1"
   shadow-intensity="1"
   environment-image="neutral"
-  tone-mapping="aces"
+  tone-mapping="neutral"
   ambient-occlusion-intensity="1"
   min-camera-distance="0.5"
   max-camera-distance="10"

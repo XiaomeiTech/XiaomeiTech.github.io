@@ -162,6 +162,24 @@ html.dark img[src^="data:image/svg"] {
   --block-icon-color: #E2D2A0;
 }
 
+/* VitePress 默认隐藏带侧边栏页面的页脚，备案信息需在这些页面同样可见。 */
+.Layout .VPFooter.has-sidebar {
+  display: block;
+}
+
+@media (min-width: 960px) {
+  .Layout .VPFooter.has-sidebar {
+    margin-left: var(--vp-sidebar-width);
+  }
+}
+
+@media (min-width: 1440px) {
+  .Layout .VPFooter.has-sidebar {
+    margin-left: calc((100% - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width));
+    margin-right: calc((100% - var(--vp-layout-max-width)) / 2);
+  }
+}
+
 /* Keep logo visible before the top-left site button/title. */
 .VPNavBarTitle .title {
   display: inline-flex;

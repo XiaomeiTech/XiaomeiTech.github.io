@@ -1,0 +1,161 @@
+[
+  {
+    "filename": "io-slave-green-1.glb",
+    "bytes": 2001988,
+    "triangles": 47492,
+    "materials": [
+      {
+        "material": "外壳 · 冷灰细纹注塑",
+        "triangles": 9075
+      },
+      {
+        "material": "侧面总线 · 镀金触点",
+        "triangles": 1032
+      },
+      {
+        "material": "侧面总线 · 黑色背板与隔栏",
+        "triangles": 605
+      },
+      {
+        "material": "前端连接器 · 注塑壳体",
+        "triangles": 28486
+      },
+      {
+        "material": "前端连接器 · 橙色按钮",
+        "triangles": 2849
+      },
+      {
+        "material": "前端连接器 · 镀锡夹片",
+        "triangles": 5445
+      }
+    ]
+  },
+  {
+    "filename": "io-slave-green-2.glb",
+    "bytes": 3341220,
+    "triangles": 80404,
+    "materials": [
+      {
+        "material": "外壳 · 冷灰细纹注塑",
+        "triangles": 9075
+      },
+      {
+        "material": "侧面总线 · 镀金触点",
+        "triangles": 1032
+      },
+      {
+        "material": "侧面总线 · 黑色背板与隔栏",
+        "triangles": 605
+      },
+      {
+        "material": "前端连接器 · 注塑壳体",
+        "triangles": 53850
+      },
+      {
+        "material": "前端连接器 · 橙色按钮",
+        "triangles": 5365
+      },
+      {
+        "material": "前端连接器 · 镀锡夹片",
+        "triangles": 10477
+      }
+    ]
+  },
+  {
+    "filename": "io-slave-black-1.glb",
+    "bytes": 2001988,
+    "triangles": 47492,
+    "materials": [
+      {
+        "material": "外壳 · 冷灰细纹注塑",
+        "triangles": 9075
+      },
+      {
+        "material": "侧面总线 · 镀金触点",
+        "triangles": 1032
+      },
+      {
+        "material": "侧面总线 · 黑色背板与隔栏",
+        "triangles": 605
+      },
+      {
+        "material": "前端连接器 · 注塑壳体",
+        "triangles": 28486
+      },
+      {
+        "material": "前端连接器 · 橙色按钮",
+        "triangles": 2849
+      },
+      {
+        "material": "前端连接器 · 镀锡夹片",
+        "triangles": 5445
+      }
+    ]
+  },
+  {
+    "filename": "io-slave-black-2.glb",
+    "bytes": 3341224,
+    "triangles": 80404,
+    "materials": [
+      {
+        "material": "外壳 · 冷灰细纹注塑",
+        "triangles": 9075
+      },
+      {
+        "material": "侧面总线 · 镀金触点",
+        "triangles": 1032
+      },
+      {
+        "material": "侧面总线 · 黑色背板与隔栏",
+        "triangles": 605
+      },
+      {
+        "material": "前端连接器 · 注塑壳体",
+        "triangles": 53850
+      },
+      {
+        "material": "前端连接器 · 橙色按钮",
+        "triangles": 5365
+      },
+      {
+        "material": "前端连接器 · 镀锡夹片",
+        "triangles": 10477
+      }
+    ]
+  },
+  {
+    "filename": "io-master-compatible.glb",
+    "bytes": 674012,
+    "triangles": 15354,
+    "materials": [
+      {
+        "material": "接口 · 深色塑料",
+        "triangles": 1335
+      },
+      {
+        "material": "绿色指示灯",
+        "triangles": 938
+      },
+      {
+        "material": "黄色指示灯",
+        "triangles": 1090
+      },
+      {
+        "material": "外壳 · 冷灰细纹注塑",
+        "triangles": 10462
+      },
+      {
+        "material": "接口接触片",
+        "triangles": 48
+      },
+      {
+        "material": "内部结构件",
+        "triangles": 2
+      },
+      {
+        "material": "接口 · 金属件",
+        "triangles": 1479
+      }
+    ]
+  }
+]
