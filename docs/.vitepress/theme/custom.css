@@ -162,6 +162,28 @@ html.dark img[src^="data:image/svg"] {
   --block-icon-color: #E2D2A0;
 }
 
+.VPFooter .footer-beian {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 20px;
+}
+
+.VPFooter .footer-beian a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.VPFooter .footer-beian img {
+  flex-shrink: 0;
+  width: 18px;
+  height: 20px;
+  object-fit: contain;
+}
+
 /* VitePress 默认隐藏带侧边栏页面的页脚，备案信息需在这些页面同样可见。 */
 .Layout .VPFooter.has-sidebar {
   display: block;

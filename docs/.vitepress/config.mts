@@ -11,6 +11,7 @@ const env = (globalThis as { process?: { env?: Record<string, string | undefined
 const repoName = env.GITHUB_REPOSITORY?.split('/')[1] ?? ''
 const isUserOrOrgPagesRepo = repoName.endsWith('.github.io')
 const githubBase = repoName && !isUserOrOrgPagesRepo ? `/${repoName}/` : '/'
+const siteBase = env.GITHUB_ACTIONS ? githubBase : '/'
 const markdownSrcDir = fileURLToPath(new URL('../../markdown', import.meta.url))
 
 // Helper: create a VitePress-compatible container render function
@@ -116,7 +117,7 @@ export default withMermaid(
 defineConfig({
   lang: 'zh-CN',
   srcDir: markdownSrcDir,
-  base: env.GITHUB_ACTIONS ? githubBase : '/',
+  base: siteBase,
   lastUpdated: true,
   ignoreDeadLinks: true,
 
@@ -223,7 +224,13 @@ defineConfig({
     },
 
     footer: {
-      message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">粤ICP备2026139328号</a>'
+      message: `<span class="footer-beian">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">粤ICP备2026139328号</a>
+        <a href="https://beian.mps.gov.cn/#/query/webSearch?code=44196602000254" target="_blank" rel="noopener noreferrer">
+          <img src="${siteBase}logo/public-security-beian.png" alt="" width="18" height="20" />
+          <span>粤公网安备44196602000254号</span>
+        </a>
+      </span>`
     },
 
     // https://vitepress.dev/reference/default-theme-config
