@@ -52,7 +52,7 @@ brand: "#dc2626"                       # 品牌色（封面等模板使用）
 
 title: 数据手册                         # 文档标题（封面/页眉）
 subtitle: DATASHEET                    # 英文副标题（封面）
-series: Pexus Edge 远程IO               # 产品系列名（封面）
+series: 工业控制器 · 模块可分离式远程IO  # 产品系列名（封面）
 description: 技术规格与参数说明           # 文档描述（封面）
 
 # ========== 封面模板 ==========
@@ -71,7 +71,7 @@ ending:
 content:
   base_dir: markdown                    # Markdown 源文件根目录（相对于项目根）
   files:                                # 要包含的文件/目录列表（按顺序拼接）
-    - pexus/edge/EtherCAT/IM2610C-datasheet.md   # 单个 .md 文件
+    - custom/IM2610C-datasheet.md         # 单个 .md 文件
     # - pexus/edge/EtherCAT/               # 整个目录（递归包含所有 .md）
     # - pexus/edge/*/index.md              # 通配符匹配
 
@@ -209,7 +209,7 @@ python scripts/generate_pdf.py -v
 INFO: Generating: 数据手册
 INFO: [cover] cover-datasheet.html → cover.pdf        # 第1步：封面
 INFO: [body] converting markdown...                    # 第2步：正文
-INFO:   [md] pexus/edge/EtherCAT/IM2610C-datasheet.md
+INFO:   [md] custom/IM2610C-datasheet.md
 INFO:   [appendix] legal-info.md                       # 附录
 INFO:   → body.pdf
 INFO: [ending] ending-default.html → ending.pdf        # 第3步：结尾
@@ -278,7 +278,7 @@ graph TB
 在 `markdown/` 下创建文档文件：
 
 ```
-markdown/pexus/edge/EtherCAT/IM2610C-datasheet.md
+markdown/custom/IM2610C-datasheet.md
 ```
 
 使用 `#` 层级标题组织大纲，`##` 为章、`###` 为节。用 `![描述](path/to/image.png)` 插入图片占位。
@@ -305,7 +305,7 @@ python scripts/generate_pdf.py -c pdf-configs/IM2610C-datasheet.yaml
 
 ```bash
 git add pdf-configs/IM2610C-datasheet.yaml
-git add markdown/pexus/edge/EtherCAT/IM2610C-datasheet.md
+git add markdown/custom/IM2610C-datasheet.md
 git commit -m "docs: 新增 IM2610C 数据手册"
 git push
 ```
@@ -378,7 +378,7 @@ brand: "#dc2626"                       # 品牌色（封面使用）
 
 title: 数据手册                         # 文档标题
 subtitle: DATASHEET                    # 英文副标题
-series: Pexus Edge 远程IO               # 产品系列
+series: 工业控制器 · 模块可分离式远程IO  # 产品系列
 description: 技术规格与参数说明           # 文档描述
 
 # ========== 封面模板 ==========
@@ -397,7 +397,7 @@ ending:
 content:
   base_dir: markdown                    # Markdown 源文件根目录
   files:                                # 要包含的 Markdown 文件列表
-    - pexus/edge/EtherCAT/IM2610C-datasheet.md
+    - custom/IM2610C-datasheet.md
     # 支持目录：- pexus/edge/ (包含该目录下所有 .md)
     # 支持通配：- pexus/edge/*/index.md
 
@@ -500,7 +500,7 @@ python scripts/generate_pdf.py -v
 INFO: Generating: 数据手册
 INFO: [cover] cover-datasheet.html → cover.pdf        # 第1步：封面
 INFO: [body] converting markdown...                    # 第2步：正文
-INFO:   [md] pexus/edge/EtherCAT/IM2610C-datasheet.md
+INFO:   [md] custom/IM2610C-datasheet.md
 INFO:   [appendix] legal-info.md                       # 附录
 INFO:   → body.pdf
 INFO: [ending] ending-default.html → ending.pdf        # 第3步：结尾
@@ -569,7 +569,7 @@ graph TB
 在 `markdown/` 下创建文档文件：
 
 ```
-markdown/pexus/edge/EtherCAT/IM2610C-datasheet.md
+markdown/custom/IM2610C-datasheet.md
 ```
 
 使用 `#` 层级标题组织大纲，`##` 为章、`###` 为节。用 `![描述](path/to/image.png)` 插入图片占位。
@@ -596,7 +596,7 @@ python scripts/generate_pdf.py -c pdf-configs/IM2610C-datasheet.yaml
 
 ```bash
 git add pdf-configs/IM2610C-datasheet.yaml
-git add markdown/pexus/edge/EtherCAT/IM2610C-datasheet.md
+git add markdown/custom/IM2610C-datasheet.md
 git commit -m "docs: 新增 IM2610C 数据手册"
 git push
 ```

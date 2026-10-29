@@ -57,8 +57,8 @@ graph LR
 Pexus Edge 的完整技术文档（规格表、数据手册、总线介绍、命名规则、接线与安全参考）位于**远程 I/O 文档区**：
 
 - [系统概述与规格表](./edge/)
-- [EtherCAT 耦合器数据手册](./edge/EtherCAT/IM2610C-datasheet)
-- [产品命名规则](./edge/Bus-intro/naming-reference)
+- [耦合器与扩展模块选型表](./edge/Expansion/)
+- [产品命名规则](./edge/Expansion/#产品命名规则)
 - [接线参考指南](./edge/Bus-intro/wiring-reference)
 - [安全参考说明](./edge/Bus-intro/safety-reference)
 

@@ -49,19 +49,19 @@ const pexusSidebar = [
     text: '耦合器',
     items: [
       { text: 'EtherCAT耦合器', link: '/pexus/edge/EtherCAT/' },
-      { text: 'IM2610C 数据手册', link: '/pexus/edge/EtherCAT/IM2610C-datasheet' },
       { text: 'PROFINET耦合器', link: '/pexus/edge/PROFINET/' },
       { text: 'EtherNet/IP耦合器', link: '/pexus/edge/EtherNetIP/' },
       { text: 'Modbus耦合器', link: '/pexus/edge/Modbus/' }
     ]
   },
   {
-    text: '拓展模块',
+    text: '扩展模块',
     items: [
-      { text: '模拟量输入AI', link: '/pexus/edge/AI/' },
-      { text: '模拟量输出AO', link: '/pexus/edge/AO/' },
-      { text: '数字量输入DI', link: '/pexus/edge/DI/' },
-      { text: '数字量输出DO', link: '/pexus/edge/DO/' }
+      { text: '耦合器与扩展模块选型表', link: '/pexus/edge/Expansion/' },
+      { text: '数字量输入 DI', link: '/pexus/edge/DI/' },
+      { text: '数字量输出 DO', link: '/pexus/edge/DO/' },
+      { text: '模拟量输入 AI', link: '/pexus/edge/AI/' },
+      { text: '模拟量输出 AO', link: '/pexus/edge/AO/' }
     ]
   },
   {
@@ -78,7 +78,6 @@ const pexusSidebar = [
       { text: 'EtherCAT 总线介绍', link: '/pexus/edge/Bus-intro/ECbus-intro' },
       { text: 'EtherNet/IP 总线介绍', link: '/pexus/edge/Bus-intro/EIPbus-intro' },
       { text: 'PROFINET 总线介绍', link: '/pexus/edge/Bus-intro/PNbus-intro' },
-      { text: '产品命名规则', link: '/pexus/edge/Bus-intro/naming-reference' },
       { text: '接线参考指南', link: '/pexus/edge/Bus-intro/wiring-reference' },
       { text: '安全参考说明', link: '/pexus/edge/Bus-intro/safety-reference' }
     ]
@@ -103,6 +102,7 @@ const industrialSidebar = [
     text: '定制控制器',
     items: [
       { text: '模块可分离式远程IO', link: '/custom/modular-separable-remote-io' },
+      { text: 'IM2610C 定制接口模块', link: '/custom/IM2610C-datasheet' },
       { text: '治具无线负压检测（高速线）', link: '/custom/presssensorH/' },
       { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' },
       { text: '直驱伺服滚筒驱动器', link: '/custom/DC Servo Roller Driver/' }

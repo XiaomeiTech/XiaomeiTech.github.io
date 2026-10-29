@@ -1,5 +1,7 @@
 # EtherCAT 耦合器（Pexus Edge）
 
+<ModuleBadge kind="IM" protocol="EC" label="IM · EtherCAT" />
+
 EtherCAT 耦合器是 **Pexus Edge** 远程 I/O 系列中面向 EtherCAT 总线的通讯耦合器，作为 EtherCAT 网络从站实现主站指令下发与现场 I/O 状态实时回传，支持级联扩展模块，提供微秒级确定性响应。
 
 <!-- Use it like any other HTML element -->
@@ -21,8 +23,13 @@ EtherCAT 耦合器是 **Pexus Edge** 远程 I/O 系列中面向 EtherCAT 总线�
 
 ## 产品列表
 
-| 型号 | 描述 | 文档 |
-|------|------|------|
-| IM2610C | Pexus Edge EtherCAT 远程耦合器 | [数据手册](./IM2610C-datasheet) |
+<div class="edge-spec-table" data-module-kind="IM">
+
+| 型号 | 描述 | 性能型 | 产品状态 | 文档 |
+| :--- | :--- | :--- | :--- | :--- |
+| <ModuleBadge kind="IM" protocol="EC" label="IM2620-EC" /> | Pexus Edge EtherCAT 远程耦合器 | - | 未发布 | [选型表](../Expansion/) |
+| <ModuleBadge kind="IM" protocol="EC" label="IM2620P-EC" /> | Pexus Edge EtherCAT 远程耦合器 | 性能型 | 未发布 | [选型表](../Expansion/) |
+
+</div>
 
 > 更多产品持续更新中，敬请期待。系列总览请见 [Pexus Edge 分布式远程 I/O](../)。

@@ -7,8 +7,8 @@ brand: "#dc2626"
 
 title: 数据手册
 subtitle: DATASHEET
-series: Pexus Edge EtherCAT 远程耦合器
-description: IM2610C 技术规格与参数说明
+series: 工业控制器 · 模块可分离式远程 IO
+description: IM2610C EtherCAT 定制接口模块，与 EM7230L 配套使用
 
 cover:
   template: pdf-templates/covers/cover-datasheet.html
@@ -23,8 +23,8 @@ ending:
 content:
   base_dir: markdown
   files:
-    - pexus/edge/EtherCAT/IM2610C-datasheet.md
-    - pexus/edge/Bus-intro/naming-reference.md
+    - custom/IM2610C-datasheet.md
+    - custom/modular-separable-remote-io.md
 
 appendices:
   - pdf-content/legal-info.md
