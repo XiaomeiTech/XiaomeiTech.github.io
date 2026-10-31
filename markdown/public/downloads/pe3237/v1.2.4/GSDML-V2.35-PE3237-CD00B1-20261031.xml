@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ISO15745Profile xmlns="http://www.profibus.com/GSDML/2003/11/DeviceProfile" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.profibus.com/GSDML/2003/11/DeviceProfile ..\xsd\GSDML-DeviceProfile-v2.35.xsd">
+  <ProfileHeader>
+    <ProfileIdentification>PROFINET Device Profile</ProfileIdentification>
+    <ProfileRevision>1.00</ProfileRevision>
+    <ProfileName>Device Profile for PROFINET Devices</ProfileName>
+    <ProfileSource>PROFIBUS Nutzerorganisation e. V. (PNO)</ProfileSource>
+    <ProfileClassID>Device</ProfileClassID>
+    <ISO15745Reference>
+      <ISO15745Part>4</ISO15745Part>
+      <ISO15745Edition>1</ISO15745Edition>
+      <ProfileTechnology>GSDML</ProfileTechnology>
+    </ISO15745Reference>
+  </ProfileHeader>
+  <ProfileBody>
+    <DeviceIdentity VendorID="0x1018" DeviceID="0x0417">
+      <InfoText TextId="INFO_DEVICE" />
+      <VendorName Value="Xiaomei Technology (Dongguan) Co., Ltd." />
+    </DeviceIdentity>
+    <DeviceFunction>
+      <Family MainFamily="I/O" ProductFamily="PE3237 RS485 Gateway" />
+    </DeviceFunction>
+    <ApplicationProcess>
+      <DeviceAccessPointList>
+        <DeviceAccessPointItem ID="DAP" PNIO_Version="V2.35" PhysicalSlots="0..4" ModuleIdentNumber="0x00000001" MinDeviceInterval="128" DNS_CompatibleName="pe3237" FixedInSlots="0" ObjectUUID_LocalIndex="1" DeviceAccessSupported="false" MultipleWriteSupported="true" CheckDeviceID_Allowed="true" NameOfStationNotTransferable="false" LLDP_NoD_Supported="true" ResetToFactoryModes="1..2" RequiredSchemaVersion="V2.35">
+          <ModuleInfo>
+            <Name TextId="NAME_DEVICE" />
+            <InfoText TextId="INFO_DEVICE" />
+            <VendorName Value="Xiaomei Technology (Dongguan) Co., Ltd." />
+            <OrderNumber Value="PE3237" />
+            <HardwareRelease Value="1" />
+            <SoftwareRelease Value="V1.2.4" />
+          </ModuleInfo>
+          <CertificationInfo ConformanceClass="A" ApplicationClass="" NetloadClass="I" />
+          <IOConfigData MaxInputLength="91" MaxOutputLength="91" MaxDataLength="182" />
+          <UseableModules>
+            <ModuleItemRef ModuleItemTarget="MID_CD00B1" AllowedInSlots="1..4" />
+          </UseableModules>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="DAP_SUB" Writeable_IM_Records="1 2 3" SubmoduleIdentNumber="0x00000001" MayIssueProcessAlarm="false">
+              <IOData />
+              <RecordDataList>
+                <ParameterRecordDataItem Index="10" Length="2" TransferSequence="0">
+                  <Name TextId="T_Module_Config_Prm" />
+                  <Const Data="0x00,0x00" />
+                  <Ref DataType="Unsigned8" ByteOffset="0" DefaultValue="50" AllowedValues="0..255" Changeable="true" Visible="true" TextId="TID_Config_SetBIT_HoldTime" />
+                  <Ref DataType="Unsigned8" ByteOffset="1" DefaultValue="200" AllowedValues="0..255" Changeable="true" Visible="true" TextId="TID_Config_CommInterval" />
+                </ParameterRecordDataItem>
+              </RecordDataList>
+              <ModuleInfo>
+                <Name TextId="NAME_DEVICE" />
+                <InfoText TextId="INFO_DEVICE" />
+                <VendorName Value="Xiaomei Technology (Dongguan) Co., Ltd." />
+                <OrderNumber Value="PE3237" />
+                <HardwareRelease Value="1" />
+                <SoftwareRelease Value="V1.2.4" />
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+          <SystemDefinedSubmoduleList>
+            <InterfaceSubmoduleItem ID="INTERFACE" SubmoduleIdentNumber="0x00008000" SubslotNumber="32768" TextId="NAME_INTERFACE" SupportedRT_Classes="RT_CLASS_1" SupportedProtocols="LLDP" NetworkComponentDiagnosisSupported="false" PTP_BoundarySupported="true" DCP_BoundarySupported="true">
+              <ApplicationRelations StartupMode="Advanced">
+                <TimingProperties SendClock="32" ReductionRatio="1 2 4 8 16 32 64 128 256 512" />
+              </ApplicationRelations>
+            </InterfaceSubmoduleItem>
+            <PortSubmoduleItem ID="PORT1" SubmoduleIdentNumber="0x00008001" SubslotNumber="32769" TextId="NAME_PORT1" MaxPortRxDelay="350" MaxPortTxDelay="160">
+              <MAUTypeList>
+                <MAUTypeItem Value="16" />
+              </MAUTypeList>
+            </PortSubmoduleItem>
+          </SystemDefinedSubmoduleList>
+        </DeviceAccessPointItem>
+      </DeviceAccessPointList>
+      <ModuleList>
+        <ModuleItem ID="MID_CD00B1" ModuleIdentNumber="0x000000B1">
+          <ModuleInfo>
+            <Name TextId="TID_MID_CD00B1_Name" />
+            <InfoText TextId="TID_MID_CD00B1_InfoText" />
+            <VendorName Value="Xiaomei Technology (Dongguan) Co., Ltd." />
+            <OrderNumber Value="CD-00B1" />
+            <HardwareRelease Value="V1.00" />
+            <SoftwareRelease Value="V1.2.4" />
+          </ModuleInfo>
+          <VirtualSubmoduleList>
+            <VirtualSubmoduleItem ID="CD-00B1V" MayIssueProcessAlarm="false" SubmoduleIdentNumber="0x00000001" FixedInSubslots="1">
+              <IOData>
+                <Input>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="TID_IOP_Crtl">
+                    <BitDataItem BitOffset="0" TextId="TID_IOP_163x_BIT0" />
+                    <BitDataItem BitOffset="1" TextId="TID_IOP_163x_BIT1" />
+                    <BitDataItem BitOffset="2" TextId="TID_IOP_163x_BIT2" />
+                    <BitDataItem BitOffset="3" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="4" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="5" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="6" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="7" TextId="T_Reserved" />
+                  </DataItem>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="TID_IOP_CommandStatus">
+                    <BitDataItem BitOffset="0" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="1" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="2" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="3" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="4" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="5" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="6" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="7" TextId="TID_IOP_CommandToggle" />
+                  </DataItem>
+                  <DataItem DataType="Unsigned16" UseAsBits="false" TextId="TID_IOP_ALARM" />
+                  <DataItem DataType="Unsigned16" UseAsBits="false" TextId="TID_IOP_CAR_CALL" />
+                  <DataItem DataType="OctetString" TextId="T_Reserved" Length="14" UseAsBits="false" />
+                </Input>
+                <Output>
+                  <DataItem DataType="Unsigned8" UseAsBits="true" TextId="TID_IOC_Crtl">
+                    <BitDataItem BitOffset="0" TextId="TID_IOC_163x_BIT_PlcOnline" />
+                    <BitDataItem BitOffset="1" TextId="TID_IOC_1637_BIT1" />
+                    <BitDataItem BitOffset="2" TextId="TID_IOC_1639_BIT2" />
+                    <BitDataItem BitOffset="3" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="4" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="5" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="6" TextId="T_Reserved" />
+                    <BitDataItem BitOffset="7" TextId="T_Reserved" />
+                  </DataItem>
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Crtl_Selfcherkfreq" />
+                  <DataItem DataType="Unsigned16" UseAsBits="false" TextId="TID_IOC_TargetCar" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Direction" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Delaytime" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_TimeStep" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Speed" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Other" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Acctime" />
+                  <DataItem DataType="Unsigned8" UseAsBits="false" TextId="TID_IOC_Dectime" />
+                  <DataItem DataType="Unsigned16" UseAsBits="false" TextId="T_Reserved" />
+                  <DataItem DataType="OctetString" TextId="T_Reserved" Length="7" UseAsBits="false" />
+                </Output>
+              </IOData>
+              <RecordDataList>
+                <ParameterRecordDataItem Index="10" Length="6">
+                  <Name TextId="T_Module_Config_Prm" />
+                  <Const Data="0x00,0x00,0x00,0x00,0x00,0x00" />
+                  <Ref DataType="Unsigned32" ByteOffset="0" DefaultValue="38400" AllowedValues="0 1526..115200" Changeable="true" Visible="true" TextId="TID_baudrate" />
+                  <Ref DataType="Unsigned8" ByteOffset="4" DefaultValue="0" AllowedValues="0..32" Changeable="true" Visible="true" TextId="TID_Config_CarNumbers" />
+                  <Ref ValueItemTarget="IDV_Car_Driver_Order" DataType="Unsigned8" ByteOffset="5" DefaultValue="1" AllowedValues="0..3" Changeable="true" Visible="true" TextId="TID_Config_DriverType" />
+                </ParameterRecordDataItem>
+              </RecordDataList>
+              <ModuleInfo>
+                <Name TextId="TID_MID_CD00B1_Name" />
+                <InfoText TextId="TID_MID_CD00B1_InfoText" />
+              </ModuleInfo>
+            </VirtualSubmoduleItem>
+          </VirtualSubmoduleList>
+        </ModuleItem>
+      </ModuleList>
+      <ValueList>
+        <ValueItem ID="IDV_Car_Driver_Order">
+          <Assignments>
+            <Assign Content="0" TextId="TID_DriverType0" />
+            <Assign Content="1" TextId="TID_DriverType1" />
+            <Assign Content="2" TextId="TID_DriverType2" />
+            <Assign Content="3" TextId="TID_DriverType3" />
+          </Assignments>
+        </ValueItem>
+      </ValueList>
+      <ExternalTextList>
+        <PrimaryLanguage>
+          <Text TextId="NAME_DEVICE" Value="PE3237 4-port PROFINET / RS485 gateway" />
+          <Text TextId="INFO_DEVICE" Value="Xiaomei Technology (Dongguan) Co., Ltd. Connects a PROFINET controller to RS485 nodes for command delivery and status monitoring. Four independently configurable ports; optional CD-00B1 modules; 20-byte input and output per port." />
+          <Text TextId="NAME_INTERFACE" Value="PROFINET RT interface" />
+          <Text TextId="NAME_PORT1" Value="100BASE-TX physical port 1" />
+          <Text TextId="TID_Config_CarNumbers" Value="Self-test node count (0 disables, 1..32)" />
+          <Text TextId="TID_Config_CommInterval" Value="Inter-transaction delay (ms)" />
+          <Text TextId="TID_Config_DriverType" Value="RS485 driver protocol" />
+          <Text TextId="TID_Config_SetBIT_HoldTime" Value="Result flag hold time (ms, minimum 30)" />
+          <Text TextId="TID_DriverType0" Value="LeiSai compatible" />
+          <Text TextId="TID_DriverType1" Value="HME Driver" />
+          <Text TextId="TID_DriverType2" Value="LeiSai driver" />
+          <Text TextId="TID_DriverType3" Value="Dalian Modi driver" />
+          <Text TextId="TID_IOC_1637_BIT1" Value="Self-test enable" />
+          <Text TextId="TID_IOC_1639_BIT2" Value="Start command (rising edge)" />
+          <Text TextId="TID_IOC_1639_BIT4" Value="Reserved" />
+          <Text TextId="TID_IOC_1639_BIT5" Value="Reserved" />
+          <Text TextId="TID_IOC_1639_BIT6" Value="Reserved" />
+          <Text TextId="TID_IOC_163x_BIT_PlcOnline" Value="PLC online (compatibility bit, not used)" />
+          <Text TextId="TID_IOC_Acctime" Value="Acceleration parameter" />
+          <Text TextId="TID_IOC_Crtl" Value="Command control register" />
+          <Text TextId="TID_IOC_Crtl_Selfcherkfreq" Value="Self-test period: 0=1000, 1=200, 2=100 ms" />
+          <Text TextId="TID_IOC_Dectime" Value="Deceleration parameter (LeiSai)" />
+          <Text TextId="TID_IOC_Delaytime" Value="Run delay parameter" />
+          <Text TextId="TID_IOC_Direction" Value="Direction (bit 6)" />
+          <Text TextId="TID_IOC_Other" Value="Protocol control flags" />
+          <Text TextId="TID_IOC_Speed" Value="Speed parameter" />
+          <Text TextId="TID_IOC_TimeStep" Value="Time/step parameter" />
+          <Text TextId="TID_IOP_163x_BIT0" Value="RS485 port initialized" />
+          <Text TextId="TID_IOP_163x_BIT1" Value="Transaction succeeded (held pulse)" />
+          <Text TextId="TID_IOP_163x_BIT2" Value="Transaction failed (held pulse)" />
+          <Text TextId="TID_IOP_ALARM" Value="Elapsed ms / alarm code (900 and above)" />
+          <Text TextId="TID_IOP_CAR_CALL" Value="Last transaction node address" />
+          <Text TextId="TID_IOP_Crtl" Value="Port transaction status" />
+          <Text TextId="TID_MID_CD00B1_InfoText" Value="CD-00B1 RS485 port; optional slot 1..4; 20-byte input and 20-byte output; parameters at record 10" />
+          <Text TextId="TID_MID_CD00B1_Name" Value="CD-00B1 RS485 port (20/20 bytes)" />
+          <Text TextId="TID_baudrate" Value="Baud rate (bit/s, 0 keeps current)" />
+          <Text TextId="T_Module_Config_Prm" Value="Port / gateway configuration" />
+          <Text TextId="T_Reserved" Value="Reserved" />
+          <Text TextId="TID_IOC_TargetCar" Value="Target node address (1..32)" />
+          <Text TextId="TID_IOP_CommandStatus" Value="Command acceptance status" />
+          <Text TextId="TID_IOP_CommandToggle" Value="Accepted command toggle" />
+        </PrimaryLanguage>
+        <Language xml:lang="zh">
+          <Text TextId="NAME_DEVICE" Value="PE3237 四路 PROFINET / RS485 网关" />
+          <Text TextId="INFO_DEVICE" Value="小美技术（东莞）有限公司。用于连接PROFINET控制器与RS485节点，实现命令下发和状态监测。四路串口独立配置，可选配CD-00B1模块，每路输入和输出各20字节。" />
+          <Text TextId="NAME_INTERFACE" Value="PROFINET RT 接口" />
+          <Text TextId="NAME_PORT1" Value="100BASE-TX 物理端口1" />
+          <Text TextId="TID_Config_CarNumbers" Value="自检节点数（0禁用，1至32）" />
+          <Text TextId="TID_Config_CommInterval" Value="事务间隔（毫秒）" />
+          <Text TextId="TID_Config_DriverType" Value="RS485 驱动协议" />
+          <Text TextId="TID_Config_SetBIT_HoldTime" Value="结果标志保持时间（毫秒，最小30）" />
+          <Text TextId="TID_DriverType0" Value="兼容雷赛" />
+          <Text TextId="TID_DriverType1" Value="HME 驱动" />
+          <Text TextId="TID_DriverType2" Value="雷赛驱动" />
+          <Text TextId="TID_DriverType3" Value="大连摩迪驱动" />
+          <Text TextId="TID_IOC_1637_BIT1" Value="自检使能" />
+          <Text TextId="TID_IOC_1639_BIT2" Value="命令启动（上升沿）" />
+          <Text TextId="TID_IOC_1639_BIT4" Value="保留" />
+          <Text TextId="TID_IOC_1639_BIT5" Value="保留" />
+          <Text TextId="TID_IOC_1639_BIT6" Value="保留" />
+          <Text TextId="TID_IOC_163x_BIT_PlcOnline" Value="PLC在线（兼容位，未使用）" />
+          <Text TextId="TID_IOC_Acctime" Value="加速参数" />
+          <Text TextId="TID_IOC_Crtl" Value="命令控制寄存器" />
+          <Text TextId="TID_IOC_Crtl_Selfcherkfreq" Value="自检周期：0为1000、1为200、2为100毫秒" />
+          <Text TextId="TID_IOC_Dectime" Value="减速参数（雷赛）" />
+          <Text TextId="TID_IOC_Delaytime" Value="运行延时参数" />
+          <Text TextId="TID_IOC_Direction" Value="方向（位6）" />
+          <Text TextId="TID_IOC_Other" Value="协议控制标志" />
+          <Text TextId="TID_IOC_Speed" Value="速度参数" />
+          <Text TextId="TID_IOC_TimeStep" Value="时间或步长参数" />
+          <Text TextId="TID_IOP_163x_BIT0" Value="RS485端口初始化成功" />
+          <Text TextId="TID_IOP_163x_BIT1" Value="事务成功（保持脉冲）" />
+          <Text TextId="TID_IOP_163x_BIT2" Value="事务失败（保持脉冲）" />
+          <Text TextId="TID_IOP_ALARM" Value="耗时毫秒或报警码（900及以上）" />
+          <Text TextId="TID_IOP_CAR_CALL" Value="最近事务节点地址" />
+          <Text TextId="TID_IOP_Crtl" Value="端口事务状态" />
+          <Text TextId="TID_MID_CD00B1_InfoText" Value="CD-00B1串口；可选槽1至4；输入输出各20字节；参数记录索引10" />
+          <Text TextId="TID_MID_CD00B1_Name" Value="CD-00B1串口（20/20字节）" />
+          <Text TextId="TID_baudrate" Value="波特率（bit/s，0保持当前值）" />
+          <Text TextId="T_Module_Config_Prm" Value="端口或网关参数" />
+          <Text TextId="T_Reserved" Value="保留" />
+          <Text TextId="TID_IOC_TargetCar" Value="目标节点地址（1至32）" />
+          <Text TextId="TID_IOP_CommandStatus" Value="命令接收状态" />
+          <Text TextId="TID_IOP_CommandToggle" Value="命令接收翻转位" />
+        </Language>
+      </ExternalTextList>
+    </ApplicationProcess>
+  </ProfileBody>
+</ISO15745Profile>

@@ -99,13 +99,19 @@ const industrialSidebar = [
     ]
   },
   {
+    text: '物流系统控制器',
+    items: [
+      { text: 'PE3237 小车控制器', link: '/custom/PE3237' },
+      { text: 'PLD-V88-P48-400 直驱伺服滚筒驱动器', link: '/custom/DC%20Servo%20Roller%20Driver' }
+    ]
+  },
+  {
     text: '定制控制器',
     items: [
       { text: '模块可分离式远程IO', link: '/custom/modular-separable-remote-io' },
       { text: 'IM2610C 定制接口模块', link: '/custom/IM2610C-datasheet' },
       { text: '治具无线负压检测（高速线）', link: '/custom/presssensorH/' },
-      { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' },
-      { text: '直驱伺服滚筒驱动器', link: '/custom/DC Servo Roller Driver/' }
+      { text: '治具无线负压检测（低速线）', link: '/custom/presssensorL/' }
     ]
   }
 ]
