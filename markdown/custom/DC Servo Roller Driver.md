@@ -1,4 +1,5 @@
 ---
+aside: false
 description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控制器系列，采用 FOC 控制，支持速度闭环与位置闭环，可与 PE3237 小车控制器配套组成一套物流控制与驱动方案，也可分别使用。
 ---
 
@@ -6,7 +7,40 @@ description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控
 
 **PLD-V88-P48-400 直驱伺服滚筒驱动器**属于**物流系统控制器**系列，面向物流分拣、输送线及 AGV 等自动化输送场景，采用 **FOC（磁场定向控制）**算法，为有感无刷滚筒电机提供速度闭环与位置闭环控制。支持 **24V 200W 或 48V 400W** 功率输出，采用铝合金外壳散热，并提供 RS485 通信与控制信号接口，便于接入现场控制系统。
 
-![为保护客户隐私，图片已隐藏](../img/RLD-VB6-P48A-400.jpg)
+## 外观与接口定义
+
+<figure class="roller-pinout">
+  <figcaption><strong>电源与控制面</strong><span>电源 · 控制接口 · 指示灯 · 升级 · 通信</span></figcaption>
+  <div class="roller-pinout-frame">
+    <img src="../img/PLD-V88-P48-400/PLD-V88-P48-400-control.svg" width="1080" height="566" alt="电源与控制面：左侧四位电源接口，上下排均为 DC+、DC−；控制接口上排为 15V、DIN1、COM1、FO、485B，下排为 GND、NC、DIN2、COM2、485A；其右侧依次为指示灯、UPDATE 升级接口和六位通信接口，通信接口上排为 485B、485B、PE，下排为 485A、485A、PE。" />
+  </div>
+</figure>
+
+<figure class="roller-pinout">
+  <figcaption><strong>电机与编码器面</strong><span>拨码开关 · 编码器信号 · 电机相线</span></figcaption>
+  <div class="roller-pinout-frame">
+    <img src="../img/PLD-V88-P48-400/PLD-V88-P48-400-motor.svg" width="1080" height="520" alt="电机与编码器面：左侧八位拨码依次标为 1、2、4、8、16、32、RE、TR；编码器接口上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+；电机接口上排为 OT、V+、GND，下排为 U、V、W。" />
+  </div>
+</figure>
+
+### 电源、控制与通信接口
+
+| 接口 | 上排（从左至右） | 下排（从左至右） |
+| --- | --- | --- |
+| 电源 | DC+ / DC− | DC+ / DC− |
+| 控制接口 | 15V / DIN1 / COM1 / FO / 485B | GND / NC / DIN2 / COM2 / 485A |
+| 通信信号 | 485B / 485B / PE | 485A / 485A / PE |
+
+**UPDATE** 为固件升级接口；其左侧为指示灯。
+
+### 编码器、电机与拨码
+
+| 接口 | 上排（从左至右） | 下排（从左至右） |
+| --- | --- | --- |
+| 编码器信号 | V+ / FA− / FB− / FC− | GND / FA+ / FB+ / FC+ |
+| 电机相线 | OT / V+ / GND | U / V / W |
+
+8 位拨码从左至右的标识为 **1、2、4、8、16、32、RE、TR**，其中前六位为地址码。RE、TR 和 OT 沿用机壳丝印标识。
 
 ## 配套与独立使用
 
@@ -28,3 +62,21 @@ description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控
 - **8位拨码盘**
 
 [返回物流系统控制器](./#物流系统控制器)
+
+<style scoped>
+.roller-pinout { margin: 24px 0; }
+.roller-pinout-frame { max-width: 100%; }
+.roller-pinout .roller-pinout-frame img { display: block; width: 100%; max-width: 100%; height: auto; filter: none; }
+.roller-pinout figcaption { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 12px; line-height: 1.7; }
+.roller-pinout figcaption strong { color: var(--vp-c-text-1); font-size: 18px; }
+.roller-pinout figcaption span { color: var(--vp-c-text-2); font-size: 13px; }
+@media (max-width: 640px) {
+  .roller-pinout { width: 100vw; margin: 20px calc(50% - 50vw); }
+  .roller-pinout figcaption { margin-bottom: 8px; padding: 0 20px; }
+  .roller-pinout figcaption strong { font-size: 16px; }
+}
+@media print {
+  .roller-pinout { width: 100%; margin: 24px 0; break-inside: avoid; }
+  .roller-pinout .roller-pinout-frame img { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
+</style>

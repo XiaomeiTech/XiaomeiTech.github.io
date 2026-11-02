@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="520" viewBox="0 0 1080 520" role="img" aria-labelledby="title description">
+  <title id="title">PLD-V88-P48-400 电机与编码器面接口图</title>
+  <desc id="description">透明背景。八位拨码依次为地址码 1、2、4、8、16、32，以及 RE、TR。编码器上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+。电机接口上排为 OT、V+、GND，下排为 U、V、W。</desc>
+  <defs>
+    <linearGradient id="aluminum" x2="0" y2="1"><stop stop-color="#f5f6f7"/><stop offset=".42" stop-color="#e4e7e9"/><stop offset="1" stop-color="#cbd0d4"/></linearGradient>
+    <linearGradient id="edge" x2="0" y2="1"><stop stop-color="#fafafa"/><stop offset="1" stop-color="#afb6bc"/></linearGradient>
+    <linearGradient id="housing" x2="1" y2="0"><stop stop-color="#e3e8e8"/><stop offset=".5" stop-color="#c3cfce"/><stop offset="1" stop-color="#99aaa9"/></linearGradient>
+    <pattern id="grain" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M2 3H4M11 7H13M6 14H8M15 16H17" stroke="#64727b" stroke-opacity=".14" stroke-width="1"/><path d="M4 5H6M13 9H15M8 16H10" stroke="#fff" stroke-opacity=".65" stroke-width="1"/><circle cx="8" cy="4" r=".6" fill="#6f7b83" fill-opacity=".13"/></pattern>
+    <linearGradient id="socket-well" x2="0" y2="1"><stop stop-color="#394b4e"/><stop offset="1" stop-color="#788c89"/></linearGradient>
+    <linearGradient id="metal-pin" x2="1" y2="1"><stop stop-color="#f1f0d9"/><stop offset=".55" stop-color="#a8aaa2"/><stop offset="1" stop-color="#535f61"/></linearGradient>
+    <g id="screw"><circle r="24" fill="#b7bec3" stroke="#30383e" stroke-width="2.5"/><circle r="20" fill="url(#edge)" stroke="#f8fafb" stroke-width="2"/><path d="M-4-12H4V-4H12V4H4V12H-4V4H-12V-4H-4Z" fill="#69737b" stroke="#30383e" stroke-width="1.8" stroke-linejoin="round"/></g>
+    <g id="panel">
+      <path d="M134 210H946Q980 210 980 244V469Q980 490 1001 490H1074V507H6V490H79Q100 490 100 469V244Q100 210 134 210Z" fill="url(#aluminum)" stroke="#30383e" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="105" y="215" width="870" height="282" rx="28" fill="url(#grain)"/>
+      <path d="M7 501H1073M106 466V245Q106 216 134 216H946Q974 216 974 245" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+      <path d="M10 506H1070" stroke="#77838c" stroke-width="2"/>
+      <use href="#screw" x="140" y="250"/><use href="#screw" x="940" y="250"/>
+      <use href="#screw" x="140" y="470"/><use href="#screw" x="940" y="470"/>
+    </g>
+    <style>
+      text { font-family: 'HarmonyOS Sans SC', 'Microsoft YaHei', 'Noto Sans CJK SC', Arial, sans-serif; }
+      .label { fill: #fff; font-size: 21px; font-weight: 700; text-anchor: middle; }
+      .leader { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .anchor { stroke: #fff; stroke-width: 2; }
+    </style>
+  </defs>
+  <use href="#panel"/>
+  <!-- DIP position and adjacent keyed sockets follow the frontal reference photo. -->
+  <g id="dip"><rect x="155" y="321" width="252" height="109" rx="2" fill="#202b33" stroke="#48535d" stroke-width="2"/><rect x="159" y="325" width="244" height="101" fill="#d62230" stroke="#ff6670" stroke-width="1.5"/><text x="180" y="348" fill="#fff2e5" font-size="20">ON</text><text x="348" y="348" fill="#fff2e5" font-size="20">DIP</text>
+    <rect x="175" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="176" y="373" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M178 376H187" stroke="#fff"/><text x="183" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">1</text>
+    <rect x="203" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="204" y="373" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M206 376H215" stroke="#fff"/><text x="211" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">2</text>
+    <rect x="231" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="232" y="373" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M234 376H243" stroke="#fff"/><text x="239" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">3</text>
+    <rect x="259" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="260" y="357" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M262 360H271" stroke="#fff"/><text x="267" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">4</text>
+    <rect x="287" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="288" y="357" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M290 360H299" stroke="#fff"/><text x="295" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">5</text>
+    <rect x="315" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="316" y="357" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M318 360H327" stroke="#fff"/><text x="323" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">6</text>
+    <rect x="343" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="344" y="357" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M346 360H355" stroke="#fff"/><text x="351" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">7</text>
+    <rect x="371" y="356" width="16" height="40" rx="4" fill="#9b1f2c"/><rect x="372" y="357" width="14" height="23" rx="3" fill="#f4f0d8" stroke="#fffbed"/><path d="M374 360H383" stroke="#fff"/><text x="379" y="419" text-anchor="middle" font-size="19" fill="#fff2e5">8</text>
+  </g>
+  <g id="encoder-connector">
+    <path d="M577 347H641V304H691V347H755V437H577Z" fill="#111c23" stroke="#43515b" stroke-width="2"/>
+    <rect x="581" y="350" width="170" height="84" rx="3" fill="#24313b" stroke="#3b4a55" stroke-width="2"/>
+    <path d="M585 430V354H747" fill="none" stroke="#67747b" stroke-opacity=".75" stroke-width="1.5"/>
+    <path d="M660 351V340H672V351" fill="#34414a" stroke="#55616a" stroke-width="1"/>
+    <rect x="591" y="358" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="605.6" y="372.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="629" y="358" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="643.6" y="372.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="667" y="358" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="681.6" y="372.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="705" y="358" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="719.6" y="372.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="591" y="392" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="605.6" y="406.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="629" y="392" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="643.6" y="406.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="667" y="392" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="681.6" y="406.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+    <rect x="705" y="392" width="33" height="29" rx="1.5" fill="#101a21" stroke="#4a5861" stroke-width="1.5"/><rect x="719.6" y="406.1" width="3.8" height="3.8" fill="url(#metal-pin)" stroke="#8e9999" stroke-width=".5"/>
+  </g>
+  <g id="motor-connector">
+    <path d="M753 320H811V269H859V320H917V437H753Z" fill="#17232a" stroke="#536068" stroke-width="2.2"/>
+    <path d="M817 323V312H853V323" fill="#bdccc8" stroke="#e1eae7" stroke-width="1.5"/>
+    <rect x="757" y="322" width="156" height="112" rx="4" fill="url(#housing)" stroke="#819590" stroke-width="2"/>
+    <path d="M761 430V326H909" fill="none" stroke="#f2f6e9" stroke-width="3"/>
+    <path d="M764 331H805V371L805 371H764L764 371Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="784.5" cy="355" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="783.1" y="353.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+    <path d="M812 331H853V371L853 371H812L812 371Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="832.5" cy="355" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="831.1" y="353.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+    <path d="M860 331H901V363L893 371H868L860 363Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="880.5" cy="355" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="879.1" y="353.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+    <path d="M764 381H805V413L797 421H772L764 413Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="784.5" cy="405" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="783.1" y="403.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+    <path d="M812 381H853V413L845 421H820L812 413Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="832.5" cy="405" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="831.1" y="403.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+    <path d="M860 381H901V421L901 421H860L860 421Z" fill="url(#socket-well)" stroke="#e0e8dd" stroke-width="2.2"/><circle cx="880.5" cy="405" r="4.1" fill="url(#metal-pin)" stroke="#bac4b8" stroke-width=".8"/><rect x="879.1" y="403.6" width="2.8" height="2.8" fill="#4c5b5d"/>
+  </g>
+  <g><rect x="145" y="18" width="308" height="34" rx="5" fill="#b97700"/><text class="label" x="299" y="42" style="font-size:21px">拨码开关</text></g>
+  <g><rect x="145" y="65" width="230" height="34" rx="5" fill="#b97700"/><text class="label" x="260" y="89" style="font-size:20px">地址码</text></g>
+  <g><rect x="145" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="162.5" y="129" style="font-size:18px">1</text></g>
+  <g><rect x="184" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="201.5" y="129" style="font-size:18px">2</text></g>
+  <g><rect x="223" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="240.5" y="129" style="font-size:18px">4</text></g>
+  <g><rect x="262" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="279.5" y="129" style="font-size:18px">8</text></g>
+  <g><rect x="301" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="318.5" y="129" style="font-size:18px">16</text></g>
+  <g><rect x="340" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="357.5" y="129" style="font-size:18px">32</text></g>
+  <g><rect x="379" y="105" width="35" height="34" rx="5" fill="#53616c"/><text class="label" x="396.5" y="129" style="font-size:18px">RE</text></g>
+  <g><rect x="418" y="105" width="35" height="34" rx="5" fill="#53616c"/><text class="label" x="435.5" y="129" style="font-size:18px">TR</text></g>
+  <path class="leader" d="M299 139V157L281 321" stroke="#b97700"/><circle class="anchor" cx="281" cy="321" r="5.5" fill="#b97700"/>
+  <g><rect x="548" y="18" width="248" height="34" rx="5" fill="#7454a4"/><text class="label" x="672" y="42" style="font-size:21px">编码器信号</text></g>
+  <g><rect x="548" y="66" width="59" height="34" rx="5" fill="#d73535"/><text class="label" x="577.5" y="90" style="font-size:20px">V+</text></g>
+  <g><rect x="611" y="66" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="640.5" y="90" style="font-size:20px">FA−</text></g>
+  <g><rect x="674" y="66" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="703.5" y="90" style="font-size:20px">FB−</text></g>
+  <g><rect x="737" y="66" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="766.5" y="90" style="font-size:20px">FC−</text></g>
+  <g><rect x="548" y="105" width="59" height="34" rx="5" fill="#53616c"/><text class="label" x="577.5" y="129" style="font-size:20px">GND</text></g>
+  <g><rect x="611" y="105" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="640.5" y="129" style="font-size:20px">FA+</text></g>
+  <g><rect x="674" y="105" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="703.5" y="129" style="font-size:20px">FB+</text></g>
+  <g><rect x="737" y="105" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="766.5" y="129" style="font-size:20px">FC+</text></g>
+  <path class="leader" d="M672 139V157L666 346" stroke="#7454a4"/><circle class="anchor" cx="666" cy="346" r="5.5" fill="#7454a4"/>
+  <g><rect x="820" y="18" width="195" height="34" rx="5" fill="#008fb8"/><text class="label" x="917.5" y="42" style="font-size:21px">电机相线</text></g>
+  <g><rect x="820" y="66" width="62" height="34" rx="5" fill="#b97700"/><text class="label" x="851" y="90" style="font-size:20px">OT</text></g>
+  <g><rect x="886" y="66" width="62" height="34" rx="5" fill="#d73535"/><text class="label" x="917" y="90" style="font-size:20px">V+</text></g>
+  <g><rect x="952" y="66" width="62" height="34" rx="5" fill="#53616c"/><text class="label" x="983" y="90" style="font-size:20px">GND</text></g>
+  <g><rect x="820" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="851" y="129" style="font-size:20px">U</text></g>
+  <g><rect x="886" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="917" y="129" style="font-size:20px">V</text></g>
+  <g><rect x="952" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="983" y="129" style="font-size:20px">W</text></g>
+  <path class="leader" d="M917 139V157L835 317" stroke="#008fb8"/><circle class="anchor" cx="835" cy="317" r="5.5" fill="#008fb8"/>
+
+</svg>
