@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="566" viewBox="0 0 1080 566" role="img" aria-labelledby="title description">
-  <title id="title">PLD-V88-P48-400 电源与控制面接口图</title>
+  <title id="title">RLD-VB8-P48-400 电源与控制面接口图</title>
   <desc id="description">透明背景。电源上、下排均为 DC+、DC−；控制接口上排为 15V、DIN1、COM1、FO、485B，下排为 GND、NC、DIN2、COM2、485A；中部为指示灯和 UPDATE 升级接口；通信接口上排为 485B、485B、PE，下排为 485A、485A、PE。</desc>
   <defs>
     <linearGradient id="aluminum" x2="0" y2="1"><stop stop-color="#f5f6f7"/><stop offset=".42" stop-color="#e4e7e9"/><stop offset="1" stop-color="#cbd0d4"/></linearGradient>

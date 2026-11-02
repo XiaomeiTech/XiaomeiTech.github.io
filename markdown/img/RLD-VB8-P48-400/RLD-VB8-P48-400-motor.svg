@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1080" height="520" viewBox="0 0 1080 520" role="img" aria-labelledby="title description">
-  <title id="title">PLD-V88-P48-400 电机与编码器面接口图</title>
-  <desc id="description">透明背景。八位拨码依次为地址码 1、2、4、8、16、32，以及 RE、TR。编码器上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+。电机接口上排为 OT、V+、GND，下排为 U、V、W。</desc>
+  <title id="title">RLD-VB8-P48-400 电机与编码器面接口图</title>
+  <desc id="description">透明背景。八位拨码依次为地址码 1、2、4、8、16、32，以及 RE、TR；RE 为保留位（空），TR 为 120R 终端电阻开关。编码器上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+。电机接口上排为 OT1、V+、OT2，下排为 U、V、W。</desc>
   <defs>
     <linearGradient id="aluminum" x2="0" y2="1"><stop stop-color="#f5f6f7"/><stop offset=".42" stop-color="#e4e7e9"/><stop offset="1" stop-color="#cbd0d4"/></linearGradient>
     <linearGradient id="edge" x2="0" y2="1"><stop stop-color="#fafafa"/><stop offset="1" stop-color="#afb6bc"/></linearGradient>
@@ -72,6 +72,8 @@
   <g><rect x="340" y="105" width="35" height="34" rx="5" fill="#b97700"/><text class="label" x="357.5" y="129" style="font-size:18px">32</text></g>
   <g><rect x="379" y="105" width="35" height="34" rx="5" fill="#53616c"/><text class="label" x="396.5" y="129" style="font-size:18px">RE</text></g>
   <g><rect x="418" y="105" width="35" height="34" rx="5" fill="#53616c"/><text class="label" x="435.5" y="129" style="font-size:18px">TR</text></g>
+  <text x="396.5" y="100" fill="#4a5560" font-size="18" font-weight="700" text-anchor="middle">空</text>
+  <text x="435.5" y="100" fill="#4a5560" font-size="18" font-weight="700" text-anchor="middle">120R</text>
   <path class="leader" d="M299 139V157L281 321" stroke="#b97700"/><circle class="anchor" cx="281" cy="321" r="5.5" fill="#b97700"/>
   <g><rect x="548" y="18" width="248" height="34" rx="5" fill="#7454a4"/><text class="label" x="672" y="42" style="font-size:21px">编码器信号</text></g>
   <g><rect x="548" y="66" width="59" height="34" rx="5" fill="#d73535"/><text class="label" x="577.5" y="90" style="font-size:20px">V+</text></g>
@@ -84,9 +86,9 @@
   <g><rect x="737" y="105" width="59" height="34" rx="5" fill="#7454a4"/><text class="label" x="766.5" y="129" style="font-size:20px">FC+</text></g>
   <path class="leader" d="M672 139V157L666 346" stroke="#7454a4"/><circle class="anchor" cx="666" cy="346" r="5.5" fill="#7454a4"/>
   <g><rect x="820" y="18" width="195" height="34" rx="5" fill="#008fb8"/><text class="label" x="917.5" y="42" style="font-size:21px">电机相线</text></g>
-  <g><rect x="820" y="66" width="62" height="34" rx="5" fill="#b97700"/><text class="label" x="851" y="90" style="font-size:20px">OT</text></g>
+  <g><rect x="820" y="66" width="62" height="34" rx="5" fill="#b97700"/><text class="label" x="851" y="90" style="font-size:20px">OT1</text></g>
   <g><rect x="886" y="66" width="62" height="34" rx="5" fill="#d73535"/><text class="label" x="917" y="90" style="font-size:20px">V+</text></g>
-  <g><rect x="952" y="66" width="62" height="34" rx="5" fill="#53616c"/><text class="label" x="983" y="90" style="font-size:20px">GND</text></g>
+  <g><rect x="952" y="66" width="62" height="34" rx="5" fill="#b97700"/><text class="label" x="983" y="90" style="font-size:20px">OT2</text></g>
   <g><rect x="820" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="851" y="129" style="font-size:20px">U</text></g>
   <g><rect x="886" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="917" y="129" style="font-size:20px">V</text></g>
   <g><rect x="952" y="105" width="62" height="34" rx="5" fill="#008fb8"/><text class="label" x="983" y="129" style="font-size:20px">W</text></g>

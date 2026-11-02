@@ -102,7 +102,7 @@ const industrialSidebar = [
     text: '物流系统控制器',
     items: [
       { text: 'PE3237 小车控制器', link: '/custom/PE3237' },
-      { text: 'PLD-V88-P48-400 直驱伺服滚筒驱动器', link: '/custom/DC%20Servo%20Roller%20Driver' }
+      { text: 'RLD-VB8-P48-400 直驱伺服滚筒驱动器', link: '/custom/RLD-VB8-P48-400' }
     ]
   },
   {

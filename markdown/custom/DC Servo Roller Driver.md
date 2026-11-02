@@ -1,25 +1,25 @@
 ---
 aside: false
-description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控制器系列，采用 FOC 控制，支持速度闭环与位置闭环，可与 PE3237 小车控制器配套组成一套物流控制与驱动方案，也可分别使用。
+description: RLD-VB8-P48-400 直驱伺服滚筒驱动器，属于物流系统控制器系列，采用 FOC 控制，支持速度闭环与位置闭环，可与 PE3237 小车控制器配套组成一套物流控制与驱动方案，也可分别使用。
 ---
 
-# PLD-V88-P48-400 直驱伺服滚筒驱动器
+# RLD-VB8-P48-400 直驱伺服滚筒驱动器
 
-**PLD-V88-P48-400 直驱伺服滚筒驱动器**属于**物流系统控制器**系列，面向物流分拣、输送线及 AGV 等自动化输送场景，采用 **FOC（磁场定向控制）**算法，为有感无刷滚筒电机提供速度闭环与位置闭环控制。支持 **24V 200W 或 48V 400W** 功率输出，采用铝合金外壳散热，并提供 RS485 通信与控制信号接口，便于接入现场控制系统。
+**RLD-VB8-P48-400 直驱伺服滚筒驱动器**属于**物流系统控制器**系列，面向物流分拣、输送线及 AGV 等自动化输送场景，采用 **FOC（磁场定向控制）**算法，为有感无刷滚筒电机提供速度闭环与位置闭环控制。支持 **24V 200W 或 48V 400W** 功率输出，采用铝合金外壳散热，并提供 RS485 通信与控制信号接口，便于接入现场控制系统。
 
 ## 外观与接口定义
 
 <figure class="roller-pinout">
   <figcaption><strong>电源与控制面</strong><span>电源 · 控制接口 · 指示灯 · 升级 · 通信</span></figcaption>
   <div class="roller-pinout-frame">
-    <img src="../img/PLD-V88-P48-400/PLD-V88-P48-400-control.svg" width="1080" height="566" alt="电源与控制面：左侧四位电源接口，上下排均为 DC+、DC−；控制接口上排为 15V、DIN1、COM1、FO、485B，下排为 GND、NC、DIN2、COM2、485A；其右侧依次为指示灯、UPDATE 升级接口和六位通信接口，通信接口上排为 485B、485B、PE，下排为 485A、485A、PE。" />
+    <img src="../img/RLD-VB8-P48-400/RLD-VB8-P48-400-control.svg" width="1080" height="566" alt="电源与控制面：左侧四位电源接口，上下排均为 DC+、DC−；控制接口上排为 15V、DIN1、COM1、FO、485B，下排为 GND、NC、DIN2、COM2、485A；其右侧依次为指示灯、UPDATE 升级接口和六位通信接口，通信接口上排为 485B、485B、PE，下排为 485A、485A、PE。" />
   </div>
 </figure>
 
 <figure class="roller-pinout">
   <figcaption><strong>电机与编码器面</strong><span>拨码开关 · 编码器信号 · 电机相线</span></figcaption>
   <div class="roller-pinout-frame">
-    <img src="../img/PLD-V88-P48-400/PLD-V88-P48-400-motor.svg" width="1080" height="520" alt="电机与编码器面：左侧八位拨码依次标为 1、2、4、8、16、32、RE、TR；编码器接口上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+；电机接口上排为 OT、V+、GND，下排为 U、V、W。" />
+    <img src="../img/RLD-VB8-P48-400/RLD-VB8-P48-400-motor.svg" width="1080" height="520" alt="电机与编码器面：左侧八位拨码依次标为 1、2、4、8、16、32、RE、TR；编码器接口上排为 V+、FA−、FB−、FC−，下排为 GND、FA+、FB+、FC+；电机接口上排为 OT1、V+、OT2，下排为 U、V、W。" />
   </div>
 </figure>
 
@@ -38,16 +38,26 @@ description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控
 | 接口 | 上排（从左至右） | 下排（从左至右） |
 | --- | --- | --- |
 | 编码器信号 | V+ / FA− / FB− / FC− | GND / FA+ / FB+ / FC+ |
-| 电机相线 | OT / V+ / GND | U / V / W |
+| 电机相线 | OT1 / V+ / OT2 | U / V / W |
 
-8 位拨码从左至右的标识为 **1、2、4、8、16、32、RE、TR**，其中前六位为地址码。RE、TR 和 OT 沿用机壳丝印标识。
+8 位拨码从左至右的标识为 **1、2、4、8、16、32、RE、TR**，各位含义如下：
+
+| 位 | 标识 | 含义 |
+| :--- | :--- | :--- |
+| 1–6 | 1 / 2 / 4 / 8 / 16 / 32 | 地址码权重位，按位叠加得到设备地址 |
+| 7 | **RE** | **Reserved**，保留位，保持关闭 |
+| 8 | **TR** | **终端电阻开关**，用于 RS485 总线末端阻抗匹配 |
+
+**地址规则**：地址 `0` 为**广播地址**，设备地址设置为 **1–31**，因此地址码按 1、2、4、8、16 叠加，权重位 32 保持关闭。
+
+图中 **RE**、**TR** 与电机接口 **OT1 / OT2** 沿用机壳丝印标识。
 
 ## 配套与独立使用
 
-**[PE3237 小车控制器](./PE3237)**与 **PLD-V88-P48-400 直驱伺服滚筒驱动器**可配套组成**一套物流控制与驱动方案，也可根据应用需求分别使用**。
+**[PE3237 小车控制器](./PE3237)**与 **RLD-VB8-P48-400 直驱伺服滚筒驱动器**可配套组成**一套物流控制与驱动方案，也可根据应用需求分别使用**。
 
-- **配套使用**：PLC 通过 PROFINET 连接 PE3237，PE3237 通过 RS485 与 PLD-V88-P48-400 通信，由驱动器完成滚筒电机的速度或位置控制。
-- **独立使用**：PE3237 可连接其他采用匹配驱动协议的 RS485 设备；PLD-V88-P48-400 可通过自身控制接口接入其他控制系统。接入时需匹配通信协议与接口参数。
+- **配套使用**：PLC 通过 PROFINET 连接 PE3237，PE3237 通过 RS485 与 RLD-VB8-P48-400 通信，由驱动器完成滚筒电机的速度或位置控制。
+- **独立使用**：PE3237 可连接其他采用匹配驱动协议的 RS485 设备；RLD-VB8-P48-400 可通过自身控制接口接入其他控制系统。接入时需匹配通信协议与接口参数。
 
 ## 应用
 
@@ -71,7 +81,7 @@ description: PLD-V88-P48-400 直驱伺服滚筒驱动器，属于物流系统控
 .roller-pinout figcaption strong { color: var(--vp-c-text-1); font-size: 18px; }
 .roller-pinout figcaption span { color: var(--vp-c-text-2); font-size: 13px; }
 @media (max-width: 640px) {
-  .roller-pinout { width: 100vw; margin: 20px calc(50% - 50vw); }
+  .roller-pinout { width: auto; margin: 20px -24px; }
   .roller-pinout figcaption { margin-bottom: 8px; padding: 0 20px; }
   .roller-pinout figcaption strong { font-size: 16px; }
 }
