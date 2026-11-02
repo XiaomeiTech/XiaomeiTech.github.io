@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="432" viewBox="0 664 1040 432" role="img" aria-labelledby="title description">
+  <title id="title">PE3237 小车控制器背面接口定义</title>
+  <desc id="description">透明背景，保留设备和接口引线。120R 为终端电阻拨码开关，按 2 / 1 标注。五位 RS485 端子从左到右为 COM2 A、COM2 B、GND、COM1 A、COM1 B。</desc>
+  <defs>
+    <linearGradient id="aluminum" x2="0" y2="1">
+      <stop stop-color="#f5f6f7"/>
+      <stop offset=".42" stop-color="#e4e7e9"/>
+      <stop offset="1" stop-color="#cbd0d4"/>
+    </linearGradient>
+    <linearGradient id="edge" x2="0" y2="1">
+      <stop stop-color="#fafafa"/>
+      <stop offset="1" stop-color="#afb6bc"/>
+    </linearGradient>
+    <linearGradient id="terminal" x2="1" y2="0">
+      <stop stop-color="#e4e8eb"/>
+      <stop offset=".5" stop-color="#c1c8ce"/>
+      <stop offset="1" stop-color="#a6afb6"/>
+    </linearGradient>
+    <pattern id="hatching" width="7" height="7" patternUnits="userSpaceOnUse">
+      <path d="M-2 2 2-2M0 7 7 0M5 9 9 5" fill="none" stroke="#66717a" stroke-opacity=".12" stroke-width=".8"/>
+    </pattern>
+    <g id="screw">
+      <circle r="25" fill="#b7bec3" stroke="#30383e" stroke-width="2.5"/>
+      <circle r="21" fill="url(#edge)" stroke="#f8fafb" stroke-width="2"/>
+      <path d="M-4-13H4V-4H13V4H4V13H-4V4H-13V-4H-4Z" fill="#69737b" stroke="#30383e" stroke-width="1.8" stroke-linejoin="round"/>
+    </g>
+    <!-- Reusable aluminum faceplate, including the extrusion feet. -->
+    <g id="panel">
+      <path d="M76 240 23 259Q16 262 16 269V279H1024V269Q1024 262 1017 259L964 240Z" fill="url(#edge)" stroke="#30383e" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M19 269H1021" stroke="#fff" stroke-width="2"/>
+      <ellipse cx="48" cy="263" rx="14" ry="4.5" fill="#818b94" stroke="#30383e" stroke-width="1.5"/>
+      <ellipse cx="992" cy="263" rx="14" ry="4.5" fill="#818b94" stroke="#30383e" stroke-width="1.5"/>
+      <rect x="74" width="892" height="280" rx="30" fill="url(#edge)" stroke="#30383e" stroke-width="3"/>
+      <rect x="81" y="7" width="878" height="266" rx="24" fill="url(#aluminum)" stroke="#65717a" stroke-width="1.5"/>
+      <rect x="84" y="10" width="872" height="260" rx="22" fill="url(#hatching)"/>
+      <path d="M100 12H940M88 34V245" fill="none" stroke="#fff" stroke-width="2"/>
+      <use href="#screw" x="113" y="37"/>
+      <use href="#screw" x="927" y="37"/>
+      <use href="#screw" x="113" y="243"/>
+      <use href="#screw" x="927" y="243"/>
+    </g>
+    <!-- One spring-clamp terminal, 58 px pitch. -->
+    <g id="terminal-position">
+      <rect width="58" height="138" fill="url(#terminal)" stroke="#68747d" stroke-width="1.5"/>
+      <path d="M3 134V3H55" fill="none" stroke="#f8fafc" stroke-width="2"/>
+      <circle cx="29" cy="25" r="10" fill="#28323a" stroke="#e6ebee" stroke-width="2"/>
+      <rect x="10" y="49" width="38" height="25" rx="2" fill="#f1f3f5" stroke="#66727b" stroke-width="1.5"/>
+      <rect x="16" y="55" width="26" height="12" fill="#9da8b0" stroke="#414d56" stroke-width="1.5"/>
+      <circle cx="29" cy="105" r="18" fill="#3b454d" stroke="#e0e5e8" stroke-width="2"/>
+      <circle cx="29" cy="105" r="12" fill="#121a20"/>
+    </g>
+    <g id="led">
+      <circle r="14" fill="#26332c" stroke="#23312b" stroke-width="2"/>
+      <circle r="10.5" fill="currentColor" stroke="#fff" stroke-opacity=".7" stroke-width="1.5"/>
+      <circle cx="-3.5" cy="-3.5" r="3" fill="#fff" opacity=".85"/>
+    </g>
+    <style>
+      text { font-family: 'HarmonyOS Sans SC', 'Microsoft YaHei', 'Noto Sans CJK SC', Arial, sans-serif; }
+      .label { fill: #fff; font-size: 24px; font-weight: 700; text-anchor: middle; }
+      .leader { fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .anchor { stroke: #fff; stroke-width: 2; }
+    </style>
+  </defs>
+  <g id="rear">
+    <use href="#panel" y="806"/>
+
+    <g id="termination-switch">
+      <rect x="486" y="900" width="78" height="139" rx="2" fill="#28323a" stroke="#30383e" stroke-width="3"/>
+      <rect x="492" y="911" width="66" height="123" fill="#bc3035" stroke="#ee6868" stroke-width="1.5"/>
+      <rect x="500" y="921" width="20" height="52" fill="#57252a" stroke="#202d36" stroke-width="2"/>
+      <rect x="532" y="921" width="20" height="52" fill="#57252a" stroke="#202d36" stroke-width="2"/>
+      <rect x="502" y="923" width="16" height="33" rx="2" fill="url(#edge)" stroke="#fff"/>
+      <rect x="534" y="923" width="16" height="33" rx="2" fill="url(#edge)" stroke="#fff"/>
+      <g fill="#fff" font-size="20" text-anchor="middle">
+        <text x="510" y="996">1</text>
+        <text x="542" y="996">2</text>
+        <text x="526" y="1023">ON</text>
+      </g>
+    </g>
+
+    <rect x="619" y="870" width="300" height="148" rx="2" fill="#414e57" stroke="#30383e" stroke-width="3"/>
+    <use href="#terminal-position" x="624" y="875"/>
+    <use href="#terminal-position" x="682" y="875"/>
+    <use href="#terminal-position" x="740" y="875"/>
+    <use href="#terminal-position" x="798" y="875"/>
+    <use href="#terminal-position" x="856" y="875"/>
+
+    <g class="leader">
+      <path d="M525 768V907" stroke="#b97700"/>
+      <path d="M653 788V900M711 788V900M827 788V900M885 788V900" stroke="#008fb8"/>
+      <path d="M769 788V900" stroke="#53616c"/>
+      <path d="M653 737V731Q653 724 660 724H675Q682 724 682 716Q682 724 689 724H704Q711 724 711 731V737M827 737V731Q827 724 834 724H849Q856 724 856 716Q856 724 863 724H878Q885 724 885 731V737" stroke="#008fb8"/>
+    </g>
+    <g class="anchor">
+      <circle cx="525" cy="907" r="6" fill="#b97700"/>
+      <circle cx="653" cy="900" r="6" fill="#008fb8"/>
+      <circle cx="711" cy="900" r="6" fill="#008fb8"/>
+      <circle cx="769" cy="900" r="6" fill="#53616c"/>
+      <circle cx="827" cy="900" r="6" fill="#008fb8"/>
+      <circle cx="885" cy="900" r="6" fill="#008fb8"/>
+    </g>
+
+    <rect x="477" y="696" width="96" height="72" rx="6" fill="#f5c946"/>
+    <g fill="#352b13" font-size="25" font-weight="700" text-anchor="middle">
+      <text x="525" y="725">120R</text>
+      <text x="525" y="755" font-size="23">2 | 1</text>
+    </g>
+    <g fill="#008fb8">
+      <rect x="620" y="674" width="124" height="40" rx="6"/>
+      <rect x="794" y="674" width="124" height="40" rx="6"/>
+      <rect x="632" y="748" width="42" height="40" rx="5"/>
+      <rect x="690" y="748" width="42" height="40" rx="5"/>
+      <rect x="806" y="748" width="42" height="40" rx="5"/>
+      <rect x="864" y="748" width="42" height="40" rx="5"/>
+    </g>
+    <rect x="739" y="748" width="60" height="40" rx="5" fill="#53616c"/>
+    <g class="label">
+      <text x="682" y="703">COM2</text>
+      <text x="856" y="703">COM1</text>
+      <text x="653" y="777">A</text>
+      <text x="711" y="777">B</text>
+      <text x="769" y="776" style="font-size: 21px">GND</text>
+      <text x="827" y="777">A</text>
+      <text x="885" y="777">B</text>
+    </g>
+  </g>
+</svg>
