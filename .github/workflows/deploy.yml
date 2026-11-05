@@ -157,8 +157,26 @@ jobs:
           # 目标路径从 Secret 获取（安全）
           TARGET_DIR="${{ env.TENCENT_TARGET }}"
 
-          # 同步文件（不处理权限，您已在服务器预设好）
-          rsync -avz --compress --compress-level=6 --delete \
+          SSH_OPTS=(-i ~/.ssh/deploy.key -p "$TENCENT_PORT" -o StrictHostKeyChecking=no -o ConnectTimeout=20)
+          REMOTE="${{ env.TENCENT_USER }}@${{ env.TENCENT_HOST }}"
+
+          # 目标目录自检：不存在则创建，并确认当前用户可写（提前暴露权限问题，而不是让 rsync 报 code 23）
+          echo "🔍 检查远程目标目录: $TARGET_DIR"
+          ssh -n "${SSH_OPTS[@]}" "$REMOTE" "
+            set -e
+            mkdir -p \"$TARGET_DIR\"
+            ls -ld \"$TARGET_DIR\"
+            test -w \"$TARGET_DIR\" || { echo '❌ 目标目录不可写，请检查属主/权限'; exit 1; }
+          "
+
+          # 同步文件（不处理权限/属主，您已在服务器预设好）
+          # /.well-known/ 由服务器上的证书工具（certbot / acme.sh / nginx）托管且属 root，
+          # 必须 exclude，否则 --delete 删除失败会让 rsync 以 code 23 退出。
+          rsync -rltvz --compress-level=6 --delete --itemize-changes \
+            --exclude='/.well-known/' \
             -e "ssh -i ~/.ssh/deploy.key -p $TENCENT_PORT -o StrictHostKeyChecking=no -o ConnectTimeout=20" \
             ./site-dist/ \
-            ${{ env.TENCENT_USER }}@${{ env.TENCENT_HOST }}:"$TARGET_DIR"
+            "$REMOTE":"$TARGET_DIR"
+
+          echo "✅ 已同步到 $REMOTE:$TARGET_DIR"
+        shell: bash
