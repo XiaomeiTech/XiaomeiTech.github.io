@@ -7,7 +7,7 @@ hero:
   text: "尽小者大 见微者美"
   tagline: "以 Pexus 标准自动化控制平台与行业深度定制能力，服务制造业现场连接、数据采集与系统集成，为企业提供稳定、安全、可持续演进的技术底座。"
   image:
-    src: /logo/xm-logo-renew.png
+    src: /logo/xmlogo20261109.svg
     alt: 小美技术 Logo
   actions:
     - theme: brand

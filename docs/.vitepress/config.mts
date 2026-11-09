@@ -187,7 +187,7 @@ defineConfig({
   title: "小美技术",
   description: "Pexus 标准自动化控制平台与工业数字化解决方案",
   head: [
-    ['link', { rel: 'icon', href: '/logo/xm-logo-renew.png' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo/xmlogo20261109.svg' }],
     ['script', { type: 'module', src: '/js/model-viewer.min.js' }],
     ['script', { src: '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', async: true }],
     ['script', {}, `
@@ -242,7 +242,7 @@ defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: '小美技术',
     logo: {
-      src: '/logo/xm-logo-renew.png',
+      src: '/logo/xmlogo20261109.svg',
       alt: '小美技术 Logo'
     },
 

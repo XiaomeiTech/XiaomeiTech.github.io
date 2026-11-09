@@ -220,3 +220,18 @@ html.dark img[src^="data:image/svg"] {
   font-size: 72px;
   line-height: 1.05;
 }
+
+/* --- Cloudflare trace 结果表：沿用默认表格样式，仅让长值换行 --- */
+.VPDoc .trace-table table {
+  width: 100%;
+}
+
+.VPDoc .trace-table code {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.VPDoc .trace-table .trace-label {
+  margin-right: 8px;
+  color: var(--vp-c-text-2);
+}

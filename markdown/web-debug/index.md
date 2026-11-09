@@ -1,37 +1,75 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
-// 原始数据
-const traceResult = ref('正在获取 Cloudflare trace 信息...')
-// 解析后数据
-const parsedData = ref({})
+// trace 常见字段的中文说明，未知字段只显示原始键名
+const FIELD_LABELS = {
+  fl: '节点编号',
+  h: '访问主机',
+  ip: '客户端 IP',
+  ts: '访问时间',
+  visit_scheme: '访问协议',
+  uag: '客户端 UA',
+  colo: 'Cloudflare 机房',
+  sliver: '机房分布',
+  http: 'HTTP 版本',
+  loc: '客户端地区',
+  tls: 'TLS 版本',
+  sni: 'SNI',
+  warp: 'WARP 状态',
+  gateway: 'Gateway',
+  rbi: '远程浏览器隔离',
+  kex: '密钥交换'
+}
 
-onMounted(() => {
-  // 强制获取当前网站 /cdn-cgi/trace
-  const url = new URL('/cdn-cgi/trace', window.location.origin).href
+const traceResult = ref('')
+const fields = ref([])
+const status = ref('loading') // loading | success | empty | error
+const errorText = ref('')
 
-  fetch(url)
-    .then(response => {
-      if (!response.ok) throw new Error('当前网站未接入 Cloudflare')
-      return response.text()
+function formatTime(raw) {
+  const seconds = Number(raw)
+  if (!Number.isFinite(seconds) || seconds <= 0) return raw
+  return new Date(seconds * 1000).toLocaleString()
+}
+
+// trace 响应是每行 key=value；本地开发未经过 Cloudflare 时会返回 HTML，需要过滤掉
+function parseTrace(text) {
+  return text
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => /^[A-Za-z0-9_]+=/.test(line))
+    .map(line => {
+      const at = line.indexOf('=')
+      const key = line.slice(0, at)
+      const raw = line.slice(at + 1)
+      return {
+        key,
+        label: FIELD_LABELS[key] ?? '',
+        value: key === 'ts' ? formatTime(raw) : raw
+      }
     })
-    .then(data => {
-      traceResult.value = data
+}
 
-      // 自动解析
-      let obj = {}
-      data.split('\n').forEach(line => {
-        if (line.includes('=')) {
-          let [k, v] = line.split('=')
-          obj[k.trim()] = v.trim()
-        }
-      })
-      parsedData.value = obj
+async function loadTrace() {
+  status.value = 'loading'
+  try {
+    const response = await fetch(new URL('/cdn-cgi/trace', window.location.origin), {
+      headers: { accept: 'text/plain' }
     })
-    .catch(error => {
-      traceResult.value = '获取失败: ' + error
-    })
-})
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+
+    const text = await response.text()
+    traceResult.value = text
+    fields.value = parseTrace(text)
+    status.value = fields.value.length ? 'success' : 'empty'
+  } catch (error) {
+    traceResult.value = ''
+    errorText.value = error instanceof Error ? error.message : String(error)
+    status.value = 'error'
+  }
+}
+
+onMounted(loadTrace)
 </script>
 
 ## 3D 模型调试
@@ -41,26 +79,51 @@ onMounted(() => {
 ## [Cloudflare Test](/cdn-cgi/trace) Result
 
 ### 🔍 解析后信息
-<div style="margin:1em 0; border:1px solid #eee; border-radius:6px; overflow:hidden;">
-  <div v-for="(val, key) in parsedData" :key="key" style="display:flex; flex-wrap:wrap; padding:10px 14px; border-bottom:1px solid #eee; background:#fafafa;">
-    <span style="font-weight:600; min-width:100px; color:#2c3e50;">{{ key }}:</span>
-    <span style="color:#3498db; flex:1; word-break:break-all;">{{ val }}</span>
-  </div>
+
+<div v-if="status === 'loading'" class="tip custom-block">
+  <p class="custom-block-title">获取中</p>
+  <p>正在读取 <code>/cdn-cgi/trace</code> …</p>
+</div>
+
+<div v-else-if="status === 'success'" class="trace-table">
+  <table>
+    <thead>
+      <tr>
+        <th>项目</th>
+        <th>值</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="field in fields" :key="field.key">
+        <td>
+          <span v-if="field.label" class="trace-label">{{ field.label }}</span>
+          <code>{{ field.key }}</code>
+        </td>
+        <td><code>{{ field.value }}</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div v-else-if="status === 'empty'" class="warning custom-block">
+  <p class="custom-block-title">未获取到 trace 数据</p>
+  <p>当前站点未经过 Cloudflare 代理（本地开发时属于正常现象），因此没有可解析的字段。</p>
+</div>
+
+<div v-else class="danger custom-block">
+  <p class="custom-block-title">获取失败</p>
+  <p>{{ errorText }}</p>
 </div>
 
 ### 📄 原始数据
-<pre
-  style="
-    white-space: pre-wrap;
-    word-break: break-all;
-    padding: 1rem;
-    border-radius: 6px;
-    line-height: 1.6;
-    background: #f7f7f7;
-  "
->
-{{ traceResult }}
-</pre>
+
+<details v-if="traceResult" class="details custom-block">
+  <summary>展开原始响应（{{ traceResult.length }} 字符）</summary>
+  <div class="language-text">
+    <pre><code>{{ traceResult }}</code></pre>
+  </div>
+</details>
+<p v-else>暂无原始数据。</p>
 
 ## Syntax Highlighting
 
