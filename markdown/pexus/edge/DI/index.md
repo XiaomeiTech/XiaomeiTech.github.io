@@ -8,4 +8,11 @@ aside: false
 
 <IoSelectionTable category="DI" />
 
+## 系列文档
+
+16 通道与 32 通道共用一份系列说明，默认以 32 通道版本讲解。型号中的 `x=4` 表示 32 通道，`x=2` 表示 16 通道。
+
+- [EM1x30 双向输入模块](./EM1x30.md)
+- [EM1x30P 双向输入模块（性能型）](./EM1x30P.md)
+
 [查看全部扩展模块](../Expansion/)

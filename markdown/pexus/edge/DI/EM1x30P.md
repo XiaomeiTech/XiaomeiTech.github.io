@@ -1,0 +1,25 @@
+# EM1x30P 数字量输入模块
+
+32 / 16 通道 · 双向输入 · 性能型
+
+本页以 **32 通道版本 EM1430P** 为例讲解，同时适用于 **16 通道版本 EM1230P**。系列名称中的 `x` 为通道数代码：`4` 表示 32 通道，`2` 表示 16 通道。
+
+16 通道版本参照本页的通用说明使用，接线和通道配置以实际产品的 16 路端子定义为准。
+
+## 产品参数
+
+<div class="edge-spec-table" data-module-kind="DI">
+
+| 参数 | EM1430P（讲解示例） | EM1230P |
+| :--- | :--- | :--- |
+| 模块类型 | <ModuleBadge kind="DI" /> 数字量输入 | <ModuleBadge kind="DI" /> 数字量输入 |
+| 通道数 | <span class="channel-badge" data-channels="32">32</span> | <span class="channel-badge" data-channels="16">16</span> |
+| 电气类型 | 双向输入 | 双向输入 |
+| 性能型 | 性能型 | 性能型 |
+| 产品状态 | 未发布 | 未发布 |
+| 连接方式 | EM 背板总线 | EM 背板总线 |
+| 配套设备 | IM 耦合器 | IM 耦合器 |
+
+</div>
+
+[查看数字量输入模块](./) · [返回扩展模块选型表](../Expansion/)

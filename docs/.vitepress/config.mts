@@ -3,6 +3,7 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 import { fileURLToPath } from 'node:url'
 import container from 'markdown-it-container'
 import wavedromPlugin from './wavedrom.mts'
+import { ioModules } from './theme/components/ioModules'
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -126,6 +127,23 @@ defineConfig({
   base: siteBase,
   lastUpdated: true,
   ignoreDeadLinks: true,
+
+  // Keep published model URLs working without duplicating the series documents
+  // in local search or the Markdown-to-PDF pipeline.
+  buildEnd(siteConfig) {
+    for (const row of ioModules) {
+      if ((row.category !== 'DI' && row.category !== 'DO') || !row.href) continue
+      const target = `${siteConfig.site.base}${row.href.slice(1)}`
+      const legacyFile = path.join(siteConfig.outDir, 'pexus', 'edge', row.category, `${row.model}.html`)
+      fs.writeFileSync(legacyFile, `<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="0;url=${target}">
+<title>正在打开系列文档</title>
+<script>location.replace(${JSON.stringify(target)} + location.search + location.hash)</script>
+</head><body><p>文档已合并至<a href="${target}">系列使用说明</a>。</p></body></html>`, 'utf8')
+    }
+  },
 
   vite: {
     plugins: [
