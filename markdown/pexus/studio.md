@@ -1,6 +1,6 @@
 # Pack Studio 集成开发环境
 
-**Pack Studio** 是 Pexus 标准自动化控制平台的**集成开发环境（IDE）**，用于对 Pexus PAC 与 Pexus Edge 进行工程组态、逻辑编程、参数配置、调试与诊断。Pack Studio 面向工程师的日常开发，提供从"新建工程"到"上线运维"的一体化体验。
+**Pack Studio** 是 Pexus 的**集成开发环境（IDE）**，用于对 Pexus PAC 与 Pexus Edge 进行工程组态、逻辑编程、参数配置、调试与诊断。Pack Studio 面向工程师的日常开发，提供从"新建工程"到"上线运维"的一体化体验。
 
 ## 定位
 

@@ -10,9 +10,9 @@ import feederImage from '../../../../markdown/img/CM-SC15124-N.jpg'
 const solutions = [
   {
     icon: 'pexus',
-    title: 'Pexus 标准系列',
+    title: 'Pexus 自动化控制系统底座',
     subtitle: 'PAC + Edge + Studio + Runtime',
-    description: '标准化自动化控制平台：Pexus PAC 控制器与 Pexus Edge 远程IO，配套 Pack Studio 集成开发环境与 Pack Runtime 运行时，一站式构建整线控制系统。',
+    description: '符合IEC61131-3规范的可定制自动化控制系统底座，包含 Pexus PAC 控制器、Pexus Edge 远程 I/O、Pack Studio 与 Pack Runtime。',
     href: '/pexus/',
     src: profinetImage
   },

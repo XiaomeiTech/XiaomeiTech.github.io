@@ -5,20 +5,20 @@ layout: home
 hero:
   name: "小美技术"
   text: "尽小者大 见微者美"
-  tagline: "以 Pexus 标准自动化控制平台与行业深度定制能力，服务制造业现场连接、数据采集与系统集成，为企业提供稳定、安全、可持续演进的技术底座。"
+  tagline: "Pexus 是符合IEC61131-3规范的可定制自动化控制系统底座，面向制造业现场连接、数据采集与整线控制。"
   image:
     src: /logo/xmlogo20261109.svg
     alt: 小美技术 Logo
   actions:
     - theme: brand
-      text: 了解 Pexus 平台
+      text: 了解 Pexus
       link: /pexus/
     - theme: alt
       text: 工业控制器
       link: /custom/
 
 features:
-  - title: Pexus 标准系列
+  - title: Pexus 自动化控制系统底座
     details: 覆盖 Pexus PAC 控制器、Pexus Edge 远程 I/O 与 Pack Studio / Pack Runtime 软件工具链，标准化组件、平台化演进。
   - title: 工业控制器
     details: 飞达控制器、物流系统控制器与各类行业定制控制器/驱动器，从电路设计、嵌入式固件到结构开发，面向特定工艺快速交付。

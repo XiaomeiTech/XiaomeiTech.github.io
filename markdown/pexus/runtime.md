@@ -1,6 +1,6 @@
 # Pack Runtime 运行时
 
-**Pack Runtime** 是 Pexus 标准自动化控制平台的**实时运行内核**，承载由 Pack Studio 编译下发的控制工程，在 Pexus PAC 上执行逻辑调度、总线通信与 I/O 刷新，是连接"开发环境"与"现场设备"的执行底座。
+**Pack Runtime** 是 Pexus 的**实时运行内核**，承载由 Pack Studio 编译下发的控制工程，在 Pexus PAC 上执行逻辑调度、总线通信与 I/O 刷新，是连接"开发环境"与"现场设备"的执行底座。
 
 ## 定位
 

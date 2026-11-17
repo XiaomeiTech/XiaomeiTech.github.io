@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="332" height="730" viewBox="0 0 332 730" role="img" aria-labelledby="title desc">
   <title id="title">EM1430P 正面面板</title>
-  <desc id="desc">面板印字 EM1430，上方为 0.0 至 0.7 和 1.0 至 1.7，下方为 2.0 至 2.7 和 3.0 至 3.7。中间白色标志上方的 PWR/SYS 是 RUN 灯，标志下方的 ERROR 是 ERR 灯。底部电源端子左侧 24V，右侧 0V。</desc>
+  <desc id="desc">面板印字 EM1430，上方为 0.0 至 0.7 和 1.0 至 1.7，下方为 2.0 至 2.7 和 3.0 至 3.7。中间白色标志上方的 PWR/SYS 是 RUN 灯，标志下方的 ERROR 是 ERR 灯。底部左侧 COM 为 P0 / P1 公共端，右侧 COM 为 P2 / P3 公共端。</desc>
   <defs>
     <linearGradient id="housing">
       <stop stop-color="#85949d"/>
@@ -124,7 +124,7 @@
     <use href="#channel-pair" y="593.5"/>
     <text x="52" y="600.5">2.7</text><text x="155" y="600.5">3.7</text>
     <use href="#terminal-row" x="67" y="617"/>
-    <text x="52" y="628">24V</text><text x="155" y="628">0V</text>
+    <text x="52" y="628" font-size="10">COM</text><text x="155" y="628" font-size="10">COM</text>
     <text x="103" y="654" fill="#ff9c9c" font-size="13" letter-spacing=".6">DI×32-P/N</text>
   </g>
 
@@ -133,12 +133,13 @@
     <path d="M78 286V281H171L204 292H227" stroke="#269b63"/>
     <path d="M78 416V421H172L203 411H227" stroke="#ce525a"/>
     <path d="M170 510H227" stroke="#748390"/>
-    <path d="M139 636H198L213 629H227" stroke="#748390"/>
+    <path d="M82 639V643H198L213 629H227M117 639V643" stroke="#748390"/>
   </g>
   <g fill="#748390">
     <circle cx="170" cy="150" r="2.5"/>
     <circle cx="170" cy="510" r="2.5"/>
-    <circle cx="139" cy="636" r="2.5"/>
+    <circle cx="82" cy="639" r="2"/>
+    <circle cx="117" cy="639" r="2"/>
   </g>
   <text x="237" y="148" class="label" fill="#6b7e8b">P0 / P1</text>
   <text x="237" y="166" class="detail">普通 DI</text>
@@ -148,6 +149,7 @@
   <text x="237" y="427" class="detail">ERROR</text>
   <text x="237" y="508" class="label" fill="#6b7e8b">P2 / P3</text>
   <text x="237" y="526" class="detail">DI / 计数输入</text>
-  <text x="237" y="627" class="label" fill="#6b7e8b">24 V / 0 V</text>
-  <text x="237" y="645" class="detail">电源端子</text>
+  <text x="237" y="627" class="label" fill="#6b7e8b">COM</text>
+  <text x="237" y="645" class="detail">左：P0 / P1</text>
+  <text x="237" y="663" class="detail">右：P2 / P3</text>
 </svg>

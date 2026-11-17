@@ -1,67 +1,24 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 
-type Pattern = {
-  opacity: number
-  animation?: {
-    duration: string
-    values: string
-    keyTimes: string
-    mode: 'discrete' | 'linear'
-  }
-}
+type Pattern =
+  | { kind: 'on' | 'off' }
+  | { kind: 'breathe' | 'even' | 'single' | 'double'; periodMs: number }
 
-const on: Pattern = { opacity: 1 }
-const off: Pattern = { opacity: 0 }
-
-function blink(...intervals: number[]): Pattern {
-  const period = intervals.reduce((total, duration) => total + duration, 0)
-  let elapsed = 0
-  const keyTimes = [0, ...intervals.map(duration => {
-    elapsed += duration
-    return elapsed / period
-  })]
-  const values = intervals.map((_, index) => index % 2 === 0 ? 1 : 0)
-  return {
-    opacity: 0,
-    animation: {
-      duration: `${period}ms`,
-      values: [...values, values[values.length - 1]].join(';'),
-      keyTimes: keyTimes.join(';'),
-      mode: 'discrete',
-    },
-  }
-}
-
-function breathe(period: number): Pattern {
-  // Approximate the firmware's squared ramp with linear interpolation between samples.
-  const frames = 20
-  const phases = Array.from({ length: frames + 1 }, (_, index) => index / frames)
-  return {
-    opacity: 0,
-    animation: {
-      duration: `${period}ms`,
-      values: phases.map(phase => ((1 - Math.abs(2 * phase - 1)) ** 2).toFixed(2)).join(';'),
-      keyTimes: phases.join(';'),
-      mode: 'linear',
-    },
-  }
-}
-
-const regular = blink(200, 200)
-const singlePulse = blink(200, 1000)
-const runOptions = [
-  { label: 'INIT · IN 口有链路', pattern: breathe(2000) },
-  { label: 'INIT · IN 口无链路', pattern: breathe(500) },
+const regular: Pattern = { kind: 'even', periodMs: 400 }
+const singlePulse: Pattern = { kind: 'single', periodMs: 1200 }
+const runOptions: { label: string; pattern: Pattern }[] = [
+  { label: 'INIT · IN 口有链路', pattern: { kind: 'breathe', periodMs: 2000 } },
+  { label: 'INIT · IN 口无链路', pattern: { kind: 'breathe', periodMs: 500 } },
   { label: 'PREOP', pattern: regular },
   { label: 'SAFEOP', pattern: singlePulse },
-  { label: 'OP', pattern: on },
-  { label: 'BOOT / FoE', pattern: blink(50, 50) },
+  { label: 'OP', pattern: { kind: 'on' } },
+  { label: 'BOOT / FoE', pattern: { kind: 'even', periodMs: 100 } },
 ]
-const errorOptions = [
-  { label: '无 EtherCAT 错误', pattern: off },
+const errorOptions: { label: string; pattern: Pattern }[] = [
+  { label: '无 EtherCAT 错误', pattern: { kind: 'off' } },
   { label: '本地应用或同步错误', pattern: singlePulse },
-  { label: 'PDO 看门狗超时 0x001B', pattern: blink(200, 200, 200, 1000) },
+  { label: 'PDO 看门狗超时 0x001B', pattern: { kind: 'double', periodMs: 1600 } },
   { label: '其他 EtherCAT 状态错误', pattern: regular },
 ]
 
@@ -69,8 +26,8 @@ const run = ref(0)
 const err = ref(0)
 const playing = ref(true)
 const lamps = computed(() => [
-  { id: 'run', y: 287, color: '#61ec95', pattern: runOptions[run.value].pattern },
-  { id: 'err', y: 406, color: '#ff646c', pattern: errorOptions[err.value].pattern },
+  { id: 'run', selection: run.value, y: 287, color: '#61ec95', pattern: runOptions[run.value].pattern },
+  { id: 'err', selection: err.value, y: 406, color: '#ff646c', pattern: errorOptions[err.value].pattern },
 ])
 </script>
 
@@ -81,32 +38,23 @@ const lamps = computed(() => [
       <!-- Match the standalone faceplate's viewBox and LED window positions. -->
       <svg
         v-if="playing"
-        :key="`${run}-${err}`"
         class="lamp-overlay"
         viewBox="0 0 332 730"
         aria-hidden="true"
       >
         <rect
-          v-for="{ id, y, color, pattern } in lamps"
-          :key="id"
+          v-for="{ id, selection, y, color, pattern } in lamps"
+          :key="`${id}-${selection}`"
+          class="lamp"
+          :class="`lamp-${pattern.kind}`"
+          :style="'periodMs' in pattern ? { animationDuration: `${pattern.periodMs}ms` } : undefined"
           x="73"
           :y="y"
           width="10"
           height="9"
           rx="1"
           :fill="color"
-          :opacity="pattern.opacity"
-        >
-          <animate
-            v-if="pattern.animation"
-            attributeName="opacity"
-            :dur="pattern.animation.duration"
-            :values="pattern.animation.values"
-            :keyTimes="pattern.animation.keyTimes"
-            :calcMode="pattern.animation.mode"
-            repeatCount="indefinite"
-          />
-        </rect>
+        />
       </svg>
     </div>
     <div class="panel-controls">
@@ -150,6 +98,31 @@ const lamps = computed(() => [
 .panel-drawing { position: relative; align-self: center; }
 .panel-demo .panel-drawing :slotted(img) { display: block; width: 100%; height: auto; filter: none; }
 .lamp-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.lamp { opacity: 0; animation-iteration-count: infinite; animation-timing-function: steps(1, end); }
+.lamp-on { opacity: 1; }
+.lamp-even { animation-name: led-even; }
+.lamp-single { animation-name: led-single; }
+.lamp-double { animation-name: led-double; }
+.lamp-breathe { animation-name: led-breathe; }
+
+@keyframes led-even {
+  0% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes led-single {
+  0% { opacity: 1; }
+  16.666667%, 100% { opacity: 0; }
+}
+@keyframes led-double {
+  0%, 25% { opacity: 1; }
+  12.5%, 37.5%, 100% { opacity: 0; }
+}
+@keyframes led-breathe {
+  0% { opacity: 0; animation-timing-function: ease-in; }
+  50% { opacity: 1; animation-timing-function: ease-out; }
+  100% { opacity: 0; }
+}
+
 .panel-controls {
   display: grid;
   gap: 15px;

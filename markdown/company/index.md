@@ -4,7 +4,7 @@
 
 **小美技术（东莞）有限公司**创立于2025年，是一家专注于智能制造领域嵌入式产品定制开发的企业，专业从事工业驱控产品的研发、生产与销售。我们可针对不同生产场景和客户需求，提供定制化的驱动器、控制器、传感器等软硬件集成解决方案，目前已广泛应用于锂电制造、物流分拣、智能仓储等多个行业。
 
-公司立足工业自动化核心领域，围绕工业总线协议（EtherCAT、PROFINET、EtherNet/IP、Modbus 等）构建 **Pexus 标准自动化控制平台**（Pexus PAC 可编程自动化控制器、Pexus Edge 分布式远程 I/O，以及 Pack Studio 集成开发环境与 Pack Runtime 运行时），同时提供面向特定工艺的定制化控制器与行业专用模组，已在 3C 电子、新能源、汽车零部件等细分场景形成批量交付能力。
+公司立足工业自动化核心领域，围绕工业总线协议（EtherCAT、PROFINET、EtherNet/IP、Modbus 等）构建 **Pexus 自动化控制系统底座**（Pexus PAC 可编程自动化控制器、Pexus Edge 分布式远程 I/O，以及 Pack Studio 集成开发环境与 Pack Runtime 运行时），同时提供面向特定工艺的定制化控制器与行业专用模组，已在 3C 电子、新能源、汽车零部件等细分场景形成批量交付能力。
 
 小美技术坚持"工程化交付 + 标准化组件"的产品理念，从 PoC 验证到规模化落地，保障项目的一致性、稳定性与可维护性。
 
@@ -14,7 +14,7 @@
 
 ### 标准产品系列 · Pexus
 
-Pexus（Pack Automation Control Kernel Nexus）是小美技术的标准自动化控制平台，覆盖控制器、远程 I/O 与配套软件工具链：
+Pexus（Pack Automation Control Kernel Nexus）是小美技术符合IEC61131-3规范的可定制自动化控制系统底座，覆盖控制器、远程 I/O 与配套软件工具链：
 
 - **Pexus PAC**（Programmable Automation Controller）— 可编程自动化控制器（PLC），整机/整线主控
 - **Pexus Edge** — 分布式远程 I/O 系列，包含：

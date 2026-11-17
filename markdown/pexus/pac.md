@@ -1,6 +1,6 @@
 # Pexus PAC 可编程自动化控制器
 
-**Pexus PAC**（Programmable Automation Controller）是 Pexus 标准自动化控制平台的**主控核心**，定位为面向整机与整线场景的可编程自动化控制器（PLC）。它把逻辑控制、运动协同、现场总线调度与数据上送集成于一体，是 Pack Studio 工程与 Pack Runtime 运行的硬件载体。
+**Pexus PAC**（Programmable Automation Controller）是 Pexus 的**主控核心**，定位为面向整机与整线场景的可编程自动化控制器（PLC）。它把逻辑控制、运动协同、现场总线调度与数据上送集成于一体，是 Pack Studio 工程与 Pack Runtime 运行的硬件载体。
 
 ## 产品定位
 

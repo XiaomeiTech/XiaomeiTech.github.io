@@ -10,9 +10,9 @@ const slides = [
   {
     src: remoteIoSystemImage,
     label: 'Pexus',
-    title: 'Pexus 标准自动化控制平台',
-    description: 'Pexus PAC 控制器 + Pexus Edge 远程IO，配套 Pack Studio 与 Pack Runtime，一站式构建整线控制系统。',
-    ctaText: '了解 Pexus 平台',
+    title: 'Pexus 自动化控制系统底座',
+    description: '符合IEC61131-3规范，可按工艺需求定制，涵盖 Pexus PAC、Pexus Edge、Pack Studio 与 Pack Runtime。',
+    ctaText: '了解 Pexus',
     href: '/pexus/'
   },
   {
@@ -37,9 +37,9 @@ const relatedLinks = [
   {
     src: remoteIoSystemImage,
     label: 'Pexus',
-    title: 'Pexus 标准自动化控制平台',
-    description: 'PAC + Edge + Studio + Runtime，标准化、平台化的整线控制底座。',
-    ctaText: '了解 Pexus 平台',
+    title: 'Pexus 自动化控制系统底座',
+    description: '可按设备及整线工艺需求组合控制器、远程 I/O 与软件工具链。',
+    ctaText: '了解 Pexus',
     href: '/pexus/'
   },
   {

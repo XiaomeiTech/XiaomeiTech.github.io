@@ -31,7 +31,7 @@ function makeContainer(title: string): (tokens: any[], idx: number) => string {
 // 使 /pexus/ 与 /pexus/edge/、/custom/ 与 /feeder-controller/ 展示同一套导航。
 const pexusSidebar = [
   {
-    text: 'Pexus 标准自动化控制平台',
+    text: 'Pexus 自动化控制系统底座',
     items: [
       { text: '平台总览', link: '/pexus/' },
       { text: 'Pexus PAC 控制器', link: '/pexus/pac' },
@@ -203,7 +203,7 @@ defineConfig({
   },
 
   title: "小美技术",
-  description: "Pexus 标准自动化控制平台与工业数字化解决方案",
+  description: "Pexus 是符合IEC61131-3规范的可定制自动化控制系统底座",
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo/xmlogo20261109.svg' }],
     ['script', { type: 'module', src: '/js/model-viewer.min.js' }],

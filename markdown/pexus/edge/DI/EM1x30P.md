@@ -30,10 +30,10 @@ EM1430P 除数字量输入外，在本文所述独立 DI 固件下支持 PUL、A
 
 ## EM1430P 正面面板
 
-面板上方 P0 / P1 为普通 DI，下方 P2 / P3 可用作 DI 或配对计数输入。左下端子为 24 V，右下端子为 0 V。图中型号印字沿用实物的 **EM1430**。
+面板上方 P0 / P1 为普通 DI，下方 P2 / P3 可用作 DI 或配对计数输入。底部左侧 **COM** 是 P0 / P1 的公共端，右侧 **COM** 是 P2 / P3 的公共端。图中型号印字沿用实物的 **EM1430**。
 
 <Em1430pPanelDemo>
-  <img src="../../../img/EM1430P/EM1430P-front.svg" width="332" height="730" alt="EM1430P 正面面板，上方两列为 P0 和 P1，下方两列为 P2 和 P3。PWR/SYS 为 RUN，ERROR 为 ERR。底部左侧为 24 V，右侧为 0 V。" />
+  <img src="../../../img/EM1430P/EM1430P-front.svg" width="332" height="730" alt="EM1430P 正面面板，上方两列为 P0 和 P1，下方两列为 P2 和 P3。PWR/SYS 为 RUN，ERROR 为 ERR。底部左侧 COM 为 P0 / P1 公共端，右侧 COM 为 P2 / P3 公共端。" />
 </Em1430pPanelDemo>
 
 ## RUN / ERR 指示灯 {#status-leds}
