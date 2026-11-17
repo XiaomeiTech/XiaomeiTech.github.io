@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="752" height="470" viewBox="0 0 752 470" role="img" aria-labelledby="title desc">
+  <title id="title">EM1430P RUN / ERR 单周期灯语图</title>
+  <desc id="desc">每行显示一个周期，图中上轨为亮，下轨为灭；呼吸曲线为亮度示意。周期以该行的毫秒标注为准。常亮和常灭没有周期。</desc>
+  <style>
+    text { font-family: Arial, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    .label { fill: #172b3a; font-size: 14px; font-weight: 700; }
+    .rate, .time { fill: #4a5e6f; font-size: 12px; }
+    .guide { fill: none; stroke: #c4d0d8; stroke-dasharray: 3 4; }
+    .trace { fill: none; stroke: #08745b; stroke-width: 2.25; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <rect x=".5" y=".5" width="751" height="469" rx="10" fill="#f6f9fa" stroke="#c8d3da"/>
+  <text x="19" y="26" class="rate">状态 / 频率</text>
+  <text x="245" y="26" class="rate">单周期亮度（上：亮 · 下：灭）</text>
+  <g>
+    <text x="19" y="53" class="label">INIT · IN 有链路</text>
+    <text x="19" y="72" class="rate">0.5 Hz</text>
+    <path d="M245 48H721M245 65H721" class="guide"/>
+    <path d="M245 65 Q364 65 483 48 Q602 65 721 65" class="trace"/>
+    <path d="M245 68v4" stroke="#a0aeb9"/>
+    <text x="245" y="85" text-anchor="start" class="time">0</text>
+    <path d="M483 68v4" stroke="#a0aeb9"/>
+    <text x="483" y="85" text-anchor="middle" class="time">1000 ms</text>
+    <path d="M721 68v4" stroke="#a0aeb9"/>
+    <text x="721" y="85" text-anchor="end" class="time">2000 ms</text>
+  </g>
+  <g>
+    <text x="19" y="106" class="label">INIT · IN 无链路</text>
+    <text x="19" y="125" class="rate">2 Hz</text>
+    <path d="M245 101H721M245 118H721" class="guide"/>
+    <path d="M245 118 Q364 118 483 101 Q602 118 721 118" class="trace"/>
+    <path d="M245 121v4" stroke="#a0aeb9"/>
+    <text x="245" y="138" text-anchor="start" class="time">0</text>
+    <path d="M483 121v4" stroke="#a0aeb9"/>
+    <text x="483" y="138" text-anchor="middle" class="time">250 ms</text>
+    <path d="M721 121v4" stroke="#a0aeb9"/>
+    <text x="721" y="138" text-anchor="end" class="time">500 ms</text>
+  </g>
+  <g>
+    <text x="19" y="159" class="label">PREOP / 其他状态错误</text>
+    <text x="19" y="178" class="rate">2.5 Hz</text>
+    <path d="M245 154H721M245 171H721" class="guide"/>
+    <path d="M245 154H483V171H721" class="trace"/>
+    <path d="M245 174v4" stroke="#a0aeb9"/>
+    <text x="245" y="191" text-anchor="start" class="time">0</text>
+    <path d="M483 174v4" stroke="#a0aeb9"/>
+    <text x="483" y="191" text-anchor="middle" class="time">200 ms</text>
+    <path d="M721 174v4" stroke="#a0aeb9"/>
+    <text x="721" y="191" text-anchor="end" class="time">400 ms</text>
+  </g>
+  <g>
+    <text x="19" y="212" class="label">SAFEOP / 本地应用或同步错误</text>
+    <text x="19" y="231" class="rate">约 0.83 Hz</text>
+    <path d="M245 207H721M245 224H721" class="guide"/>
+    <path d="M245 207H324.3333333333333V224H721" class="trace"/>
+    <path d="M245 227v4" stroke="#a0aeb9"/>
+    <text x="245" y="244" text-anchor="start" class="time">0</text>
+    <path d="M324.3333333333333 227v4" stroke="#a0aeb9"/>
+    <text x="324.3333333333333" y="244" text-anchor="middle" class="time">200 ms</text>
+    <path d="M721 227v4" stroke="#a0aeb9"/>
+    <text x="721" y="244" text-anchor="end" class="time">1200 ms</text>
+  </g>
+  <g>
+    <text x="19" y="265" class="label">OP</text>
+    <text x="19" y="284" class="rate">常亮</text>
+    <path d="M245 260H721M245 277H721" class="guide"/>
+    <path d="M245 260H721" class="trace"/>
+
+  </g>
+  <g>
+    <text x="19" y="318" class="label">BOOT / FoE</text>
+    <text x="19" y="337" class="rate">10 Hz</text>
+    <path d="M245 313H721M245 330H721" class="guide"/>
+    <path d="M245 313H483V330H721" class="trace"/>
+    <path d="M245 333v4" stroke="#a0aeb9"/>
+    <text x="245" y="350" text-anchor="start" class="time">0</text>
+    <path d="M483 333v4" stroke="#a0aeb9"/>
+    <text x="483" y="350" text-anchor="middle" class="time">50 ms</text>
+    <path d="M721 333v4" stroke="#a0aeb9"/>
+    <text x="721" y="350" text-anchor="end" class="time">100 ms</text>
+  </g>
+  <g>
+    <text x="19" y="371" class="label">无 EtherCAT 错误</text>
+    <text x="19" y="390" class="rate">常灭</text>
+    <path d="M245 366H721M245 383H721" class="guide"/>
+    <path d="M245 383H721" class="trace"/>
+
+  </g>
+  <g>
+    <text x="19" y="424" class="label">PDO 看门狗超时 0x001B</text>
+    <text x="19" y="443" class="rate">0.625 Hz</text>
+    <path d="M245 419H721M245 436H721" class="guide"/>
+    <path d="M245 419H304.5V436H364V419H423.5V436H721" class="trace"/>
+    <path d="M245 439v4" stroke="#a0aeb9"/>
+    <text x="245" y="456" text-anchor="start" class="time">0</text>
+    <path d="M304.5 439v4" stroke="#a0aeb9"/>
+    <text x="304.5" y="456" text-anchor="middle" class="time">200 ms</text>
+    <path d="M364 439v4" stroke="#a0aeb9"/>
+    <text x="364" y="456" text-anchor="middle" class="time">400 ms</text>
+    <path d="M423.5 439v4" stroke="#a0aeb9"/>
+    <text x="423.5" y="456" text-anchor="middle" class="time">600 ms</text>
+    <path d="M721 439v4" stroke="#a0aeb9"/>
+    <text x="721" y="456" text-anchor="end" class="time">1600 ms</text>
+  </g>
+</svg>

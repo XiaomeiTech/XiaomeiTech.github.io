@@ -15,4 +15,6 @@ aside: false
 - [EM1x30 双向输入模块](./EM1x30.md)
 - [EM1x30P 双向输入模块（性能型）](./EM1x30P.md)
 
+EM1430P 独立 DI 的计数接线、四种模式示例及启动参数保存方法，见 [TwinCAT 3 计数配置](./EM1x30P.md#twincat-counter)。
+
 [查看全部扩展模块](../Expansion/)

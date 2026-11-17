@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="332" height="730" viewBox="0 0 332 730" role="img" aria-labelledby="title desc">
+  <title id="title">EM1430P 正面面板</title>
+  <desc id="desc">面板印字 EM1430，上方为 0.0 至 0.7 和 1.0 至 1.7，下方为 2.0 至 2.7 和 3.0 至 3.7。中间白色标志上方的 PWR/SYS 是 RUN 灯，标志下方的 ERROR 是 ERR 灯。底部电源端子左侧 24V，右侧 0V。</desc>
+  <defs>
+    <linearGradient id="housing">
+      <stop stop-color="#85949d"/>
+      <stop offset=".15" stop-color="#b7c1c7"/>
+      <stop offset=".77" stop-color="#8b9aa3"/>
+      <stop offset="1" stop-color="#637782"/>
+    </linearGradient>
+    <linearGradient id="face" x2=".7" y2="1">
+      <stop stop-color="#474a4f"/>
+      <stop offset="1" stop-color="#35383c"/>
+    </linearGradient>
+    <linearGradient id="socket" x2="0" y2="1">
+      <stop stop-color="#102812"/>
+      <stop offset=".68" stop-color="#20381b"/>
+      <stop offset="1" stop-color="#31482b"/>
+    </linearGradient>
+    <linearGradient id="contact" x2="0" y2="1">
+      <stop stop-color="#daddb4"/>
+      <stop offset=".55" stop-color="#89966a"/>
+      <stop offset="1" stop-color="#52654a"/>
+    </linearGradient>
+    <g id="port">
+      <path d="M3 2H26L33 7V16L28 21H4L1 17V6Z" fill="url(#socket)" stroke="#47663d"/>
+      <path d="M5 5H25M4 8V17" fill="none" stroke="#86ab61" stroke-opacity=".65"/>
+      <circle cx="15" cy="13" r="3.4" fill="#152416"/>
+      <path d="M13 13H17" stroke="url(#contact)" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+    <g id="terminal-row">
+      <use href="#port"/>
+      <use href="#port" x="35"/>
+    </g>
+    <g id="channel-pair" fill="#272d30" stroke="#626d70">
+      <rect x="48" y="10" width="8" height="9" rx="1"/>
+      <rect x="151" y="10" width="8" height="9" rx="1"/>
+    </g>
+    <style>
+      text { font-family: Arial, "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+      .imprint { fill: #f7f8f9; font-size: 11px; font-weight: 700; text-anchor: middle; }
+      .label { font-size: 17px; font-weight: 750; }
+      .detail { font-size: 14px; fill: #748390; }
+      .leader { fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+      @media (prefers-color-scheme: dark) { .detail { fill: #a6b4bf; } }
+    </style>
+  </defs>
+
+  <!-- Enclosure and mounting tabs, sized from the front-facing reference photo. -->
+  <path d="M4 4H37V31H195V699H34V727H3V708L25 648V113L4 38Z" fill="url(#housing)" stroke="#57666d" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M10 14H26V109L10 35Z" fill="#101214"/>
+  <path d="M10 718V709L26 651V718Z" fill="#101214"/>
+  <path d="M35 50Q35 34 49 33H193M31 648V105M38 695H191" fill="none" stroke="#d3dadd" stroke-opacity=".75" stroke-width="2"/>
+  <path d="M113 32V55M111 670V698" fill="none" stroke="#687780" stroke-width="1.6"/>
+  <path d="M174 68H194V693H174Z" fill="#687b86" opacity=".42"/>
+  <path d="M178 78H195M178 96H195M178 114H195M178 132H195M178 150H195M178 168H195M178 186H195M178 204H195M178 222H195" stroke="#29333b" stroke-width="8"/>
+
+  <!-- Faceplate, terminals and printed legends. -->
+  <rect x="38" y="54" width="132" height="615" rx="3" fill="url(#face)" stroke="#20272b" stroke-width="2"/>
+  <path d="M42 58H166M41 62V663" fill="none" stroke="#e6e6e0" stroke-opacity=".44"/>
+  <path d="M43 62H165M42 661H165" stroke="#f27677" stroke-width="5"/>
+
+  <g class="imprint">
+    <rect x="66" y="85" width="73" height="190" rx="1.5" fill="#badc8f" stroke="#121b14" stroke-width="2"/>
+    <use href="#terminal-row" x="67" y="87"/>
+    <use href="#channel-pair" y="87"/>
+    <text x="52" y="94">0.0</text><text x="155" y="94">1.0</text>
+    <use href="#terminal-row" x="67" y="110.5"/>
+    <use href="#channel-pair" y="110.5"/>
+    <text x="52" y="117.5">0.1</text><text x="155" y="117.5">1.1</text>
+    <use href="#terminal-row" x="67" y="134"/>
+    <use href="#channel-pair" y="134"/>
+    <text x="52" y="141">0.2</text><text x="155" y="141">1.2</text>
+    <use href="#terminal-row" x="67" y="157.5"/>
+    <use href="#channel-pair" y="157.5"/>
+    <text x="52" y="164.5">0.3</text><text x="155" y="164.5">1.3</text>
+    <use href="#terminal-row" x="67" y="181"/>
+    <use href="#channel-pair" y="181"/>
+    <text x="52" y="188">0.4</text><text x="155" y="188">1.4</text>
+    <use href="#terminal-row" x="67" y="204.5"/>
+    <use href="#channel-pair" y="204.5"/>
+    <text x="52" y="211.5">0.5</text><text x="155" y="211.5">1.5</text>
+    <use href="#terminal-row" x="67" y="228"/>
+    <use href="#channel-pair" y="228"/>
+    <text x="52" y="235">0.6</text><text x="155" y="235">1.6</text>
+    <use href="#terminal-row" x="67" y="251.5"/>
+    <use href="#channel-pair" y="251.5"/>
+    <text x="52" y="258.5">0.7</text><text x="155" y="258.5">1.7</text>
+    <rect id="run-window" x="72" y="286" width="12" height="11" rx="1.5" fill="#232a28" stroke="#717777"/>
+    <text x="88" y="296" text-anchor="start" font-size="12">PWR/SYS</text>
+    <g transform="translate(103 336) scale(.072)" fill="#fff">
+      <path d="M -228.89042 -211.5 L -145.75198 -355.5 A 9 9 0 0 1 -137.95775 -360 L 137.95775 -360 A 9 9 0 0 1 145.75198 -355.5 L 228.89042 -211.5 A 9 9 0 0 1 221.09619 -198 L 98.7269 -198 A 9 9 0 0 0 90.93267 -193.5 L 7.79423 -49.5 A 9 9 0 0 1 -7.79423 -49.5 L -90.93267 -193.5 A 9 9 0 0 0 -98.7269 -198 L -221.09619 -198 A 9 9 0 0 1 -228.89042 -211.5 Z"/>
+      <path d="M -280.85194 193.5 L -358.79423 58.5 A 9 9 0 0 1 -358.79423 49.5 L -239.28272 -157.5 A 9 9 0 0 1 -231.48849 -162 L -119.51151 -162 A 9 9 0 0 1 -111.71728 -157.5 L -23.38269 -4.5 A 9 9 0 0 1 -23.38269 4.5 L -111.71728 157.5 A 9 9 0 0 1 -127.30573 157.5 L -178.09808 69.52508 A 9 9 0 0 0 -193.68653 69.52508 L -265.26349 193.5 A 9 9 0 0 1 -280.85194 193.5 Z"/>
+      <path d="M 358.79423 58.5 L 280.85194 193.5 A 9 9 0 0 1 265.26349 193.5 L 193.68653 69.52508 A 9 9 0 0 0 178.09808 69.52508 L 127.30573 157.5 A 9 9 0 0 1 111.71728 157.5 L 23.38269 4.5 A 9 9 0 0 1 23.38269 -4.5 L 111.71728 -157.5 A 9 9 0 0 1 119.51151 -162 L 231.48849 -162 A 9 9 0 0 1 239.28272 -157.5 L 358.79423 49.5 A 9 9 0 0 1 358.79423 58.5 Z"/>
+      <path d="M 228.89042 211.5 L 145.75198 355.5 A 9 9 0 0 1 137.95775 360 L -137.95775 360 A 9 9 0 0 1 -145.75198 355.5 L -228.89042 211.5 A 9 9 0 0 1 -221.09619 198 L -98.7269 198 A 9 9 0 0 0 -90.93267 193.5 L -7.79423 49.5 A 9 9 0 0 1 7.79423 49.5 L 90.93267 193.5 A 9 9 0 0 0 98.7269 198 L 221.09619 198 A 9 9 0 0 1 228.89042 211.5 Z"/>
+    </g>
+    <text x="103" y="392" font-size="22" font-style="italic">EM1430</text>
+    <rect id="err-window" x="72" y="405" width="12" height="11" rx="1.5" fill="#292527" stroke="#717777"/>
+    <text x="88" y="415" text-anchor="start" font-size="12">ERROR</text>
+
+    <rect x="66" y="427" width="73" height="213" rx="1.5" fill="#badc8f" stroke="#121b14" stroke-width="2"/>
+    <use href="#terminal-row" x="67" y="429"/>
+    <use href="#channel-pair" y="429"/>
+    <text x="52" y="436">2.0</text><text x="155" y="436">3.0</text>
+    <use href="#terminal-row" x="67" y="452.5"/>
+    <use href="#channel-pair" y="452.5"/>
+    <text x="52" y="459.5">2.1</text><text x="155" y="459.5">3.1</text>
+    <use href="#terminal-row" x="67" y="476"/>
+    <use href="#channel-pair" y="476"/>
+    <text x="52" y="483">2.2</text><text x="155" y="483">3.2</text>
+    <use href="#terminal-row" x="67" y="499.5"/>
+    <use href="#channel-pair" y="499.5"/>
+    <text x="52" y="506.5">2.3</text><text x="155" y="506.5">3.3</text>
+    <use href="#terminal-row" x="67" y="523"/>
+    <use href="#channel-pair" y="523"/>
+    <text x="52" y="530">2.4</text><text x="155" y="530">3.4</text>
+    <use href="#terminal-row" x="67" y="546.5"/>
+    <use href="#channel-pair" y="546.5"/>
+    <text x="52" y="553.5">2.5</text><text x="155" y="553.5">3.5</text>
+    <use href="#terminal-row" x="67" y="570"/>
+    <use href="#channel-pair" y="570"/>
+    <text x="52" y="577">2.6</text><text x="155" y="577">3.6</text>
+    <use href="#terminal-row" x="67" y="593.5"/>
+    <use href="#channel-pair" y="593.5"/>
+    <text x="52" y="600.5">2.7</text><text x="155" y="600.5">3.7</text>
+    <use href="#terminal-row" x="67" y="617"/>
+    <text x="52" y="628">24V</text><text x="155" y="628">0V</text>
+    <text x="103" y="654" fill="#ff9c9c" font-size="13" letter-spacing=".6">DI×32-P/N</text>
+  </g>
+
+  <g class="leader">
+    <path d="M170 150H227" stroke="#748390"/>
+    <path d="M78 286V281H171L204 292H227" stroke="#269b63"/>
+    <path d="M78 416V421H172L203 411H227" stroke="#ce525a"/>
+    <path d="M170 510H227" stroke="#748390"/>
+    <path d="M139 636H198L213 629H227" stroke="#748390"/>
+  </g>
+  <g fill="#748390">
+    <circle cx="170" cy="150" r="2.5"/>
+    <circle cx="170" cy="510" r="2.5"/>
+    <circle cx="139" cy="636" r="2.5"/>
+  </g>
+  <text x="237" y="148" class="label" fill="#6b7e8b">P0 / P1</text>
+  <text x="237" y="166" class="detail">普通 DI</text>
+  <text x="237" y="290" class="label" fill="#269b63">RUN</text>
+  <text x="237" y="308" class="detail">PWR/SYS</text>
+  <text x="237" y="409" class="label" fill="#ce525a">ERR</text>
+  <text x="237" y="427" class="detail">ERROR</text>
+  <text x="237" y="508" class="label" fill="#6b7e8b">P2 / P3</text>
+  <text x="237" y="526" class="detail">DI / 计数输入</text>
+  <text x="237" y="627" class="label" fill="#6b7e8b">24 V / 0 V</text>
+  <text x="237" y="645" class="detail">电源端子</text>
+</svg>
