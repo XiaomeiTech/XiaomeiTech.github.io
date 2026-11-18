@@ -1,4 +1,4 @@
-﻿import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { fileURLToPath } from 'node:url'
 import container from 'markdown-it-container'
@@ -127,6 +127,29 @@ defineConfig({
   base: siteBase,
   lastUpdated: true,
   ignoreDeadLinks: true,
+
+  mermaid: {
+    theme: 'base',
+    look: 'handDrawn',
+    handDrawnSeed: 37,
+    fontFamily: '"HarmonyOS Sans SC", "Microsoft YaHei", sans-serif',
+    themeVariables: {
+      primaryColor: '#f9df91',
+      secondaryColor: '#bce8cf',
+      tertiaryColor: '#c4e5f8',
+      primaryBorderColor: '#323b50',
+      secondaryBorderColor: '#323b50',
+      tertiaryBorderColor: '#323b50',
+      primaryTextColor: '#202a41',
+      secondaryTextColor: '#202a41',
+      tertiaryTextColor: '#202a41',
+      mainBkg: '#f9df91',
+      nodeBorder: '#323b50',
+      nodeTextColor: '#202a41',
+      stateLabelColor: '#202a41',
+      clusterBorder: '#91939c',
+    },
+  },
 
   // Keep published model URLs working without duplicating the series documents
   // in local search or the Markdown-to-PDF pipeline.

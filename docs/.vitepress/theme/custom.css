@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+  src: url('../../public/fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+  src: url('../../public/fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: 'HarmonyOS Sans SC';
-  src: url('/fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+  src: url('../../public/fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
@@ -234,4 +234,60 @@ html.dark img[src^="data:image/svg"] {
 .VPDoc .trace-table .trace-label {
   margin-right: 8px;
   color: var(--vp-c-text-2);
+}
+
+.vp-doc .mermaid {
+  margin: 20px 0;
+  padding: clamp(12px, 3vw, 28px);
+  overflow-x: auto;
+}
+
+.vp-doc .mermaid > svg {
+  display: block;
+  height: auto;
+  margin-inline: auto;
+}
+
+/* Color Mermaid's default shapes and leave authored classes and fills in control. */
+.vp-doc .mermaid :is(.nodes, .block) > :is(.default, .statediagram-state):nth-child(4n + 1) {
+  --sketch-node-fill: #f9df91;
+}
+
+.vp-doc .mermaid :is(.nodes, .block) > :is(.default, .statediagram-state):nth-child(4n + 2) {
+  --sketch-node-fill: #bce8cf;
+}
+
+.vp-doc .mermaid :is(.nodes, .block) > :is(.default, .statediagram-state):nth-child(4n + 3) {
+  --sketch-node-fill: #c4e5f8;
+}
+
+.vp-doc .mermaid :is(.nodes, .block) > :is(.default, .statediagram-state):nth-child(4n) {
+  --sketch-node-fill: #f5c6dc;
+}
+
+.vp-doc .mermaid .nodes > :is(.rough-node.default, .statediagram-state)[data-look="handDrawn"] > .label-container:not([style*="fill:"]) > path:first-child:not(:only-child)[fill="none"] {
+  stroke: var(--sketch-node-fill);
+  stroke-width: 5.25px;
+}
+
+.vp-doc .mermaid .block > .node.default > :is(circle, rect, polygon, path):not([style*="fill:"]) {
+  fill: var(--sketch-node-fill) !important;
+}
+
+.vp-doc .mermaid .block > .node.default .nodeLabel p:not([style*="color:"]) {
+  color: #202a41 !important;
+}
+
+/* Let the page show through hand-drawn subgraphs and keep edge labels legible. */
+.vp-doc .mermaid svg[aria-roledescription^="flowchart"] .cluster[data-look="handDrawn"] > g:first-child > path:first-child:not(:only-child)[fill="none"] {
+  stroke: transparent;
+}
+
+.vp-doc .mermaid .edgeLabel :is(span, p) {
+  background: var(--vp-c-bg) !important;
+  color: var(--vp-c-text-1) !important;
+}
+
+.vp-doc .mermaid .edgeLabel text {
+  fill: var(--vp-c-text-1) !important;
 }
