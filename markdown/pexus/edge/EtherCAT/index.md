@@ -33,3 +33,7 @@ EtherCAT 耦合器是 **Pexus Edge** 远程 I/O 系列中面向 EtherCAT 总线�
 </div>
 
 > 更多产品持续更新中，敬请期待。系列总览请见 [Pexus Edge 分布式远程 I/O](../)。
+
+## 常见问题
+
+- [欧姆龙 NX1P2 拔插 EtherCAT 网线后如何恢复通信](./omron-nx1p2-cable-reconnect)
